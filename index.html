@@ -1,0 +1,1621 @@
+<!doctype html>
+<html>
+<head>
+    <title>CAM Assistant for Massis Simulations - UCM</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Videos, Tags, PHAT-SIM, Massis, UCM, Complutense"/>
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link href="css/style.css" rel='stylesheet' type='text/css'/>
+    <!--link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic'
+          rel='stylesheet' type='text/css'-->
+    <link rel="stylesheet" href="css/font.css" type="text/css"/>
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/videojs.markers.min.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="css/video-js.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/bar-controls.css">
+    <link rel="stylesheet" href="css/video-js.css">
+    <link rel="stylesheet" href="css/videojs.caption.css">
+    <link rel="stylesheet" href="css/tipped.css">
+
+    <script src="js/jquery2.0.3.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/tipped.js"></script>
+    <script src="js/bootstrap-slider.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/screenfull.js"></script>
+
+    <script> $(function () {
+        // $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+        if (!screenfull.enabled) {
+            return false;
+        }
+        $('#toggle').click(function () {
+            screenfull.toggle($('#container')[0]);
+        });
+    });
+    </script>
+    <!-- If you'd like to support IE8 -->
+    <!--script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script-->
+
+    <script src="js/video.js"></script>
+    <script src="js/videojs.caption.js"></script>
+    <script src='js/videojs.markers.js'></script>
+
+    <script src="js/skycons.js"></script>
+    <script src="js/json2.js"></script>
+    <script src="js/jstorage.js"></script>
+
+    <script>
+
+        JSOTRAGE = {
+            /**
+             * insert_value
+             * takes data from form fields and stores it with jStorage
+             * @return
+             */
+            insert_value: function(key, val){
+                var ttl = Number($('#ttl').val()) || 0;
+                $.jStorage.set(key, val);
+                if(ttl>0){
+                    $.jStorage.setTTL(key, ttl);
+                }
+                // this.reDraw();
+            },
+            /**
+             * inser caption.
+             */
+            insert_caption: function (caption) {
+                $.jStorage.set("caption_data", JSON.stringify(caption));
+            },
+
+            /**
+             * get_value
+             * alerts a value from jStorage with a key from a form field
+             * @return
+             */
+            get_value: function(key){
+                var value = $.jStorage.get(key);
+                alert(value);
+            },
+
+            get_caption: function () {
+                var caption = $.jStorage.get("caption_data");
+                if (caption == '' || caption == 'undefined')
+                    caption = {};
+                return JSON.parse(caption);
+            },
+
+            /**
+             * flush_values
+             * clears all data
+             * @return
+             */
+            flush_values: function(){
+                $.jStorage.flush();
+                this.reDraw();
+            },
+
+            /**
+             * reDraw
+             * fills table with data from jStorage
+             * @return
+             */
+            reDraw: function(){
+                var row, del, indx=$.jStorage.index(), valuetd;
+                $$("tr[class~=rida]").each(function(c){c.remove();});
+                for(var i=0; i<indx.length; i++){
+                    row = new Element("tr",{className:"rida"});
+                    row.insert(new Element("td").update(indx[i]));
+                    valuetd = new Element("td").update($.jStorage.get(indx[i]));
+                    valuetd.setAttribute("colspan",2);
+                    valuetd.colspan = 2;
+                    row.insert(valuetd);
+                    del = new Element("a",{href:"javascript:void(0)"}).update("DEL");
+                    (function(i){
+                        del.observe("click", function(){
+                            $.jStorage.deleteKey(i);
+                            JSOTRAGE.reDraw();
+                        });
+                    }).call(this,indx[i])
+                    row.insert(new Element("td").insert(del));
+                    $("tulemused").insert(row);
+                }
+            }
+        }
+
+        $.jStorage.listenKeyChange("test", function(key, action){
+            JSOTRAGE.reDraw();
+            alert(key+" "+action+" ("+$.jStorage.get(key, "~~")+")");
+        });
+
+        var hasFocus = false;
+        $.jStorage.subscribe("valchange", function(channel, payload){
+            if(window.hasFocus){
+                return;
+            }
+            // $("val").value(payload);
+        });
+    </script>
+</head>
+<body class="dashboard-page">
+    <script>
+        $(function () {
+
+            Tipped.create('.tooltip_', {skin: 'red'});
+
+            $('.agile-bottom-grid').draggable({
+                opacity: 0.35,
+                zIndex: 1
+            });
+
+            $('.agile-Updating-grids').draggable({
+                opacity: 0.35,
+                zIndex: 1
+            });
+
+            $('.area-grids').draggable({
+                opacity: 0.35,
+                zIndex: 1
+            });
+        });
+    </script>
+    <script>
+        var theme = 'default';
+        $('body').removeClass(function (index, css) {
+            return (css.match(/\btheme-\S+/g) || []).join(' ');
+        });
+        if (theme !== 'default')
+            $('body').addClass(theme);
+    </script>
+
+    <nav class="main-menu"></nav>
+
+    <section class="wrapper scrollable">
+        <nav class="user-menu">
+            <a href="javascript:;" class="main-menu-access">
+                <i class="icon-proton-logo"></i>
+                <i class="icon-reorder"></i>
+            </a>
+        </nav>
+        <section class="title-bar">
+            <div class="logo">
+                <h1>
+                    <a href="index.html"><img src="images/ucm-ws.png" alt=""/>CAM ASSISTANT</a>
+                </h1>
+            </div>
+            <div class="full-screen">
+                <section class="full-top">
+                    <button id="toggle"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
+                </section>
+            </div>
+            <div class="w3l_search">
+            </div>
+            <div class="header-right">
+                <div class="profile_details_left">
+                    <div class="header-right-left">
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </section>
+        <div class="main-grid">
+
+            <div class="social grid">
+                <div class="grid-info">
+                    <div class="col-md-12">
+                        <div class="checkbox">
+                            <input type="text" id="videoFile1" size="40" maxlength="250" class="tooltip_" style="width: 350px;" title="Video 1 file input field"
+                                   value="videos/cancion.mp4"/>
+                            <input type="text" id="videoFile2" size="40" maxlength="250" class="tooltip_" style="width: 350px;" title="Video 2 file input field"
+                                   value="videos/venecia.mp4"/>
+                            <input type="text" id="videoFile3" size="40" maxlength="250" class="tooltip_" style="width: 350px;" title="Video 3 file input field"
+                                   value="videos/monterrey.mp4"/>
+                            <input type="text" id="videoFile4" size="40" maxlength="250" class="tooltip_" style="width: 350px;" title="Video 4 file input field"
+                                   value="videos/paris.mp4"/>
+                            <label>
+                                <input id="load-caption_storage" name="load-caption_storage" type="checkbox" checked>
+                                <img src="images/subtitle_load.png" class="button-edit tooltip_" width="22" height="22" title="Load Comments of File" alt="Load Comments"/>
+                            </label>
+                            <button type="button" id="buttom_load_video" class="btn btn-md btn-primary" style="width: 120px">
+                                Load Videos
+                            </button>
+                        </div>
+                        <div title="Error message area" id="errorMsg" style="color:Red;"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-12">
+                        <div id="buttonbar" style="display: none; font-size:larger;">
+                            <button type="button" id="restart" class="btn btn-md btn-primary" style="width: 60px">
+                                <img src="images/refresh.png" height="22" width="22" alt="[]" title="Reload Video" class="tooltip_"/>
+                            </button>
+                            <button type="button" id="rew" class="btn btn-md btn-primary" style="width: 60px">
+                                <img src="images/previous.png" height="22" width="22" alt="&lt;&lt;" title="Rewind Video" class="tooltip_"/>
+                            </button>
+                            <button type="button" id="play" class="btn btn-md btn-primary" style="width: 60px">
+                                <img src="images/play-button.png" height="22" width="22" alt="&gt;" title="Play Video" class="tooltip_"/>
+                            </button>
+                            <button type="button" id="fwd" class="btn btn-md btn-primary" style="width: 60px">
+                                <img src="images/next.png" height="22" width="22" alt="&gt;&gt;" title="Forward Video" class="tooltip_"/>
+                            </button>
+                            <label>&nbsp;&nbsp;&nbsp;Rate Video: </label>
+                            <button type="button" id="slower" title="Slower playback button" class="btn btn-md btn-primary"
+                                    style="width: 60px">
+                                <img alt="-" src="images/minus.png" height="22" width="22" title="Slower playback" class="tooltip_"/>
+                            </button>
+                            <button type="button" id="faster"  class="btn btn-md btn-primary" style="width: 60px">
+                                <img alt="+" src="images/plus.png" height="22" width="22" title="Faster playback" class="tooltip_"/>
+                            </button>
+                            <button type="button" id="normal" class="btn btn-md btn-primary" style="width: 60px">
+                                <img alt="-" src="images/refresh.png" height="22" width="22" title="Reset playback rate" class="tooltip_"/>
+                            </button>
+
+                            <label>&nbsp;&nbsp;&nbsp;Volume: </label>
+                            <button type="button" id="volDn" class="btn btn-md btn-primary" style="width: 60px">
+                                <img alt="-" src="images/minus.png" height="22" width="22" title="Volume Down"/>
+                            </button>
+                            <button type="button" id="volUp" class="btn btn-md btn-primary" style="width: 60px">
+                                <img alt="+" src="images/plus.png" height="22" width="22" title="Volume Up"/>
+                            </button>
+
+                            <label>&nbsp;&nbsp;&nbsp;Sound: </label>
+                            <button type="button" id="mute" title="Mute button" class="btn btn-md btn-primary"
+                                    style="width: 60px">
+                                <img alt="On/Off" src="images/volume-off.png" title="On/Off Audio Videos" height="22" width="22"/>
+                            </button>
+                            <label for="bottom-export-json">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save Comments</label>
+                            <input id="filename" disabled="disabled" size="20" maxlength="20" type="hidden" placeholder="Please enter filename for Comments" value="comments-sesion-video.json"/>
+                            <button for="filename" type="button" id="bottom-export-json" title="Export JSON" class="btn btn-md btn-primary"
+                                    style="width: 60px">
+                                <img alt="Export JSON" src="images/save.png" title="Export Comment to JSON" height="22" width="22" class="tooltip_"/>
+                            </button><a id="download" download="" href=""></a>
+                            <br/>
+                            <br/>
+                            <div style="position:relative; margin:auto; width:90%">
+                                <span style="position:absolute; color:gray; min-width:100px;">
+                                    <span id="value_range"></span>
+                                </span>
+                                <input id="current_time_video_bar" name="current_time_video_bar" type="range" min="0" max="100" step="0.01" value="0" title="Current Time 0.00"/>
+                            </div>
+                            <br/>
+                            <div id="status">Length(seconds): <span id="vLen"></span> <br/>
+                                Current time: <span id="curTime" title="Current time"></span>
+                                <br/> Remaining time: <span id="vRemaining" title="Remaining time"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="agile-bottom-grids">
+                <div class="col-md-6 agile-bottom-right">
+                    <div class="agile-bottom-grid">
+                        <div class="area-grids-heading heading-video">
+                            <h3>Kitchen</h3>
+                        </div>
+                        <div id="graph6" class="video-mc">
+                            <video id="Video1" preload="none" class="video-js responsive-video "
+                                   style="border: 1px solid yellow;" title="video element" width="775" height="436"
+                                   poster="images/fondo_viedeos.png"  >
+                                HTML5 Video is required for this example
+                            </video>
+                        </div>
+                        <div class="area-grids-heading">
+                            <div id="demo-tools-1" style="display: none;">
+                                <h3 class="demo-box-title active">Tools Tags Video - Camera 1</h3>
+                                <div class="demo-box">
+                                    <ul class="demo-tool-buttons" id="tools_1">
+                                        <li id="increase-font-1" class="increase-font">
+                                            <img src="images/font_inc.png" width="22" height="22" alt="Zoom in Tags" title="Zoom in Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="decrease-font-1" class="decrease-font">
+                                            <img src="images/font_dec.png" width="22" height="22" alt="Zoom out Tags" title="Zoom out Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="decrease-tag-1" class="dynamic-demo-prev">
+                                            <img src="images/previous.png" width="22" height="22" title="Previus Tags" alt="Previus Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="increase-tag-1" class="dynamic-demo-next">
+                                            <img src="images/next.png" width="22" height="22" title="Next Tags" alt="Next Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="none1-tag-1" class=""></li>
+
+                                        <!--<li id="movel-1sec-tag-1" class="dynamic-demo-shift-l" style="align-self: flex-end;" >-->
+                                            <!--<img src="images/left-arrow.png" width="22" height="22" title="Move Left 1 seconds All Tags" alt="Move Left 1 seconds All Tags"/>-->
+                                        <!--</li>-->
+                                        <!--<li id="mover-1sec-tag-1" class="dynamic-demo-shift-r" style="align-self: flex-end;" >-->
+                                            <!--<img src="images/right-arrow.png" width="22" height="22" title="Move Right 1 seconds All Tags" alt="Move Right 1 seconds All Tags"/>-->
+                                        <!--</li>-->
+                                        <li id="none2-tag-1" class=""></li>
+
+                                        <li id="delete-tag-1" class="dynamic-demo-remove-all-1" style="align-self: flex-end;">
+                                            <img src="images/trash.png" width="22" height="22" title="Delete All Tags" alt="Delete All Tags" class="tooltip_"/>
+                                        </li>
+
+                                        <li id="none3-tag-1" class=""></li>
+                                        <li id="none4-tag-1" class=""></li>
+                                        <li id="add-tag-1" class="dynamic-demo-add-tag" style="align-self: flex-end;">
+                                            <img src="images/add_tag_b.png" width="22" height="22" title="Add Tag" alt="Add Tag" class="tooltip_"/>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="demo-box" role="group" aria-label="...">
+                                    <!--label for="top_text_tag_1">Top Text Tag:&nbsp;*</label>
+                                    <input type="text" id="top_text_tag_1" name="top_text_tag_1" value="" size="50" maxlength="50" required placeholder="Top Text Tags in Video"/><br/-->
+                                    <input type="hidden" id="ct_1" name="ct_1" />
+                                    <label for="bottom_text_tag_1">Text Tag:&nbsp;*</label>
+                                    <input type="text" id="bottom_text_tag_1" name="bottom_text_tag_1" disabled="disabled" value="" size="50" maxlength="50" required placeholder="Text Tags visible in Video"/><br/>
+                                    <label for="text_tag_1">Comments Tag:&nbsp;</label>
+                                        <textarea id="text_tag_1" name="text_tag_1" rows="3" cols="70" disabled="disabled" style="resize: none;" placeholder="Comment of your tags, not visible in video"></textarea><br/>
+                                    <label for="textOver_1">Options Text Tag:&nbsp;</label>
+                                    <div class="checkbox" id="buttom_1">
+                                        <label>
+                                            <input id="dynamic-demo-bold-1" name="dynamic-demo-bold-1" type="checkbox">
+                                            <img src="images/bold.png" class="button-edit tooltip_" width="22" height="22" title="Bold Text" alt="Bold"/>
+                                        </label>&nbsp;
+                                        <label>
+                                            <input id="dynamic-demo-italy-1" name="dynamic-demo-italy-1" type="checkbox">
+                                            <img src="images/italic.png" class="button-edit tooltip_" width="22" height="22" title="Italy Text" alt="Italy"/>
+                                        </label>&nbsp;
+                                        <label>
+                                            <input id="dynamic-dynamic-demo-underline-1" name="dynamic-demo-underline-1" type="checkbox">
+                                            <img src="images/underline.png" class="button-edit tooltip_" width="22" height="22" title="Underline Text" alt="Underline"/>
+                                        </label>&nbsp;
+                                        <label>
+                                            <input id="dynamic-dynamic-demo-left-1" name="dynamic-demo-left-1" type="checkbox">
+                                            <img src="images/left.png" class="button-edit tooltip_" width="22" height="22" title="Left Text" alt="Left"/>
+                                        </label>&nbsp;
+                                        <label>
+                                            <input id="dynamic-dynamic-demo-center-1" name="dynamic-demo-center-1" type="checkbox">
+                                            <img src="images/center.png" class="button-edit tooltip_" width="22" height="22" title="Center Text" alt="Center"/>
+                                        </label>&nbsp;&nbsp;
+                                        <img src="images/save.png" class="dynamic-demo-add button-edit tooltip_" width="22" height="22" title="Save" alt="Save"/>
+                                        &nbsp;&nbsp;
+                                        <img src="images/cancel.png" class="dynamic-demo-cancel button-edit tooltip_" width="22" height="22" title="Cancel Edition Tag" alt="Cancel"/>
+                                    </div>
+                                    <input type="hidden" id="textOver_1" name="textOver_1" />
+                                    <input type="hidden" id="id_1" name="id_1" />
+                                    <input type="hidden" id="ed_1" name="ed_1" value="N" />
+                                </div>
+                                <div class="demo-box" >
+                                    <ul id='marker-list-1' class="dynamic-demo-events list-group tag-list">
+                                    </ul>
+                                </div>
+                                <div id="text-controls_1" class="demo-edit-buttons">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 agile-bottom-left">
+                    <div class="agile-bottom-grid">
+                        <div class="area-grids-heading heading-video">
+                            <h3>Bath</h3>
+                        </div>
+                        <div id="graph5">
+                            <video id="Video2" preload="none" class="video-js responsive-video vjs-default-skin" style="border: 1px solid yellow;" title="video element" width="775" height="436" poster="images/fondo_viedeos.png">
+                                HTML5 Video is required for this example
+                            </video>
+                        </div>
+                        <div class="area-grids-heading">
+                            <div id="demo-tools-2" style="display: none;">
+                                <h3 class="demo-box-title active">Tools Tags Video - Camera 2</h3>
+                                <div class="demo-box">
+                                    <ul class="demo-tool-buttons" id="tools_2">
+                                        <li id="increase-font-2" class="increase-font">
+                                            <img src="images/font_inc.png" width="22" height="22" alt="Zoom in Tags" title="Zoom in Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="decrease-font-2" class="decrease-font">
+                                            <img src="images/font_dec.png" width="22" height="22" alt="Zoom out Tags" title="Zoom out Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="decrease-tag-2" class="dynamic-demo-prev">
+                                            <img src="images/previous.png" width="22" height="22" title="Previus Tags" alt="Previus Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="increase-tag-2" class="dynamic-demo-next">
+                                            <img src="images/next.png" width="22" height="22" title="Next Tags" alt="Next Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="none1-tag-2" class=""></li>
+
+                                        <!--<li id="movel-1sec-tag-2" class="dynamic-demo-shift-l" style="align-self: flex-end;" >-->
+                                            <!--<img src="images/left-arrow.png" width="22" height="22" title="Move Left 1 seconds All Tags" alt="Move Left 1 seconds All Tags"/>-->
+                                        <!--</li>-->
+                                        <!--<li id="mover-1sec-tag-2" class="dynamic-demo-shift-r" style="align-self: flex-end;" >-->
+                                            <!--<img src="images/right-arrow.png" width="22" height="22" title="Move Right 1 seconds All Tags" alt="Move Right 1 seconds All Tags"/>-->
+                                        <!--</li>-->
+                                        <li id="none2-tag-2" class=""></li>
+
+                                        <li id="delete-tag-2" class="dynamic-demo-remove-all-2" style="align-self: flex-end;">
+                                            <img src="images/trash.png" width="22" height="22" title="Delete All Tags" alt="Delete All Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="none3-tag-2" class=""></li>
+                                        <li id="none4-tag-2" class=""></li>
+                                        <li id="add-tag-2" class="dynamic-demo-add-tag" style="align-self: flex-end;">
+                                            <img src="images/add_tag_b.png" width="22" height="22" title="Add Tag" alt="Add Tag" class="tooltip_"/>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="demo-box" role="group" aria-label="...">
+                                    <!--label for="top_text_tag_2">Text Tag:&nbsp;*</label>
+                                    <input type="text" id="top_text_tag_2" name="top_text_tag_2" value="" size="50" maxlength="50" required placeholder="Title for Tags in Video"/><br/-->
+                                    <input type="hidden" id="ct_2" name="ct_2" />
+                                    <label for="bottom_text_tag_2">Text Tag:&nbsp;*</label>
+                                    <input type="text" id="bottom_text_tag_2" name="bottom_text_tag_2" disabled="disabled" value="" size="50" maxlength="50" required placeholder="Text Tags visible in Video"/><br/>
+                                    <label for="text_tag_2">Comments Tag:&nbsp;</label>
+                                    <textarea id="text_tag_2" name="text_tag_2" rows="3" cols="70" disabled="disabled" style="resize: none;" placeholder="Comment of your tags, not visible in video"></textarea><br/>
+                                    <label for="textOver_2">Options Text Tag:&nbsp;</label>
+                                    <div class="checkbox" id="buttom_2">
+                                        <label>
+                                            <input id="dynamic-demo-bold-2" name="dynamic-demo-bold-2" type="checkbox">
+                                            <img src="images/bold.png" class="button-edit tooltip_" width="22" height="22" title="Bold Text" alt="Bold"/>
+                                        </label>&nbsp;
+                                        <label>
+                                            <input id="dynamic-demo-italy-2" name="dynamic-demo-italy-2" type="checkbox">
+                                            <img src="images/italic.png" class="button-edit tooltip_" width="22" height="22" title="Italy Text" alt="Italy"/>
+                                        </label>&nbsp;
+                                        <label>
+                                            <input id="dynamic-dynamic-demo-underline-2" name="dynamic-demo-underline-2" type="checkbox">
+                                            <img src="images/underline.png" class="button-edit tooltip_" width="22" height="22" title="Underline Text" alt="Underline"/>
+                                        </label>&nbsp;
+                                        <label>
+                                            <input id="dynamic-dynamic-demo-left-2" name="dynamic-demo-left-2" type="checkbox">
+                                            <img src="images/left.png" class="button-edit tooltip_" width="22" height="22" title="Left Text" alt="Left"/>
+                                        </label>&nbsp;
+                                        <label>
+                                            <input id="dynamic-dynamic-demo-center-2" name="dynamic-demo-center-2" type="checkbox">
+                                            <img src="images/center.png" class="button-edit tooltip_" width="22" height="22" title="Center Text" alt="Center"/>
+                                        </label>&nbsp;&nbsp;
+                                        <img src="images/save.png" class="dynamic-demo-add button-edit tooltip_" width="22" height="22" title="Save" alt="Save"/>
+                                        &nbsp;&nbsp;
+                                        <img src="images/cancel.png" class="dynamic-demo-cancel button-edit tooltip_" width="22" height="22" title="Cancel Edition Tag" alt="Cancel"/>
+                                    </div>
+                                    <input type="hidden" id="textOver_2" name="textOver_2" />
+                                    <input type="hidden" id="id_2" name="id_2" />
+                                    <input type="hidden" id="ed_2" name="ed_2" value="N" />
+                                </div>
+                                <div class="demo-box" >
+                                    <ul id='marker-list-2' class="dynamic-demo-events list-group tag-list">
+                                    </ul>
+                                </div>
+                                <div id="text-controls_2" class="demo-edit-buttons">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="agile-grids">
+                <div class="col-md-6 charts-right">
+                    <!-- area-chart -->
+                    <div class="area-grids">
+                        <div class="area-grids-heading heading-video">
+                            <h3>Cam Living Room</h3>
+                        </div>
+                        <div id="graph4">
+                            <video id="Video3" preload="none" class="video-js vjs-default-skin responsive-video" style="border: 1px solid red;" title="video element"
+                                   width="775" height="436" poster="images/fondo_viedeos.png">
+                                HTML5 Video is required for this example
+                            </video>
+                        </div>
+                        <div class="area-grids-heading">
+                            <div id="demo-tools-3" style="display: none;">
+                                <h3 class="demo-box-title active">Tools Tags Video - Camera 3</h3>
+                                <div class="demo-box">
+                                    <ul class="demo-tool-buttons" id="tools_3">
+                                        <li id="increase-font-3" class="increase-font">
+                                            <img src="images/font_inc.png" width="22" height="22" alt="Zoom in Tags" title="Zoom in Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="decrease-font-3" class="decrease-font">
+                                            <img src="images/font_dec.png" width="22" height="22" alt="Zoom out Tags" title="Zoom out Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="decrease-tag-3" class="dynamic-demo-prev">
+                                            <img src="images/previous.png" width="22" height="22" title="Previus Tags" alt="Previus Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="increase-tag-3" class="dynamic-demo-next">
+                                            <img src="images/next.png" width="22" height="22" title="Next Tags" alt="Next Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="none1-tag-3" class=""></li>
+
+                                        <!--<li id="movel-1sec-tag-3" class="dynamic-demo-shift-l" style="align-self: flex-end;" >-->
+                                            <!--<img src="images/left-arrow.png" width="22" height="22" title="Move Left 1 seconds All Tags" alt="Move Left 1 seconds All Tags"/>-->
+                                        <!--</li>-->
+                                        <!--<li id="mover-1sec-tag-3" class="dynamic-demo-shift-r" style="align-self: flex-end;" >-->
+                                            <!--<img src="images/right-arrow.png" width="22" height="22" title="Move Right 1 seconds All Tags" alt="Move Right 1 seconds All Tags"/>-->
+                                        <!--</li>-->
+                                        <li id="none2-tag-3" class=""></li>
+
+                                        <li id="delete-tag-3" class="dynamic-demo-remove-all-3" style="align-self: flex-end;">
+                                            <img src="images/trash.png" width="22" height="22" title="Delete All Tags" alt="Delete All Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="none3-tag-3" class=""></li>
+                                        <li id="none4-tag-3" class=""></li>
+                                        <li id="add-tag-3" class="dynamic-demo-add-tag" style="align-self: flex-end;">
+                                            <img src="images/add_tag_b.png" width="22" height="22" title="Add Tag" alt="Add Tag" class="tooltip_"/>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="demo-box" role="group" aria-label="...">
+                                    <!--label for="top_text_tag_3">Text Tag:&nbsp;*</label>
+                                    <input type="text" id="top_text_tag_3" name="top_text_tag_3" value="" size="50" maxlength="50" required placeholder="Title for Tags in Video"/><br/-->
+                                    <input type="hidden" id="ct_3" name="ct_3" />
+                                    <label for="bottom_text_tag_3">Text Tag:&nbsp;*</label>
+                                    <input type="text" id="bottom_text_tag_3" name="bottom_text_tag_3" disabled="disabled" value="" size="50" maxlength="50" required placeholder="Text Tags visible in Video"/><br/>
+                                    <label for="text_tag_3">Comments Tag:&nbsp;</label>
+                                    <textarea id="text_tag_3" name="text_tag_3" rows="3" cols="70" disabled="disabled" style="resize: none;" placeholder="Comment of your tags, not visible in video"></textarea><br/>
+                                    <label for="textOver_3">Options Text Tag:&nbsp;</label>
+                                    <div class="checkbox" id="buttom_3">
+                                        <label>
+                                            <input id="dynamic-demo-bold-3" name="dynamic-demo-bold-3" type="checkbox">
+                                            <img src="images/bold.png" class="button-edit tooltip_" width="22" height="22" title="Bold Text" alt="Bold"/>
+                                        </label>&nbsp;
+                                        <label>
+                                            <input id="dynamic-demo-italy-3" name="dynamic-demo-italy-3" type="checkbox">
+                                            <img src="images/italic.png" class="button-edit tooltip_" width="22" height="22" title="Italy Text" alt="Italy"/>
+                                        </label>&nbsp;
+                                        <label>
+                                            <input id="dynamic-dynamic-demo-underline-3" name="dynamic-demo-underline-3" type="checkbox">
+                                            <img src="images/underline.png" class="button-edit tooltip_" width="22" height="22" title="Underline Text" alt="Underline"/>
+                                        </label>&nbsp;
+                                        <label>
+                                            <input id="dynamic-dynamic-demo-left-3" name="dynamic-demo-left-3" type="checkbox">
+                                            <img src="images/left.png" class="button-edit tooltip_" width="22" height="22" title="Left Text" alt="Left"/>
+                                        </label>&nbsp;
+                                        <label>
+                                            <input id="dynamic-dynamic-demo-center-3" name="dynamic-demo-center-3" type="checkbox">
+                                            <img src="images/center.png" class="button-edit tooltip_" width="22" height="22" title="Center Text" alt="Center"/>
+                                        </label>&nbsp;&nbsp;
+                                        <img src="images/save.png" class="dynamic-demo-add button-edit tooltip_" width="22" height="22" title="Save" alt="Save"/>
+                                        &nbsp;&nbsp;
+                                        <img src="images/cancel.png" class="dynamic-demo-cancel button-edit tooltip_" width="22" height="22" title="Cancel Edition Tag" alt="Cancel"/>
+                                    </div>
+                                    <input type="hidden" id="textOver_3" name="textOver_2" />
+                                    <input type="hidden" id="id_3" name="id_3" />
+                                    <input type="hidden" value="N" id="ed_3" name="ed_3" />
+                                </div>
+                                <div class="demo-box" >
+                                    <ul id='marker-list-3' class="dynamic-demo-events list-group tag-list">
+                                    </ul>
+                                </div>
+                                <div id="text-controls_3" class="demo-edit-buttons">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- //area-chart -->
+                </div>
+                <div class="col-md-6 chart-left">
+                    <!-- updating-data -->
+                    <div class="agile-Updating-grids">
+                        <div class="area-grids-heading heading-video">
+                            <h3>Room</h3>
+                        </div>
+                        <div id="graph1">
+                            <video id="Video4" preload="none" class="video-js vjs-default-skin responsive-video" style="border: 1px solid blue;" title="video element" width="775" height="436" poster="images/fondo_viedeos.png">
+                                HTML5 Video is required for this example
+                            </video>
+                        </div>
+                        <div class="area-grids-heading">
+                            <div id="demo-tools-4" style="display: none;">
+                                <h3 class="demo-box-title active">Tools Tags Video - Camera 4</h3>
+                                <div class="demo-box">
+                                    <ul class="demo-tool-buttons" id="tools_4">
+                                        <li id="increase-font-4" class="increase-font">
+                                            <img src="images/font_inc.png" width="22" height="22" alt="Zoom in Tags" title="Zoom in Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="decrease-font-4" class="decrease-font">
+                                            <img src="images/font_dec.png" width="22" height="22" alt="Zoom out Tags" title="Zoom out Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="decrease-tag-4" class="dynamic-demo-prev">
+                                            <img src="images/previous.png" width="22" height="22" title="Previus Tags" alt="Previus Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="increase-tag-4" class="dynamic-demo-next">
+                                            <img src="images/next.png" width="22" height="22" title="Next Tags" alt="Next Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="none1-tag-4" class=""></li>
+
+                                        <!--<li id="movel-1sec-tag-4" class="dynamic-demo-shift-l" style="align-self: flex-end;" >-->
+                                            <!--<img src="images/left-arrow.png" width="22" height="22" title="Move Left 1 seconds All Tags" alt="Move Left 1 seconds All Tags"/>-->
+                                        <!--</li>-->
+                                        <!--<li id="mover-1sec-tag-4" class="dynamic-demo-shift-r" style="align-self: flex-end;" >-->
+                                            <!--<img src="images/right-arrow.png" width="22" height="22" title="Move Right 1 seconds All Tags" alt="Move Right 1 seconds All Tags"/>-->
+                                        <!--</li>-->
+                                        <li id="none2-tag-4" class=""></li>
+
+                                        <li id="delete-tag-4" class="dynamic-demo-remove-all-4" style="align-self: flex-end;">
+                                            <img src="images/trash.png" width="22" height="22" title="Delete All Tags" alt="Delete All Tags" class="tooltip_"/>
+                                        </li>
+                                        <li id="none3-tag-4" class=""></li>
+                                        <li id="none4-tag-4" class=""></li>
+                                        <li id="add-tag-4" class="dynamic-demo-add-tag" style="align-self: flex-end;">
+                                            <img src="images/add_tag_b.png" width="22" height="22" title="Add Tag" alt="Add Tag" class="tooltip_"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="demo-box" role="group" aria-label="...">
+                                    <!--label for="top_text_tag_4">Text Tag:&nbsp;*</label>
+                                    <input type="text" id="top_text_tag_4" name="top_text_tag_4" value="" size="50" maxlength="50" required placeholder="Title for Tags in Video"/><br/-->
+                                    <input type="hidden" id="ct_4" name="ct_4" />
+                                    <label for="bottom_text_tag_4">Text Tag:&nbsp;*</label>
+                                    <input type="text" id="bottom_text_tag_4" name="bottom_text_tag_4" disabled="disabled" value="" size="50" maxlength="50" required placeholder="Text Tags visible in Video"/><br/>
+                                    <label for="text_tag_4">Comments Tag:&nbsp;</label>
+                                    <textarea id="text_tag_4" name="text_tag_4" rows="3" cols="70" style="resize: none;" disabled="disabled" placeholder="Comment of your tags, nt visible in video"></textarea><br/>
+                                    <label for="textOver_4">Options Top and Bottom Text:&nbsp;</label>
+                                    <div class="checkbox" id="buttom_4">
+                                        <label>
+                                            <input id="dynamic-demo-bold-4" name="dynamic-demo-bold-4" type="checkbox">
+                                            <img src="images/bold.png" class="button-edit tooltip_" width="22" height="22" title="Bold Text" alt="Bold"/>
+                                        </label>&nbsp;
+                                        <label>
+                                            <input id="dynamic-demo-italy-4" name="dynamic-demo-italy-4" type="checkbox">
+                                            <img src="images/italic.png" class="button-edit tooltip_" width="22" height="22" title="Italy Text" alt="Italy"/>
+                                        </label>&nbsp;
+                                        <label>
+                                            <input id="dynamic-dynamic-demo-underline-4" name="dynamic-demo-underline-4" type="checkbox">
+                                            <img src="images/underline.png" class="button-edit tooltip_" width="22" height="22" title="Underline Text" alt="Underline"/>
+                                        </label>&nbsp;
+                                        <label>
+                                            <input id="dynamic-dynamic-demo-left-4" name="dynamic-demo-left-4" type="checkbox">
+                                            <img src="images/left.png" class="button-edit tooltip_" width="22" height="22" title="Left Text" alt="Left"/>
+                                        </label>&nbsp;
+                                        <label>
+                                            <input id="dynamic-dynamic-demo-center-4" name="dynamic-demo-center-4" type="checkbox">
+                                            <img src="images/center.png" class="button-edit tooltip_" width="22" height="22" title="Center Text" alt="Center"/>
+                                        </label>&nbsp;&nbsp;
+                                        <img src="images/save.png" class="dynamic-demo-add button-edit tooltip_" width="22" height="22" title="Save" alt="Save"/>
+                                        &nbsp;&nbsp;
+                                        <img src="images/cancel.png" class="dynamic-demo-cancel button-edit tooltip_" width="22" height="22" title="Cancel Edition Tag" alt="Cancel"/>
+                                    </div>
+                                    <input type="hidden" id="textOver_4" name="textOver_4" />
+                                    <input type="hidden" id="id_4" name="id_4" />
+                                    <input type="hidden" id="ed_4" name="ed_4" value="N" />
+                                </div>
+                                <div class="demo-box" >
+                                    <ul id='marker-list-4' class="dynamic-demo-events list-group tag-list">
+                                    </ul>
+                                </div>
+                                <div id="text-controls_4" class="demo-edit-buttons">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- //updating-data -->
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="agile-last-grids">
+                <div class="clearfix"></div>
+            </div>
+            <div class="agile-two-grids">
+                <div class="col-md-6 count">
+                </div>
+                <div class="col-md-6 weather">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- footer -->
+        <div class="footer">
+            <p>© 2016 mCardenas - UCM</p>
+        </div>
+        <!-- //footer -->
+    </section>
+</body>
+<script>
+
+    var caption_data = caption_data = JSOTRAGE.get_caption();;
+    var video1 = document.getElementById("Video1");
+    var video2 = document.getElementById("Video2");
+    var video3 = document.getElementById("Video3");
+    var video4 = document.getElementById("Video4");
+
+    var video_1 = videojs('Video1');
+    var video_2 = videojs('Video2');
+    var video_3 = videojs('Video3');
+    var video_4 = videojs('Video4');
+
+    $(function () {
+
+        var vLength;
+        $("#current_time_video_bar").val('0');
+
+        $("#bottom-export-json").on("click", function (e) {
+            var dataJson = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(caption_data));
+            var downlink = document.getElementById('download');
+            var filename = $("#filename").val() || "comment-video.json";
+            downlink.setAttribute("href", dataJson);
+            downlink.setAttribute("download", filename);
+            downlink.click();
+        });
+
+        if (video1.canPlayType) {
+
+            $("#play").click(function(){
+                loadVideos();
+            });
+
+            $("#restart").click(function(){
+                setTime(0);
+            });
+
+            $("#rew").click(function(){
+                setTime(-10);
+            });
+
+            $("#fwd").click(function(){
+                setTime(10);
+            });
+
+            $("#current_time_video_bar").change(function () {
+                var ct = parseFloat($(this).val()).toFixed(1);
+                $(this).attr('title', "Current Time " + ct);
+                setTimeBar(ct);
+            });
+
+            $("#volDn").click(function(){
+                setVol(-.1);
+            });
+
+            $("#volUp").click(function(){
+                setVol(.1);
+            });
+
+            $("#buttom_load_video").click(function(){
+                var msg = " ", sw = true;
+                if (!$('#load-caption_storage').is(":checked")){
+                    msg = msg + "\nThis action loaded the comments you have in your nevegador. ";
+                }else{
+                    msg = msg + "\nThis action will delete comments you may have stored on your nevegador. ";
+                    sw = false;
+                }
+                if(confirm(msg + "\nDo you wish to continue?")) {
+                    $("#current_time_video_bar").val('0');
+                    setFileTags(sw);
+                }
+            });
+
+            $("#slower").click(function(){
+                video1.playbackRate -= .25;
+                video2.playbackRate -= .25;
+                video3.playbackRate -= .25;
+                video4.playbackRate -= .25;
+            });
+
+            $("#faster").click(function(){
+                video1.playbackRate += .25;
+                video2.playbackRate += .25;
+                video3.playbackRate += .25;
+                video4.playbackRate += .25;
+            });
+
+            $("#normal").click(function(){
+                video1.playbackRate = 1;
+                video2.playbackRate = 1;
+                video3.playbackRate = 1;
+                video4.playbackRate = 1;
+            });
+
+            $("#mute").click(function(){
+                if (video1.muted) {
+                    video1.muted = false;
+                    video2.muted = false;
+                    video3.muted = false;
+                    video4.muted = false;
+                } else {
+                    video1.muted = true;
+                    video2.muted = true;
+                    video3.muted = true;
+                    video4.muted = true;
+                }
+            });
+
+            video1.addEventListener("timeupdate", function () {
+                var vTime = video1.currentTime;
+                document.getElementById("curTime").textContent = vTime.toFixed(1);
+                document.getElementById("vRemaining").textContent = (vLength - vTime).toFixed(1);
+                $("#current_time_video_bar").val(vTime);
+                $("#current_time_video_bar").attr('title', "Current Time " + vTime);
+            }, false);
+
+            video1.addEventListener("pause", function () {
+                document.getElementById("play").innerHTML = "<img alt='&gl;' title='Play' src='images/play-button.png' height='22' width='22'/>";
+            }, false);
+
+            video1.addEventListener("playing", function () {
+                document.getElementById("play").innerHTML = "<img alt='||' title='Pause' src='images/pause.png' height='22' width='22'/>";
+            }, false);
+
+            video1.addEventListener("volumechange", function () {
+                if (video1.muted) {
+                    document.getElementById("mute").innerHTML = "<img alt='Off' src='images/volume-off.png' height='22' width='22'/>"
+                } else {
+                    document.getElementById("mute").innerHTML = "<img alt='On' src='images/high-volume.png' height='22' width='22'/>"
+                }
+            }, false);
+
+            video1.addEventListener("canplay", function () {
+                document.getElementById("buttonbar").style.display = "block";
+                document.getElementById("demo-tools-1").style.display = "block";
+                document.getElementById("demo-tools-2").style.display = "block";
+                document.getElementById("demo-tools-3").style.display = "block";
+                document.getElementById("demo-tools-4").style.display = "block";
+            }, false);
+
+            video1.addEventListener("loadedmetadata", function () {
+                vLength = video1.duration.toFixed(1);
+                document.getElementById("vLen").textContent = vLength;
+                $("#current_time_video_bar").attr('max', vLength);
+            }, false);
+
+            video1.addEventListener("error", function (err) {
+                errMessage(err);
+            }, true);
+
+        } else {
+            errMessage("HTML5 Video is required for this example");
+        }
+
+        function setFileTags(sw) {
+            if (sw) {
+                caption_data = JSOTRAGE.get_caption();
+                getVideo();
+            } else {
+                var request;
+                if (window.XMLHttpRequest){
+                    request = new XMLHttpRequest();
+                } else {
+                    request = ActiveXObject("Microsoft.XMLHTTP");
+                }
+                request.overrideMimeType("application/json");
+                request.open('GET', 'comment-video.json', true);
+                request.onreadystatechange = function() {
+                    if (request.readyState == 4 && request.status == "200") {
+                        caption_data = JSON.parse(request.responseText);
+                        JSOTRAGE.insert_caption(caption_data);
+                        if (Object.keys(caption_data).length == 4)
+                            getVideo();
+                        else
+                            errMessage("Enter a valid video URL for video and file for comments tags");
+                    }
+                }
+                request.send(null);
+            }
+
+        }
+
+        /**
+         * Function load Videos.
+         */
+        function loadVideos(evt) {
+            if (video1.src == "") {
+                getVideo();
+            }
+            if (video1.paused) {
+                playVideos();
+                document.getElementById("play").innerHTML = "<img alt='||' title='Pause' src='images/pause.png' height='22' width='22'/>";
+            } else {
+                pauseVideos();
+                document.getElementById("play").innerHTML = "<img alt='&gl;' title='Play' src='images/play-button.png' height='22' width='22'/>";
+            }
+        }
+
+        /**
+         * Function get url for video.
+         */
+        function getVideo() {
+            var fileURL1 = document.getElementById("videoFile1").value;
+            var fileURL2 = document.getElementById("videoFile2").value;
+            var fileURL3 = document.getElementById("videoFile3").value;
+            var fileURL4 = document.getElementById("videoFile4").value;
+
+            if (fileURL1 != "" && fileURL2 != "" && fileURL3 != "" && fileURL4 != "") {
+                video1.src = fileURL1;
+                video1.load();
+                video2.src = fileURL2;
+                video2.load();
+                video3.src = fileURL3;
+                video3.load();
+                video4.src = fileURL4;
+                video4.load();
+                document.getElementById("buttonbar").style.display = "block";
+                document.getElementById("play").innerHTML = "<img alt='&gl;' title='Play' src='images/play-button.png' height='22' width='22'/>";
+                loadSubtitle();
+                paintListAll();
+            } else {
+                errMessage("Enter a valid video URL for video and file for comments tags");
+            }
+        }
+
+        /**
+         * Function Set Time for all videos.
+         */
+        function setTime(tValue) {
+            try {
+                if (tValue == 0) {
+                    video1.currentTime = tValue;
+                    video2.currentTime = tValue;
+                    video3.currentTime = tValue;
+                    video4.currentTime = tValue;
+                } else {
+                    video1.currentTime += tValue;
+                    video2.currentTime += tValue;
+                    video3.currentTime += tValue;
+                    video4.currentTime += tValue;
+                }
+            } catch (err) {
+                errMessage("Video content might not be loaded");
+            }
+        }
+
+        /**
+         * Function Set Time for all videos.
+         */
+        function setTimeBar(tValue) {
+            try {
+                video1.currentTime = tValue;
+                video2.currentTime = tValue;
+                video3.currentTime = tValue;
+                video4.currentTime = tValue;
+            } catch (err) {
+                errMessage("Video content might not be loaded");
+            }
+        }
+
+        /**
+         * Function Set Volumen for all videos.
+         */
+        function setVol(value) {
+            var vol = video1.volume;
+            vol += value;
+            if (vol >= 0 && vol <= 1) {
+                video1.volume = vol;
+                video2.volume = vol;
+                video3.volume = vol;
+                video4.volume = vol;
+            } else {
+                video1.volume = (vol < 0) ? 0 : 1;
+                video2.volume = (vol < 0) ? 0 : 1;
+                video3.volume = (vol < 0) ? 0 : 1;
+                video4.volume = (vol < 0) ? 0 : 1;
+            }
+        }
+
+        /**
+         * Function Show error msg for all videos.
+         */
+        function errMessage(msg) {
+            document.getElementById("errorMsg").textContent = msg;
+            setTimeout("document.getElementById('errorMsg').textContent=''", 10000);
+        }
+
+        /**
+         * Function Modify Information of Tags for all videos.
+         */
+        function modInfoTag(id, title, bottom, text, caption) {
+            for (var i=0; i < caption.length; i++) {
+                if (caption[i].id == id) {
+                    caption[i].text = title;
+                    caption[i].data = bottom;
+                    caption[i].comment = text;
+                    caption[i].overlayText = title;
+                    break;
+                }
+            }
+            return true;
+        }
+
+        /**
+         * Function loadSubtitle.
+         */
+        function loadSubtitle() {
+            try {
+                // Control for video 3
+                video_3.markers({
+                    markerStyle: {
+                        'width':'10px',
+                        'border-radius': '40%',
+                        'background-color': 'blue'
+                    },
+                    markerTip:{
+                        display: false,
+                        text: function(marker) {
+                            return marker.text;
+                        },
+                        time: function(marker) {
+                            return marker.time;
+                        }
+                    },
+                    breakOverlay:{
+                        display: true,
+                        style:{
+                            'width':'100%',
+                            'height': '10%',
+                            'background-color': 'rgba(0,0,0,0)',
+                            'color': 'white',
+                            'font-size': '20px'
+                        },
+                        text: function(marker) {
+                            //return marker.text;
+                            return '';
+                        }
+                    },
+                    onMarkerClick: function(marker){
+                        //$('.dynamic-demo-events').append('<li class="list-group-item">Marker click: '+marker.time+'</li>');
+                    },
+                    onMarkerReached: function(marker){
+                        //$('.dynamic-demo-events').append('<li class="list-group-item">Marker reached: '+marker.time+'</li>');
+                    },
+                    markers: caption_data["cam-3"].rows
+                });
+                video_3.caption({
+                    data: caption_data["cam-3"].rows, setting: {
+                        onCaptionChange: function (num_c) {
+                            console.log("Show 3: " + num_c + " caption");
+                        }
+                    }
+                });
+
+                // Control for video 4
+                video_4.markers({
+                    markerStyle: {
+                        'width':'10px',
+                        'border-radius': '40%',
+                        'background-color': 'blue'
+                    },
+                    markerTip:{
+                        display: false,
+                        text: function(marker) {
+                            return marker.text;
+                        },
+                        time: function(marker) {
+                            return marker.time;
+                        }
+                    },
+                    breakOverlay:{
+                        display: true,
+                        style:{
+                            'width':'100%',
+                            'height': '10%',
+                            'background-color': 'rgba(0,0,0,0)',
+                            'color': 'white',
+                            'font-size': '20px'
+                        },
+                        text: function(marker) {
+                            // return marker.text;
+                            return '';
+                        }
+                    },
+                    onMarkerClick: function(marker){
+                        //$('.dynamic-demo-events').append('<li class="list-group-item">Marker click: '+marker.time+'</li>');
+                    },
+                    onMarkerReached: function(marker){
+                        //$('.dynamic-demo-events').append('<li class="list-group-item">Marker reached: '+marker.time+'</li>');
+                    },
+                    markers: caption_data["cam-4"].rows
+                });
+                video_4.caption({
+                    data: caption_data["cam-4"].rows, setting: {
+                        onCaptionChange: function (num_c) {
+                            console.log("Show 4: " + num_c + " caption");
+                        }
+                    }
+                });
+
+                // Control for video 2
+                video_2.markers({
+                    markerStyle: {
+                        'width':'10px',
+                        'border-radius': '40%',
+                        'background-color': 'blue'
+                    },
+                    markerTip:{
+                        display: false,
+                        text: function(marker) {
+                            return marker.text;
+                        },
+                        time: function(marker) {
+                            return marker.time;
+                        }
+                    },
+                    breakOverlay:{
+                        display: true,
+                        style:{
+                            'width':'100%',
+                            'height': '10%',
+                            'background-color': 'rgba(0,0,0,0)',
+                            'color': 'white',
+                            'font-size': '20px'
+                        },
+                        text: function(marker) {
+                            // return marker.text;
+                            return '';
+                        }
+                    },
+                    onMarkerClick: function(marker){
+                        //$('.dynamic-demo-events').append('<li class="list-group-item">Marker click: '+marker.time+'</li>');
+                    },
+                    onMarkerReached: function(marker){
+                        //$('.dynamic-demo-events').append('<li class="list-group-item">Marker reached: '+marker.time+'</li>');
+                    },
+                    markers: caption_data["cam-2"].rows
+                });
+                video_2.caption({
+                    data: caption_data["cam-2"].rows, setting: {
+                        onCaptionChange: function (num_c) {
+                            console.log("Show 2: " + num_c + " caption");
+                        }
+                    }
+                });
+
+                // Control for video 1
+                video_1.markers({
+                    markerStyle: {
+                        'width':'10px',
+                        'border-radius': '40%',
+                        'background-color': 'blue'
+                    },
+                    markerTip:{
+                        display: false,
+                        text: function(marker) {
+                            return marker.text;
+                        },
+                        time: function(marker) {
+                            return marker.time;
+                        }
+                    },
+                    breakOverlay:{
+                        display: true,
+                        style:{
+                            'width':'100%',
+                            'height': '10%',
+                            'background-color': 'rgba(0,0,0,0)',
+                            'color': 'white',
+                            'font-size': '20px'
+                        },
+                        text: function(marker) {
+                            // return marker.text;
+                            return '';
+                        }
+                    },
+                    onMarkerClick: function(marker){
+                        //$('.dynamic-demo-events').append('<li class="list-group-item">Marker click: '+marker.time+'</li>');
+                    },
+                    onMarkerReached: function(marker){
+                        //$('.dynamic-demo-events').append('<li class="list-group-item">Marker reached: '+marker.time+'</li>');
+                    },
+                    markers: caption_data["cam-1"].rows
+                });
+                video_1.caption({
+                    data: caption_data["cam-1"].rows, setting: {
+                        onCaptionChange: function (num_c) {
+                            console.log("Show 1: " + num_c + " caption");
+                        }
+                    }
+                });
+            } catch(err) {
+                console.log("No refresh object videos: " + err)
+            }
+
+        }
+
+        /**
+         * Function get cam video.
+         */
+        function getCamVideo(cam){
+            var video = '';
+            switch(parseInt(cam)) {
+                case 1:
+                    video = video_1;
+                    break;
+                case 2:
+                    video = video_2;
+                    break;
+                case 3:
+                    video = video_3;
+                    break;
+                case 4:
+                    video = video_4;
+                    break;
+            }
+            return video;
+        }
+
+        /**
+         * Function prev tag.
+         */
+        function prevTagVideos(){
+            video_1.markers.prev();
+            video_2.markers.prev();
+            video_3.markers.prev();
+            video_4.markers.prev();
+        }
+
+        /**
+         * Function Next tag.
+         */
+        function nextTagVideos(){
+            video_1.markers.next();
+            video_2.markers.next();
+            video_3.markers.next();
+            video_4.markers.next();
+        }
+
+        /**
+         * Function get cam video.
+         */
+        function getCaption(cam){
+            var cam_index = "cam-" + cam;
+            var caption = caption_data[cam_index];
+            return caption;
+        }
+
+        /**
+         * Function move tags 1 seconds.
+         */
+        function shiftTags(cam, increment){
+            var data = getCamVideo(cam).caption.getCaptionData();
+            for (var i = 0; i < data.length; i++) {
+                var startTime = data[i].startTime;
+                if (startTime >= 0){
+                    startTime += increment;
+                    if (startTime < 0) {
+                        data[i].startTime = 0;
+                        data[i].endTime = 2000;
+                        errMessage('You can not move the tag on the video ' + cam);
+                    } else {
+                        data[i].startTime += increment;
+                        data[i].endTime += increment;
+                        errMessage('Move the tag 1 seconds on the video ' + cam);
+                    }
+                } else {
+                    errMessage('You can not move the tag on the video ' + cam);
+                }
+            }
+            video_1.caption.updateCaption();
+            video_2.caption.updateCaption();
+            video_3.caption.updateCaption();
+            video_4.caption.updateCaption();
+        }
+
+        $(".dynamic-demo-add").click(function () {
+            pauseVideos();
+            var id_ = $(this).parent().attr('id');
+            var cam = id_.slice(-1);
+            var currentTime = parseFloat($("#ct_" + cam).val());
+            var tag_input = $("#bottom_text_tag_" + cam);
+            var text_input = $("#text_tag_" + cam);
+            var ed_sn = $("#ed_" + cam);
+            var bottom = tag_input.val();
+            var text = text_input.val();
+            var title = '';
+            var sn = ed_sn.val();
+            var id_input = $("#id_" + cam);
+
+            if (currentTime != '' && bottom != '') {
+                var id = parseInt(id_input.val());
+                if (sn == 'S') {
+                    // update caption and markers
+                    var cam_index = "cam-" + cam;
+                    modInfoTag(id, title, bottom, text, caption_data[cam_index].rows);
+                } else {
+                    id_input.val('');
+                    var ctempa = {};
+                    var caption_ = getCaption(cam);
+                    var num_tags = caption_.rows.length;
+                    num_tags += 1;
+                    var tm = currentTime * 1000;
+                    ctempa.startTime = tm;     // time in miliseconds
+                    ctempa.endTime = tm + 2000;
+                    ctempa.position = "HB";
+                    ctempa.data = bottom;
+                    ctempa.alignment = "C";
+                    ctempa.comment = text;
+                    ctempa.id = num_tags;
+                    ctempa.text = title;
+                    ctempa.time = currentTime;
+
+                    caption_.rows.push(ctempa);
+                    caption_.total = num_tags.toString();
+                    caption_.records = num_tags.toString();
+
+                    var ctempb = $.extend({}, ctempa);
+                    ctempb.text = '';
+                    ctempb.data = '';
+                    ctempb.comment = '';
+
+                    switch(parseInt(cam)) {
+                        case 1:
+                            caption_data["cam-2"].rows.push(ctempb);
+                            caption_data["cam-2"].total = num_tags.toString();
+                            caption_data["cam-2"].records = num_tags.toString();
+                            caption_data["cam-3"].rows.push(ctempb);
+                            caption_data["cam-3"].total = num_tags.toString();
+                            caption_data["cam-3"].records = num_tags.toString();
+                            caption_data["cam-4"].rows.push(ctempb);
+                            caption_data["cam-4"].total = num_tags.toString();
+                            caption_data["cam-4"].records = num_tags.toString();
+                            break;
+                        case 2:
+                            caption_data["cam-1"].rows.push(ctempb);
+                            caption_data["cam-1"].total = num_tags.toString();
+                            caption_data["cam-1"].records = num_tags.toString();
+                            caption_data["cam-3"].rows.push(ctempb);
+                            caption_data["cam-3"].total = num_tags.toString();
+                            caption_data["cam-3"].records = num_tags.toString();
+                            caption_data["cam-4"].rows.push(ctempb);
+                            caption_data["cam-4"].total = num_tags.toString();
+                            caption_data["cam-4"].records = num_tags.toString();
+                            break;
+                        case 3:
+                            caption_data["cam-2"].rows.push(ctempb);
+                            caption_data["cam-2"].total = num_tags.toString();
+                            caption_data["cam-2"].records = num_tags.toString();
+                            caption_data["cam-1"].rows.push(ctempb);
+                            caption_data["cam-1"].total = num_tags.toString();
+                            caption_data["cam-1"].records = num_tags.toString();
+                            caption_data["cam-4"].rows.push(ctempb);
+                            caption_data["cam-4"].total = num_tags.toString();
+                            caption_data["cam-4"].records = num_tags.toString();
+                            break;
+                        case 4:
+                            caption_data["cam-2"].rows.push(ctempb);
+                            caption_data["cam-2"].total = num_tags.toString();
+                            caption_data["cam-2"].records = num_tags.toString();
+                            caption_data["cam-3"].rows.push(ctempb);
+                            caption_data["cam-3"].total = num_tags.toString();
+                            caption_data["cam-3"].records = num_tags.toString();
+                            caption_data["cam-1"].rows.push(ctempb);
+                            caption_data["cam-1"].total = num_tags.toString();
+                            caption_data["cam-1"].records = num_tags.toString();
+                            break;
+                    }
+
+                    video_1.markers.add([{
+                        time: currentTime,
+                        text: title,
+                        overlayText: title
+                    }]);
+
+                    video_2.markers.add([{
+                        time: currentTime,
+                        text: title,
+                        overlayText: title
+                    }]);
+
+                    video_3.markers.add([{
+                        time: currentTime,
+                        text: title,
+                        overlayText: title
+                    }]);
+
+                    video_4.markers.add([{
+                        time: currentTime,
+                        text: title,
+                        overlayText: title
+                    }]);
+                }
+                paintListAll();
+
+                tag_input.val('');
+                text_input.val('');
+                $("#textOver_" + cam).val('');
+                ed_sn.val('N');
+            } else {
+                alert("Please, play Video and enter the tag information for Video Camera " + cam);
+            }
+            tag_input.attr('disabled', 'disabled');
+            text_input.attr('disabled', 'disabled');
+            ed_sn.val('N');
+            $("#ct_" + cam).val('');
+            JSOTRAGE.insert_caption(caption_data);
+            video_1.caption.updateCaption();
+            video_2.caption.updateCaption();
+            video_3.caption.updateCaption();
+            video_4.caption.updateCaption();
+            video_1.markers.updateTime();
+            video_2.markers.updateTime();
+            video_3.markers.updateTime();
+            video_4.markers.updateTime();
+            playVideos();
+        });
+
+        $(".dynamic-demo-cancel").click(function () {
+            var id_ = $(this).parent().attr('id');
+            cancelEdit(id_.slice(-1));
+        })
+
+        $(".dynamic-demo-add-tag").click(function () {
+            pauseVideos();
+            var id_ = $(this).parent().attr('id');
+            var cam = id_.slice(-1);
+            var ct = parseFloat(getCamVideo(cam).currentTime()).toFixed(2);
+            var text_input = $("#bottom_text_tag_" + cam);
+            text_input.prop('disabled', false);
+            text_input.focus();
+            $("#text_tag_" + cam).prop('disabled', false);
+            $("#ct_" + cam).val(ct);
+
+        });
+
+        $(".dynamic-demo-prev").click(function(){
+            prevTagVideos();
+        });
+
+        $(".dynamic-demo-next").click(function(){
+            nextTagVideos();
+        });
+
+        $(".increase-font").click(function () {
+            var id_ = $(this).parent().attr('id');
+            getCamVideo(id_.slice(-1)).caption.increaseFontSize();
+        });
+
+        $(".decrease-font").click(function () {
+            var id_ = $(this).parent().attr('id');
+            getCamVideo(id_.slice(-1)).caption.decreaseFontSize();
+        });
+
+        $(".dynamic-demo-shift-r").click(function () {
+            var id_ = $(this).parent().attr('id');
+            shiftTags(id_.slice(-1), 1000)
+        });
+
+        $(".dynamic-demo-shift-l").click(function () {
+            var id_ = $(this).parent().attr('id');
+            shiftTags(id_.slice(-1), -1000)
+        });
+
+        /**
+         * Functoin paint list in Web.
+         * @param cam
+         * @param caption
+         */
+        function paintList(cam, caption) {
+            // insert marker list
+            $("#marker-list-" + cam).empty();
+            for (var i = 0; i < caption.length; i++) {
+                var item = '';
+                if (caption[i].data != '') {
+                    item = $("<li class='list-group-item' style='padding: 1px 1px;' data-index='" + i +
+                            "' ><b>" +
+                            "<input type='hidden' id='current_time_" + cam + i +  "' name='current_time_" + cam + i + "' value='" + caption[i].time + "' />" +
+                            "<input type='hidden' id='ed_" + cam + i + "' name='ed_" + cam + i + "' value='S' />" +
+                            "<input type='hidden' id='id_" + cam + i + "' name='id_" + cam + i + "' value='" + caption[i].id + "' />" +
+                            "<input type='text' disabled='disabled' size='70' maxlength='70' name='tag_text_save_" + cam + i + "' id='tag_text_save_" + cam + i + "' value='Time: " + caption[i].time  + " seg. - Tags: " + caption[i].data + "' class='tooltip_' title='" + caption[i].comment + "'/> "  +
+                            "</b>" +
+                            "&nbsp;<img src='images/preview.png' class='li-prev tooltip_' width='18' height='18' alt='Preview' title='Preview Tag on Video' id='goto_tag_" + i +
+                            cam + "' onclick='javascript: goTag(" + cam + ", " + i + ");'/> " +
+                            "&nbsp;<img src='images/rename.png' class='li-rename tooltip_' width='18' height='18' alt='Edit' title='Edit Tag Text' id='edit_tag_" + i +
+                            cam + "' onclick='javascript: editTag(" + cam + ", " + i + ");'/> " +
+//                            "&nbsp;<img src='images/left-arrow.png' class='li-left-time' width='18' height='18' alt='Move Left' title='Move Left Time Tag' id='move_left_tag_" + i +
+//                            cam + "' onclick='javascript: moveLeftTag(" + cam + ", " + i + ");'/> " +
+//                            "&nbsp;<img src='images/right-arrow.png' class='li-right-time' width='18' height='18' alt='Move Right' title='Move Right Time Tag' id='move_right_tag_" + i +
+//                            cam + "' onclick='javascript: moveRightTag(" + cam + ", " + i + ");'/> " +
+                            "</li>");
+                    // $("#marker-list-" + cam).append(item);
+                } else{
+                    item = $("<li class='list-group-item' style='padding: 1px 1px;display: none;' data-index='" + i + "' ></li>");
+                }
+                $("#marker-list-" + cam).append(item);
+            }
+            $("#marker-list-" + cam).append("<script>$(function(){ Tipped.create('.tooltip_', {skin: 'red'} ); });<\/script>");
+        }
+
+        // paintListAll();
+
+        /**
+         * Function Paint All list on video.
+         */
+        function paintListAll(){
+            try {
+                paintList(1, caption_data["cam-1"].rows);
+                paintList(2, caption_data["cam-2"].rows);
+                paintList(3, caption_data["cam-3"].rows);
+                paintList(4, caption_data["cam-4"].rows);
+            } catch(err) {
+                console.log("No paint list comment for videos: " + err)
+            }
+        }
+
+    });
+
+    /**
+     * Function Pause All videos
+     */
+    function pauseVideos(){
+        video1.pause();
+        video2.pause();
+        video3.pause();
+        video4.pause();
+    }
+
+    /**
+     * Function Play All videos
+     */
+    function playVideos(){
+        video1.play();
+        video2.play();
+        video3.play();
+        video4.play();
+    }
+
+    /**
+     * Function Go Tags index preview.
+     * @param cam
+     * @param index_tag
+     */
+    function goTag(cam, index_tag){
+        pauseVideos();
+        var cam_index = "cam-" + cam;
+        var ct = caption_data[cam_index].rows[index_tag].time;
+        video_1.currentTime(ct);
+        video_2.currentTime(ct);
+        video_3.currentTime(ct);
+        video_4.currentTime(ct);
+        playVideos();
+    }
+
+    /**
+     * Function Edit Text in Tag.
+     * @param cam
+     * @param index_tag
+     */
+    function editTag(cam, index_tag){
+        pauseVideos();
+        goTag(cam, index_tag);
+        var cam_index = "cam-" + cam;
+
+        var text = caption_data[cam_index].rows[index_tag].text;
+        var bottom = caption_data[cam_index].rows[index_tag].data;
+        var comment = caption_data[cam_index].rows[index_tag].comment;
+        var id = caption_data[cam_index].rows[index_tag].id;
+
+        var tag_input = $("#bottom_text_tag_" + cam);
+        var text_input = $("#text_tag_" + cam);
+
+        $("#top_text_tag_" + cam).val(text);
+        tag_input.val(bottom);
+        text_input.val(comment);
+        tag_input.prop('disabled', false);
+        text_input.prop('disabled', false);
+        $("#textOver_" + cam).val(text);
+        $("#id_" + cam).val(id);
+        $("#ed_" + cam).val('S');
+    }
+
+    /**
+     * Function Cancel Edition on Tag.
+     * @param cam
+     */
+    function cancelEdit(cam){
+        var tag_input = $("#bottom_text_tag_" + cam);
+        var text_input = $("#text_tag_" + cam);
+        $("#top_text_tag_" + cam).val('');
+        tag_input.val('');
+        text_input.val('');
+        $("#id_" + cam).val('');
+        $("#ed_" + cam).val('N');
+        $("#textOver_" + cam).val('');
+        tag_input.attr('disabled', 'disabled');
+        text_input.attr('disabled', 'disabled');
+        $("#ct_" + cam).val('');
+    }
+</script>
+</html>
