@@ -18,14 +18,14 @@ You can export the captions in a json files. By default captions can be loaded e
 
 ### Characteristics
 
-Main control panel to simultaneously play all videos
+##### Main control panel to simultaneously play all videos
 ![Panel Control](https://github.com/mfcardenas/annotation-video/blob/master/images/interface_bb.bmp)
 
-Section four cameras default.
+##### Section four cameras default.
 ![Section Camera](https://github.com/mfcardenas/annotation-video/blob/master/images/interface_cc.bmp)
 
-Control subtitle sync for each camera content on the four videos.
+##### Control subtitle sync for each camera content on the four videos.
 ![Control Subtitle](https://github.com/mfcardenas/annotation-video/blob/master/images/interface_dd.bmp)
 
-Rich Text format for subtitles.
+##### Rich Text format for subtitles.
 ![Rich Text](https://github.com/mfcardenas/annotation-video/blob/master/images/interface_ee.bmp)
