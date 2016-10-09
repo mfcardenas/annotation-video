@@ -1,7 +1,7 @@
 {
   "cam-1": {
-    "records": "8",
-    "total": "8",
+    "records": "4",
+    "total": "4",
     "rows": [
       {
         "endTime": 4000,
@@ -32,76 +32,32 @@
         "time": 5.26
       },
       {
-        "startTime": 7980,
-        "endTime": 9980,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 3,
-        "text": "",
-        "time": 7.98
-      },
-      {
         "startTime": 11770,
         "endTime": 13770,
         "position": "HB",
         "data": "STORAGE  add 33",
         "alignment": "C",
         "comment": "STORAGE  con 33",
-        "id": 4,
+        "id": 3,
         "text": "",
         "time": 11.77
       },
       {
-        "startTime": 14780,
-        "endTime": 16780,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 5,
-        "text": "",
-        "time": 14.78
-      },
-      {
-        "startTime": 23080,
-        "endTime": 25080,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 6,
-        "text": "",
-        "time": 23.08
-      },
-      {
-        "startTime": 25240,
-        "endTime": 27240,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 7,
-        "text": "",
-        "time": 25.24
-      },
-      {
-        "startTime": 78370,
-        "endTime": 80370,
+        "startTime": 15370,
+        "endTime": 17370,
         "position": "HB",
         "data": "STORAGE  add 13",
         "alignment": "C",
         "comment": "STORAGE  con 13",
-        "id": 8,
+        "id": 4,
         "text": "",
-        "time": 78.37
+        "time": 15.37
       }
     ]
   },
   "cam-2": {
-    "records": "8",
-    "total": "8",
+    "records": "3",
+    "total": "3",
     "rows": [
       {
         "endTime": 4000,
@@ -121,37 +77,15 @@
         "key": "9dc11256-a1b9-490b-b89f-c9de3b08288f"
       },
       {
-        "startTime": 5260,
-        "endTime": 7260,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 2,
-        "text": "",
-        "time": 5.26
-      },
-      {
         "startTime": 7980,
         "endTime": 9980,
         "position": "HB",
         "data": "STORAGE  add 22",
         "alignment": "C",
         "comment": "STORAGE  con 22",
-        "id": 3,
+        "id": 2,
         "text": "",
         "time": 7.98
-      },
-      {
-        "startTime": 11770,
-        "endTime": 13770,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 4,
-        "text": "",
-        "time": 11.77
       },
       {
         "startTime": 14780,
@@ -160,48 +94,15 @@
         "data": "STORAGE  add 55",
         "alignment": "C",
         "comment": "STORAGE  add 55",
-        "id": 5,
+        "id": 3,
         "text": "",
         "time": 14.78
-      },
-      {
-        "startTime": 23080,
-        "endTime": 25080,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 6,
-        "text": "",
-        "time": 23.08
-      },
-      {
-        "startTime": 25240,
-        "endTime": 27240,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 7,
-        "text": "",
-        "time": 25.24
-      },
-      {
-        "startTime": 78370,
-        "endTime": 80370,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 8,
-        "text": "",
-        "time": 78.37
       }
     ]
   },
   "cam-3": {
-    "records": "8",
-    "total": "8",
+    "records": "2",
+    "total": "2",
     "rows": [
       {
         "endTime": 4000,
@@ -221,87 +122,21 @@
         "key": "fdef15ed-0618-4169-8e80-1e6a6bdab1f4"
       },
       {
-        "startTime": 5260,
-        "endTime": 7260,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 2,
-        "text": "",
-        "time": 5.26
-      },
-      {
-        "startTime": 7980,
-        "endTime": 9980,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 3,
-        "text": "",
-        "time": 7.98
-      },
-      {
-        "startTime": 11770,
-        "endTime": 13770,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 4,
-        "text": "",
-        "time": 11.77
-      },
-      {
-        "startTime": 14780,
-        "endTime": 16780,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 5,
-        "text": "",
-        "time": 14.78
-      },
-      {
         "startTime": 23080,
         "endTime": 25080,
         "position": "HB",
         "data": "STORAGE  add 31",
         "alignment": "C",
         "comment": "STORAGE  con 31",
-        "id": 6,
+        "id": 2,
         "text": "",
         "time": 23.08
-      },
-      {
-        "startTime": 25240,
-        "endTime": 27240,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 7,
-        "text": "",
-        "time": 25.24
-      },
-      {
-        "startTime": 78370,
-        "endTime": 80370,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 8,
-        "text": "",
-        "time": 78.37
       }
     ]
   },
   "cam-4": {
-    "records": "8",
-    "total": "8",
+    "records": "2",
+    "total": "2",
     "rows": [
       {
         "endTime": 4000,
@@ -321,81 +156,15 @@
         "key": "56bb4045-6bea-41c3-9e4c-88e853c52dd2"
       },
       {
-        "startTime": 5260,
-        "endTime": 7260,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 2,
-        "text": "",
-        "time": 5.26
-      },
-      {
-        "startTime": 7980,
-        "endTime": 9980,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 3,
-        "text": "",
-        "time": 7.98
-      },
-      {
-        "startTime": 11770,
-        "endTime": 13770,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 4,
-        "text": "",
-        "time": 11.77
-      },
-      {
-        "startTime": 14780,
-        "endTime": 16780,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 5,
-        "text": "",
-        "time": 14.78
-      },
-      {
-        "startTime": 23080,
-        "endTime": 25080,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 6,
-        "text": "",
-        "time": 23.08
-      },
-      {
         "startTime": 25240,
         "endTime": 27240,
         "position": "HB",
         "data": "STORAGE  add 41",
         "alignment": "C",
         "comment": "STORAGE  con 41",
-        "id": 7,
+        "id": 2,
         "text": "",
         "time": 25.24
-      },
-      {
-        "startTime": 78370,
-        "endTime": 80370,
-        "position": "HB",
-        "data": "",
-        "alignment": "C",
-        "comment": "",
-        "id": 8,
-        "text": "",
-        "time": 78.37
       }
     ]
   }

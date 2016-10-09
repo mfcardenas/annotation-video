@@ -1350,57 +1350,58 @@
                     caption_.total = num_tags.toString();
                     caption_.records = num_tags.toString();
 
-                    var ctempb = $.extend({}, ctempa);
-                    ctempb.text = '';
-                    ctempb.data = '';
-                    ctempb.comment = '';
-
-                    switch(parseInt(cam)) {
-                        case 1:
-                            caption_data["cam-2"].rows.push(ctempb);
-                            caption_data["cam-2"].total = num_tags.toString();
-                            caption_data["cam-2"].records = num_tags.toString();
-                            caption_data["cam-3"].rows.push(ctempb);
-                            caption_data["cam-3"].total = num_tags.toString();
-                            caption_data["cam-3"].records = num_tags.toString();
-                            caption_data["cam-4"].rows.push(ctempb);
-                            caption_data["cam-4"].total = num_tags.toString();
-                            caption_data["cam-4"].records = num_tags.toString();
-                            break;
-                        case 2:
-                            caption_data["cam-1"].rows.push(ctempb);
-                            caption_data["cam-1"].total = num_tags.toString();
-                            caption_data["cam-1"].records = num_tags.toString();
-                            caption_data["cam-3"].rows.push(ctempb);
-                            caption_data["cam-3"].total = num_tags.toString();
-                            caption_data["cam-3"].records = num_tags.toString();
-                            caption_data["cam-4"].rows.push(ctempb);
-                            caption_data["cam-4"].total = num_tags.toString();
-                            caption_data["cam-4"].records = num_tags.toString();
-                            break;
-                        case 3:
-                            caption_data["cam-2"].rows.push(ctempb);
-                            caption_data["cam-2"].total = num_tags.toString();
-                            caption_data["cam-2"].records = num_tags.toString();
-                            caption_data["cam-1"].rows.push(ctempb);
-                            caption_data["cam-1"].total = num_tags.toString();
-                            caption_data["cam-1"].records = num_tags.toString();
-                            caption_data["cam-4"].rows.push(ctempb);
-                            caption_data["cam-4"].total = num_tags.toString();
-                            caption_data["cam-4"].records = num_tags.toString();
-                            break;
-                        case 4:
-                            caption_data["cam-2"].rows.push(ctempb);
-                            caption_data["cam-2"].total = num_tags.toString();
-                            caption_data["cam-2"].records = num_tags.toString();
-                            caption_data["cam-3"].rows.push(ctempb);
-                            caption_data["cam-3"].total = num_tags.toString();
-                            caption_data["cam-3"].records = num_tags.toString();
-                            caption_data["cam-1"].rows.push(ctempb);
-                            caption_data["cam-1"].total = num_tags.toString();
-                            caption_data["cam-1"].records = num_tags.toString();
-                            break;
-                    }
+//                    var ctempb = $.extend({}, ctempa);
+//                    ctempb.text = '';
+//                    ctempb.data = '';
+//                    ctempb.comment = '';
+//                    ctempb.endTime = tm + 100;
+//
+//                    switch(parseInt(cam)) {
+//                        case 1:
+//                            caption_data["cam-2"].rows.push(ctempb);
+//                            caption_data["cam-2"].total = num_tags.toString();
+//                            caption_data["cam-2"].records = num_tags.toString();
+//                            caption_data["cam-3"].rows.push(ctempb);
+//                            caption_data["cam-3"].total = num_tags.toString();
+//                            caption_data["cam-3"].records = num_tags.toString();
+//                            caption_data["cam-4"].rows.push(ctempb);
+//                            caption_data["cam-4"].total = num_tags.toString();
+//                            caption_data["cam-4"].records = num_tags.toString();
+//                            break;
+//                        case 2:
+//                            caption_data["cam-1"].rows.push(ctempb);
+//                            caption_data["cam-1"].total = num_tags.toString();
+//                            caption_data["cam-1"].records = num_tags.toString();
+//                            caption_data["cam-3"].rows.push(ctempb);
+//                            caption_data["cam-3"].total = num_tags.toString();
+//                            caption_data["cam-3"].records = num_tags.toString();
+//                            caption_data["cam-4"].rows.push(ctempb);
+//                            caption_data["cam-4"].total = num_tags.toString();
+//                            caption_data["cam-4"].records = num_tags.toString();
+//                            break;
+//                        case 3:
+//                            caption_data["cam-2"].rows.push(ctempb);
+//                            caption_data["cam-2"].total = num_tags.toString();
+//                            caption_data["cam-2"].records = num_tags.toString();
+//                            caption_data["cam-1"].rows.push(ctempb);
+//                            caption_data["cam-1"].total = num_tags.toString();
+//                            caption_data["cam-1"].records = num_tags.toString();
+//                            caption_data["cam-4"].rows.push(ctempb);
+//                            caption_data["cam-4"].total = num_tags.toString();
+//                            caption_data["cam-4"].records = num_tags.toString();
+//                            break;
+//                        case 4:
+//                            caption_data["cam-2"].rows.push(ctempb);
+//                            caption_data["cam-2"].total = num_tags.toString();
+//                            caption_data["cam-2"].records = num_tags.toString();
+//                            caption_data["cam-3"].rows.push(ctempb);
+//                            caption_data["cam-3"].total = num_tags.toString();
+//                            caption_data["cam-3"].records = num_tags.toString();
+//                            caption_data["cam-1"].rows.push(ctempb);
+//                            caption_data["cam-1"].total = num_tags.toString();
+//                            caption_data["cam-1"].records = num_tags.toString();
+//                            break;
+//                    }
 
                     video_1.markers.add([{
                         time: currentTime,
@@ -1519,10 +1520,6 @@
                             cam + "' onclick='javascript: goTag(" + cam + ", " + i + ");'/> " +
                             "&nbsp;<img src='images/rename.png' class='li-rename tooltip_' width='18' height='18' alt='Edit' title='Edit Tag Text' id='edit_tag_" + i +
                             cam + "' onclick='javascript: editTag(" + cam + ", " + i + ");'/> " +
-//                            "&nbsp;<img src='images/left-arrow.png' class='li-left-time' width='18' height='18' alt='Move Left' title='Move Left Time Tag' id='move_left_tag_" + i +
-//                            cam + "' onclick='javascript: moveLeftTag(" + cam + ", " + i + ");'/> " +
-//                            "&nbsp;<img src='images/right-arrow.png' class='li-right-time' width='18' height='18' alt='Move Right' title='Move Right Time Tag' id='move_right_tag_" + i +
-//                            cam + "' onclick='javascript: moveRightTag(" + cam + ", " + i + ");'/> " +
                             "</li>");
                     // $("#marker-list-" + cam).append(item);
                 } else{
