@@ -1303,10 +1303,11 @@
                     errMessage('You can not move the tag on the video ' + cam);
                 }
             }
-            video_1.caption.updateCaption();
-            video_2.caption.updateCaption();
-            video_3.caption.updateCaption();
-            video_4.caption.updateCaption();
+            updateCaptions();
+            //video_1.caption.updateCaption();
+            //video_2.caption.updateCaption();
+            //video_3.caption.updateCaption();
+            //video_4.caption.updateCaption();
         }
 
         $(".dynamic-demo-add").click(function () {
@@ -1350,59 +1351,6 @@
                     caption_.total = num_tags.toString();
                     caption_.records = num_tags.toString();
 
-//                    var ctempb = $.extend({}, ctempa);
-//                    ctempb.text = '';
-//                    ctempb.data = '';
-//                    ctempb.comment = '';
-//                    ctempb.endTime = tm + 100;
-//
-//                    switch(parseInt(cam)) {
-//                        case 1:
-//                            caption_data["cam-2"].rows.push(ctempb);
-//                            caption_data["cam-2"].total = num_tags.toString();
-//                            caption_data["cam-2"].records = num_tags.toString();
-//                            caption_data["cam-3"].rows.push(ctempb);
-//                            caption_data["cam-3"].total = num_tags.toString();
-//                            caption_data["cam-3"].records = num_tags.toString();
-//                            caption_data["cam-4"].rows.push(ctempb);
-//                            caption_data["cam-4"].total = num_tags.toString();
-//                            caption_data["cam-4"].records = num_tags.toString();
-//                            break;
-//                        case 2:
-//                            caption_data["cam-1"].rows.push(ctempb);
-//                            caption_data["cam-1"].total = num_tags.toString();
-//                            caption_data["cam-1"].records = num_tags.toString();
-//                            caption_data["cam-3"].rows.push(ctempb);
-//                            caption_data["cam-3"].total = num_tags.toString();
-//                            caption_data["cam-3"].records = num_tags.toString();
-//                            caption_data["cam-4"].rows.push(ctempb);
-//                            caption_data["cam-4"].total = num_tags.toString();
-//                            caption_data["cam-4"].records = num_tags.toString();
-//                            break;
-//                        case 3:
-//                            caption_data["cam-2"].rows.push(ctempb);
-//                            caption_data["cam-2"].total = num_tags.toString();
-//                            caption_data["cam-2"].records = num_tags.toString();
-//                            caption_data["cam-1"].rows.push(ctempb);
-//                            caption_data["cam-1"].total = num_tags.toString();
-//                            caption_data["cam-1"].records = num_tags.toString();
-//                            caption_data["cam-4"].rows.push(ctempb);
-//                            caption_data["cam-4"].total = num_tags.toString();
-//                            caption_data["cam-4"].records = num_tags.toString();
-//                            break;
-//                        case 4:
-//                            caption_data["cam-2"].rows.push(ctempb);
-//                            caption_data["cam-2"].total = num_tags.toString();
-//                            caption_data["cam-2"].records = num_tags.toString();
-//                            caption_data["cam-3"].rows.push(ctempb);
-//                            caption_data["cam-3"].total = num_tags.toString();
-//                            caption_data["cam-3"].records = num_tags.toString();
-//                            caption_data["cam-1"].rows.push(ctempb);
-//                            caption_data["cam-1"].total = num_tags.toString();
-//                            caption_data["cam-1"].records = num_tags.toString();
-//                            break;
-//                    }
-
                     video_1.markers.add([{
                         time: currentTime,
                         text: title,
@@ -1441,14 +1389,16 @@
             ed_sn.val('N');
             $("#ct_" + cam).val('');
             JSOTRAGE.insert_caption(caption_data);
-            video_1.caption.updateCaption();
-            video_2.caption.updateCaption();
-            video_3.caption.updateCaption();
-            video_4.caption.updateCaption();
-            video_1.markers.updateTime();
-            video_2.markers.updateTime();
-            video_3.markers.updateTime();
-            video_4.markers.updateTime();
+            updateCaptions();
+            //video_1.caption.updateCaption();
+            //video_2.caption.updateCaption();
+            //video_3.caption.updateCaption();
+            //video_4.caption.updateCaption();
+            updateMarkers();
+            //video_1.markers.updateTime();
+            //video_2.markers.updateTime();
+            //video_3.markers.updateTime();
+            //video_4.markers.updateTime();
             playVideos();
         });
 
@@ -1575,13 +1525,41 @@
      */
     function goTag(cam, index_tag){
         pauseVideos();
+        setCurrentPositionCaption(cam, index_tag);
+        playVideos();
+    }
+
+    /**
+     * Set Currents position caption for all videos.
+     */
+    function setCurrentPositionCaption(cam, index_tag){
         var cam_index = "cam-" + cam;
         var ct = caption_data[cam_index].rows[index_tag].time;
         video_1.currentTime(ct);
         video_2.currentTime(ct);
         video_3.currentTime(ct);
         video_4.currentTime(ct);
-        playVideos();
+    }
+
+    /**
+     * Update Captions all videos.
+     *
+     */
+    function updateCaptions(){
+        video_1.caption.updateCaption();
+        video_2.caption.updateCaption();
+        video_3.caption.updateCaption();
+        video_4.caption.updateCaption();
+    }
+
+    /**
+     * Update markers all videos.
+     */
+    function updateMarkers(){
+        video_1.markers.updateTime();
+        video_2.markers.updateTime();
+        video_3.markers.updateTime();
+        video_4.markers.updateTime();
     }
 
     /**
@@ -1591,7 +1569,7 @@
      */
     function editTag(cam, index_tag){
         pauseVideos();
-        goTag(cam, index_tag);
+        setCurrentPositionCaption(cam, index_tag);
         var cam_index = "cam-" + cam;
 
         var text = caption_data[cam_index].rows[index_tag].text;
