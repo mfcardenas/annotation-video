@@ -36,6 +36,7 @@
     <script src="js/modernizr.js"></script>
     <script src="js/jquery.cookie.js"></script>
     <script src="js/screenfull.js"></script>
+    <script src="js/model_massis.js"></script>
 
     <script> $(function () {
         // $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -1304,10 +1305,6 @@
                 }
             }
             updateCaptions();
-            //video_1.caption.updateCaption();
-            //video_2.caption.updateCaption();
-            //video_3.caption.updateCaption();
-            //video_4.caption.updateCaption();
         }
 
         $(".dynamic-demo-add").click(function () {
@@ -1390,15 +1387,7 @@
             $("#ct_" + cam).val('');
             JSOTRAGE.insert_caption(caption_data);
             updateCaptions();
-            //video_1.caption.updateCaption();
-            //video_2.caption.updateCaption();
-            //video_3.caption.updateCaption();
-            //video_4.caption.updateCaption();
             updateMarkers();
-            //video_1.markers.updateTime();
-            //video_2.markers.updateTime();
-            //video_3.markers.updateTime();
-            //video_4.markers.updateTime();
             playVideos();
         });
 
