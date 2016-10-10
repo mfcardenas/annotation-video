@@ -7,6 +7,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="Videos, Tags, PHAT-SIM, Massis, UCM, Complutense"/>
     <script type="application/x-javascript">
+        if (navigator.userAgent.indexOf('Firefox') == -1) {
+            window.location.href = "error.html"
+        }
         addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
         }, false);
@@ -16,9 +19,7 @@
     </script>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link href="css/style.css" rel='stylesheet' type='text/css'/>
-    <!--link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic'
-          rel='stylesheet' type='text/css'-->
-    <link rel="stylesheet" href="css/font.css" type="text/css"/>
+    <link href="css/font.css" rel="stylesheet" type="text/css"/>
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href="css/videojs.markers.min.css" rel="stylesheet" type="text/css" media="screen">
     <link href="css/video-js.css" rel="stylesheet">
@@ -36,17 +37,17 @@
     <script src="js/modernizr.js"></script>
     <script src="js/jquery.cookie.js"></script>
     <script src="js/screenfull.js"></script>
-    <script src="js/model_massis.js"></script>
 
-    <script> $(function () {
-        // $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
-        if (!screenfull.enabled) {
-            return false;
-        }
-        $('#toggle').click(function () {
-            screenfull.toggle($('#container')[0]);
+    <script>
+        $(function () {
+            // $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+            if (!screenfull.enabled) {
+                return false;
+            }
+            $('#toggle').click(function () {
+                screenfull.toggle($('#container')[0]);
+            });
         });
-    });
     </script>
     <!-- If you'd like to support IE8 -->
     <!--script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script-->
@@ -729,7 +730,7 @@
         </div>
         <!-- footer -->
         <div class="footer">
-            <p>© 2016 mCardenas - UCM</p>
+            <p>© 2016 <a href="http://grasia.fdi.ucm.es/colosaal/" target="_blank">ColosAAL</a> - <a href="http://ucm.es" target="_blank">Universidad Complutense de Madrid</a></p>
         </div>
         <!-- //footer -->
     </section>

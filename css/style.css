@@ -3606,16 +3606,16 @@ button.note-color-btn {
     margin: 3em 0 0 0;
 }
 .copyright p{
-	color: #000;
+	color: #757575;
     font-size: 1em;
     margin: 0;
 }
 .copyright p a{
-	color: #000;
+	color: #727272;
     text-decoration: none;
 }
 .copyright p a:hover{
-	color:#FFFFFF;
+	color:#f2f2f2;
 }
 .agile-signup {
     padding: 5em 0;
@@ -3818,17 +3818,17 @@ div#vmap {
     margin: 0em auto 5em;
 }
 .error-page img {
-    width: 100%;
+    width: 50%;
 }
 .go-back {
     margin: 1em 0 0 0;
     text-align: center;
 }
 .go-back a {
-    background: #fcb216;
-    color: #000;
+    background: #f2f2f2;
+    color: #727272;
     padding: .8em 1.5em;
-    border: solid 2px #fcb216;
+    border: solid 2px #727272;
 }
 .go-back a:hover{
     border: solid 2px #000000;
@@ -3836,8 +3836,8 @@ div#vmap {
 }
 .error-body{
 	overflow: auto !important;
-	background: url(../images/error-bg.jpg) no-repeat 0px 0px;
-	background-size:cover;
+	/* background: url(../images/error-bg.jpg) no-repeat 0px 0px; */
+	background-size: cover;
 }
 /*-- //error --*/
 /*-- faq --*/
