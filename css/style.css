@@ -266,7 +266,7 @@ body a:hover{
 			-webkit-transition: width .05s linear;
 			transition: width .05s linear;
 			-webkit-transform: translateZ(0) scale(1,1);
-			background: #00bcd4;
+			background: #5a88ca;
 			z-index: 11;
 		}
 		nav.main-menu>ul{margin:7px 0}
@@ -285,7 +285,7 @@ body a:hover{
 		nav.main-menu li ul{
 		    position: absolute;
 			display: inline-block;
-			background: #00bcd4;
+			background: #5a88ca;
 			top: 0;
 			right: -210px;
 			width: 0;
@@ -341,7 +341,7 @@ body a:hover{
 			-webkit-transition: max-height .2s linear;
 			transition: max-height .2s linear;
 			-webkit-transform: translateZ(0) scale(1,1);
-			background: #00bcd4;
+			background: #5a88ca;
 			z-index: 1010;
 		}
 		nav.main-menu>ul{margin:0}nav.main-menu>ul>li{    
@@ -364,7 +364,7 @@ body a:hover{
 		}
 		nav.main-menu li ul{
 		    display: block;
-			background: #00bcd4;
+			background: #5a88ca;
 			width: 100%;
 			max-height: 0;
 			overflow: hidden;
@@ -400,7 +400,7 @@ body a:hover{
 
 	nav.user-menu .main-menu-access{position:relative;float:left;padding:15px 17px;color:#666;-webkit-transition:all .1s;transition:all .1s}
 	nav.user-menu .main-menu-access i{font-size:21px;width:30px}
-	nav.user-menu .main-menu-access.active{background: #00bcd4;}
+	nav.user-menu .main-menu-access.active{background: #5a88ca;}
 	nav.user-menu .main-menu-access.active i{color:#fff}
 	nav.user-menu .panel{
 		position:absolute;display:none;top:58px;left:0;right:0;width:100%;
@@ -511,8 +511,8 @@ button.btn.btn-default{
     padding: 10px 0 9px;
     width: 15%;
     position: relative;
-    background: #00bcd4;
-    border: solid 1px #00bcd4;
+    background: #5a88ca;
+    border: solid 1px #5a88ca;
     border-radius: 0;
 }
 button.btn.btn-default i.fa.fa-search{
@@ -540,8 +540,8 @@ button.btn.btn-default{
     padding: 10px 0 9px;
     width: 15%;
     position: relative;
-    background: #00bcd4;
-    border: solid 1px #00bcd4;
+    background: #5a88ca;
+    border: solid 1px #5a88ca;
     border-radius: 0;
 }
 button.btn.btn-default i.fa.fa-search{
@@ -960,7 +960,7 @@ ul.nofitications-dropdown {
 }
 span.prfil-img i.fa.fa-user {
     color: #ffffff;
-    background: #00bcd4;
+    background: #5a88ca;
     height: 41px;
     width: 41px;
     padding: .7em 0 0 0;
@@ -1112,7 +1112,7 @@ ul#example li { display: inline-block; }
 ul#example li span {
     font-size: 60px;
     font-weight: 900;
-    color: #00bcd4;
+    color: #5a88ca;
     letter-spacing: 5px;
 }
 ul#example li.seperator {
@@ -1240,12 +1240,12 @@ svg#lol {
 	text-decoration:none;
 }
 .footer p a:hover{
-	color:#00bcd4;
+	color:#5a88ca;
 }
 /*-- //footer --*/
 /*-- buttons --*/
 .buttons-heading h2,.grids-heading h2,.chart-heading h2,.table-heading h2,.map-heading h2{
-	color: #00bcd4;
+	color: #5a88ca;
     font-size: 2.5em;
     margin: 0 0 1em 0;
     text-align: center;
@@ -1492,7 +1492,7 @@ code {
 }
 .btn-primary {
     color: #fff;
-    background-color: #00bcd4;
+    background-color: #5a88ca;
 }
 .btn-danger {
     color: #fff;
@@ -3639,7 +3639,7 @@ body.signup-body {
     text-transform: uppercase;
 }
 .content2 a:hover{
-	color: #00bcd4;
+	color: #5a88ca;
 }
 /*-- //sign-up --*/
 /*-- login --*/
@@ -3854,7 +3854,7 @@ div#vmap {
     font-size: 0.9em;
 }
 .banner h2 a {
-    color: #00bcd4;
+    color: #5a88ca;
     text-decoration: none;
     padding: 0.3em;
 }
