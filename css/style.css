@@ -4800,3 +4800,15 @@ ul#marker-list li a:hover {
 .expand-tools {
 	color: #3897ff;
 }
+
+.image-upload > input {
+	display: none;
+}
+
+.image-upload img {
+	cursor: pointer;
+}
+
+.text-video {
+	color: red;
+}
