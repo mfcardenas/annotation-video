@@ -1,63 +1,24 @@
 {
   "cam-1": {
-    "records": "4",
-    "total": "4",
+    "records": "1",
+    "total": "1",
     "rows": [
       {
         "endTime": 4000,
         "startTime": 1000,
         "position": "HB",
-        "data": "The preparation of the data takes too long.",
+        "data": "This is an example of a comment.",
         "alignment": "C",
         "time": 1,
-        "text": "",
+        "text": "Example comment for video camera 1",
         "overlayText": "",
         "class": "blue-marker-class",
-        "comment": "In this video, the preparation of the data takes too long.",
+        "comment": "This is an example of an extensive commentary.",
         "format": [
           "i"
         ],
         "id": 1,
         "key": "18ff9ba6-3c24-441a-8120-64953787695d"
-      },
-      {
-        "startTime": 64849.99999999999,
-        "endTime": 66850,
-        "position": "HB",
-        "data": "This graph shows very high peaks.",
-        "alignment": "C",
-        "comment": "This graph shows very high peaks in the People Flow bar two.",
-        "id": 2,
-        "text": "",
-        "time": 64.85,
-        "overlayText": "",
-        "key": "309dd334-2ab9-41f9-9d2d-cedc58f97ac1"
-      },
-      {
-        "startTime": 356700,
-        "endTime": 358700,
-        "position": "HB",
-        "data": "The red line is not proportional",
-        "alignment": "C",
-        "comment": "The red line is not proportional to the blue line.",
-        "id": 3,
-        "text": "",
-        "time": 356.7,
-        "overlayText": "",
-        "key": "5ba6a617-e2be-426c-bc8c-f803f4949ff1"
-      },
-      {
-        "startTime": 505900,
-        "endTime": 507900,
-        "position": "HB",
-        "data": "Too little people at this point and this is ok",
-        "alignment": "C",
-        "comment": "There should be people going out from the classroom at this moment",
-        "id": 4,
-        "text": "",
-        "time": 505.9,
-        "overlayText": "",
-        "key": "4bd93b18-fe30-4053-b79c-f692f8195d45"
       }
     ]
   },
@@ -69,13 +30,13 @@
         "endTime": 4000,
         "startTime": 1500,
         "position": "HB",
-        "data": "Example tag for video camera 2.",
+        "data": "This is an example of a comment.",
         "alignment": "C",
         "time": 1.5,
-        "text": "Example tag for video camera 2.",
+        "text": "Example comment for video camera 2.",
         "overlayText": "Tag 2",
         "class": "blue-marker-class",
-        "comment": "Example comment for video camera 2.",
+        "comment": "This is an example of an extensive commentary.",
         "format": [
           "i"
         ],
@@ -92,29 +53,18 @@
         "endTime": 4000,
         "startTime": 2000,
         "position": "HB",
-        "data": "Example tag for video camera 3.",
+        "data": "This is an example of a comment.",
         "alignment": "C",
         "time": 2,
-        "text": "Example tag for video camera 3.",
+        "text": "Example comment for video camera 3.",
         "overlayText": "Tag 3",
         "class": "blue-marker-class",
-        "comment": "Example comment for video camera 3.",
+        "comment": "This is an example of an extensive commentary.",
         "format": [
           "i"
         ],
         "id": 1,
         "key": "81e77d8d-aa0b-4a34-aab0-b1684e884b77"
-      },
-      {
-        "startTime": 505900,
-        "endTime": 507900,
-        "position": "HB",
-        "data": "This camera is correct",
-        "alignment": "C",
-        "comment": "Good, this camera is correct.",
-        "id": 2,
-        "text": "",
-        "time": "505.90"
       }
     ]
   },
@@ -126,55 +76,18 @@
         "endTime": 4000,
         "startTime": 2500,
         "position": "HB",
-        "data": "Example tag for video camera 4.",
+        "data": "This is an example of a comment.",
         "alignment": "C",
         "time": 2.5,
-        "text": "Example tag for video camera 4.",
+        "text": "Example comment for video camera 4.",
         "overlayText": "Tag 4",
         "class": "blue-marker-class",
-        "comment": "Example comment for video camera 4.",
+        "comment": "This is an example of an extensive commentary.",
         "format": [
           "i"
         ],
         "id": 1,
         "key": "dc980b5e-e1f8-4d79-a4a3-c60056e69a38"
-      },
-      {
-        "startTime": 65489.99999999999,
-        "endTime": 67490,
-        "position": "HB",
-        "data": "The image shows correctly exit the hall.",
-        "alignment": "C",
-        "comment": "The image shows correctly exit the hall.",
-        "id": 2,
-        "text": "",
-        "time": 65.49,
-        "key": "45145cb2-c720-4662-9eb6-ae961b2c8b25"
-      },
-      {
-        "startTime": 505900,
-        "endTime": 507900,
-        "position": "HB",
-        "data": "Too little people at this point and it is bad.",
-        "alignment": "C",
-        "comment": "There should be people going out from the class at this moment",
-        "id": 3,
-        "text": "",
-        "time": 505.9,
-        "overlayText": "",
-        "key": "8d066907-c2a9-41f9-b6f6-19920688f571"
-      },
-      {
-        "startTime": 512890,
-        "endTime": 514890,
-        "position": "HB",
-        "data": "The male character does not walk properly",
-        "alignment": "C",
-        "comment": "The male character does not walk properly in this camera.",
-        "id": 4,
-        "text": "",
-        "time": 512.89,
-        "key": "5e821927-1c65-44d9-ba5e-ee2ab8b1bbad"
       }
     ]
   }

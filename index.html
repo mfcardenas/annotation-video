@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="keywords" content="Videos, Tags, PHAT-SIM, Massis, UCM, Complutense"/>
+    <meta name="keywords" content="Videos, Tags, Comments, PHAT-SIM, Massis, UCM, Complutense"/>
     <script type="application/x-javascript">
         if (navigator.userAgent.indexOf('Firefox') == -1) {
             window.location.href = "error.html"
@@ -59,9 +59,19 @@
     <script src="js/skycons.js"></script>
     <script src="js/json2.js"></script>
     <script src="js/jstorage.js"></script>
-
+    <script src="js/util.js"></script>
+</head>
+<body class="dashboard-page">
     <script>
-
+        var theme = 'default';
+        $('body').removeClass(function (index, css) {
+            return (css.match(/\btheme-\S+/g) || []).join(' ');
+        });
+        if (theme !== 'default') {
+            $('body').addClass(theme);
+        }
+    </script>
+    <script>
         JSOTRAGE = {
             /**
              * insert_value
@@ -95,9 +105,12 @@
 
             get_caption: function () {
                 var caption = $.jStorage.get("caption_data");
-                if (caption == '' || caption == 'undefined')
-                    caption = {};
-                return JSON.parse(caption);
+                if (caption == '' || caption == 'undefined' || caption == null){
+                    caption = getDefaultComments();
+                    return caption;
+                }else{
+                    return JSON.parse(caption);
+                }
             },
 
             /**
@@ -151,37 +164,6 @@
             // $("val").value(payload);
         });
     </script>
-</head>
-<body class="dashboard-page">
-    <script>
-        $(function () {
-            Tipped.create('.tooltip_', {skin: 'red'});
-
-            $('.agile-bottom-grid').draggable({
-                opacity: 0.35,
-                zIndex: 1
-            });
-
-            $('.agile-Updating-grids').draggable({
-                opacity: 0.35,
-                zIndex: 1
-            });
-
-            $('.area-grids').draggable({
-                opacity: 0.35,
-                zIndex: 1
-            });
-        });
-    </script>
-    <script>
-        var theme = 'default';
-        $('body').removeClass(function (index, css) {
-            return (css.match(/\btheme-\S+/g) || []).join(' ');
-        });
-        if (theme !== 'default') {
-            $('body').addClass(theme);
-        }
-    </script>
 
     <nav class="main-menu">
         <ul>
@@ -197,19 +179,19 @@
                 <a href="help.html">
                     <i class="fa fa-cogs" aria-hidden="true"></i>
                     <span class="nav-text">
-					Help
+					Ayuda
 				</span>
                     <i class="icon-angle-right"></i><i class="icon-angle-down"></i>
                 </a>
                 <ul>
                     <li>
                         <a class="subnav-text" href="help.html#controlcommon">
-                            Common Controls
+                            Controles Comunes
                         </a>
                     </li>
                     <li>
                         <a class="subnav-text" href="help.html#controlcomment">
-                            Comment Controls
+                            Controles de Comentarios
                         </a>
                     </li>
                 </ul>
@@ -354,54 +336,54 @@
                         <div class="area-grids-heading">
                             <div id="demo-tools-1" style="display: none;">
                                 <h3 class="demo-box-title active panel-title">
-                                    <a data-toggle="collapse" href="#collapse1"><span class="expand-tools">[+]</span> Tools Tags Video - Camera 1 </a>
+                                    <a data-toggle="collapse" href="#collapse1"><span class="expand-tools">[+]</span> Tools Comments Video - Camera 1 </a>
                                 </h3>
                                 <div id="collapse1" class="panel-collapse collapse">
                                     <div class="demo-box">
                                         <ul class="demo-tool-buttons" id="tools_1">
                                             <li id="increase-font-1" class="increase-font">
-                                                <img src="images/font_inc.png" width="22" height="22" alt="Zoom in Tags" title="Zoom in Tags" class="tooltip_"/>
+                                                <img src="images/font_inc.png" width="22" height="22" alt="Zoom in Comments" title="Zoom in Comments" class="tooltip_"/>
                                             </li>
                                             <li id="decrease-font-1" class="decrease-font">
-                                                <img src="images/font_dec.png" width="22" height="22" alt="Zoom out Tags" title="Zoom out Tags" class="tooltip_"/>
+                                                <img src="images/font_dec.png" width="22" height="22" alt="Zoom out Comments" title="Zoom out Comments" class="tooltip_"/>
                                             </li>
                                             <!--li id="decrease-tag-1" class="dynamic-demo-prev">
-                                                <img src="images/previous.png" width="22" height="22" title="Previus Tags" alt="Previus Tags" class="tooltip_"/>
+                                                <img src="images/previous.png" width="22" height="22" title="Previus Comments" alt="Previus Comments" class="tooltip_"/>
                                             </li>
                                             <li id="increase-tag-1" class="dynamic-demo-next">
-                                                <img src="images/next.png" width="22" height="22" title="Next Tags" alt="Next Tags" class="tooltip_"/>
+                                                <img src="images/next.png" width="22" height="22" title="Next Comments" alt="Next Comments" class="tooltip_"/>
                                             </li-->
                                             <li id="none1-tag-1" class=""></li>
 
                                             <!--<li id="movel-1sec-tag-1" class="dynamic-demo-shift-l" style="align-self: flex-end;" >-->
-                                                <!--<img src="images/left-arrow.png" width="22" height="22" title="Move Left 1 seconds All Tags" alt="Move Left 1 seconds All Tags"/>-->
+                                                <!--<img src="images/left-arrow.png" width="22" height="22" title="Move Left 1 seconds All Comments" alt="Move Left 1 seconds All Comments"/>-->
                                             <!--</li>-->
                                             <!--<li id="mover-1sec-tag-1" class="dynamic-demo-shift-r" style="align-self: flex-end;" >-->
-                                                <!--<img src="images/right-arrow.png" width="22" height="22" title="Move Right 1 seconds All Tags" alt="Move Right 1 seconds All Tags"/>-->
+                                                <!--<img src="images/right-arrow.png" width="22" height="22" title="Move Right 1 seconds All Comments" alt="Move Right 1 seconds All Comments"/>-->
                                             <!--</li>-->
                                             <li id="none2-tag-1" class=""></li>
 
                                             <!--li id="delete-tag-1" class="dynamic-demo-remove-all-1" style="align-self: flex-end;">
-                                                <img src="images/trash.png" width="22" height="22" title="Delete All Tags" alt="Delete All Tags" class="tooltip_"/>
+                                                <img src="images/trash.png" width="22" height="22" title="Delete All Comments" alt="Delete All Comments" class="tooltip_"/>
                                             </li-->
 
                                             <li id="none3-tag-1" class=""></li>
                                             <li id="none4-tag-1" class=""></li>
                                             <li id="add-tag-1" class="dynamic-demo-add-tag" style="align-self: flex-end;">
-                                                <img src="images/add_tag_b.png" width="22" height="22" title="Add Tag" alt="Add Tag" class="tooltip_"/>
+                                                <img src="images/create_comment.png" width="30" height="30" title="Add Comment" alt="Add Comment" class="tooltip_"/>
                                             </li>
 
                                         </ul>
                                     </div>
                                     <div class="demo-box" role="group" aria-label="...">
-                                        <!--label for="top_text_tag_1">Top Text Tag:&nbsp;*</label>
-                                        <input type="text" id="top_text_tag_1" name="top_text_tag_1" value="" size="50" maxlength="50" required placeholder="Top Text Tags in Video"/><br/-->
+                                        <!--label for="top_text_tag_1">Top Short Comment&nbsp;*</label>
+                                        <input type="text" id="top_text_tag_1" name="top_text_tag_1" value="" size="50" maxlength="50" required placeholder="Top Short Comment in Video"/><br/-->
                                         <input type="hidden" id="ct_1" name="ct_1" />
-                                        <label for="bottom_text_tag_1">Text Tag:&nbsp;*</label>
-                                        <input type="text" id="bottom_text_tag_1" name="bottom_text_tag_1" disabled="disabled" value="" size="50" maxlength="50" required placeholder="Text Tags visible in Video"/><br/>
-                                        <label for="text_tag_1">Comments Tag:&nbsp;</label>
-                                            <textarea id="text_tag_1" name="text_tag_1" rows="3" cols="70" disabled="disabled" style="resize: none;" placeholder="Comment of your tags, not visible in video"></textarea><br/>
-                                        <label for="textOver_1">Options Text Tag:&nbsp;</label>
+                                        <label for="bottom_text_tag_1">Short Comment:&nbsp;*</label>
+                                        <input type="text" id="bottom_text_tag_1" name="bottom_text_tag_1" disabled="disabled" value="" size="50" maxlength="50" required placeholder="Short Comment visible in Video"/><br/>
+                                        <label for="text_tag_1">Long Comment:&nbsp;</label>
+                                            <textarea id="text_tag_1" name="text_tag_1" rows="3" cols="70" disabled="disabled" style="resize: none;" placeholder="Long Comment of camera, not visible in video"></textarea><br/>
+                                        <label for="textOver_1">Options Short Comment:&nbsp;</label>
                                         <div class="checkbox" id="buttom_1">
                                             <label>
                                                 <input id="dynamic-demo-bold-1" name="dynamic-demo-bold-1" type="checkbox">
@@ -455,7 +437,7 @@
                         <div class="area-grids-heading">
                             <div id="demo-tools-2" style="display: none;">
                                 <h3 class="demo-box-title active panel-title">
-                                    <a data-toggle="collapse" href="#collapse2"><span class="expand-tools">[+]</span> Tools Tags Video - Camera 2</a>
+                                    <a data-toggle="collapse" href="#collapse2"><span class="expand-tools">[+]</span> Tools Comments Video - Camera 2</a>
                                 </h3>
                                 <div id="collapse2" class="panel-collapse collapse">
                                     <div class="demo-box">
@@ -488,20 +470,20 @@
                                             <li id="none3-tag-2" class=""></li>
                                             <li id="none4-tag-2" class=""></li>
                                             <li id="add-tag-2" class="dynamic-demo-add-tag" style="align-self: flex-end;">
-                                                <img src="images/add_tag_b.png" width="22" height="22" title="Add Tag" alt="Add Tag" class="tooltip_"/>
+                                                <img src="images/create_comment.png" width="30" height="30" title="Add Comment" alt="Add Comment" class="tooltip_"/>
                                             </li>
 
                                         </ul>
                                     </div>
                                     <div class="demo-box" role="group" aria-label="...">
-                                        <!--label for="top_text_tag_2">Text Tag:&nbsp;*</label>
+                                        <!--label for="top_text_tag_2">Short Comment:&nbsp;*</label>
                                         <input type="text" id="top_text_tag_2" name="top_text_tag_2" value="" size="50" maxlength="50" required placeholder="Title for Tags in Video"/><br/-->
                                         <input type="hidden" id="ct_2" name="ct_2" />
-                                        <label for="bottom_text_tag_2">Text Tag:&nbsp;*</label>
-                                        <input type="text" id="bottom_text_tag_2" name="bottom_text_tag_2" disabled="disabled" value="" size="50" maxlength="50" required placeholder="Text Tags visible in Video"/><br/>
-                                        <label for="text_tag_2">Comments Tag:&nbsp;</label>
-                                        <textarea id="text_tag_2" name="text_tag_2" rows="3" cols="70" disabled="disabled" style="resize: none;" placeholder="Comment of your tags, not visible in video"></textarea><br/>
-                                        <label for="textOver_2">Options Text Tag:&nbsp;</label>
+                                        <label for="bottom_text_tag_2">Short Comment:&nbsp;*</label>
+                                        <input type="text" id="bottom_text_tag_2" name="bottom_text_tag_2" disabled="disabled" value="" size="50" maxlength="50" required placeholder="Short Comment visible in Video"/><br/>
+                                        <label for="text_tag_2">Long Comment:&nbsp;</label>
+                                        <textarea id="text_tag_2" name="text_tag_2" rows="3" cols="70" disabled="disabled" style="resize: none;" placeholder="Long Comment of camera, not visible in video"></textarea><br/>
+                                        <label for="textOver_2">Options Short Comment:&nbsp;</label>
                                         <div class="checkbox" id="buttom_2">
                                             <label>
                                                 <input id="dynamic-demo-bold-2" name="dynamic-demo-bold-2" type="checkbox">
@@ -561,7 +543,7 @@
                         <div class="area-grids-heading">
                             <div id="demo-tools-3" style="display: none;">
                                 <h3 class="demo-box-title active panel-title">
-                                    <a data-toggle="collapse" href="#collapse3"><span class="expand-tools">[+]</span> Tools Tags Video - Camera 3</a>
+                                    <a data-toggle="collapse" href="#collapse3"><span class="expand-tools">[+]</span> Tools Comments Video - Camera 3</a>
                                 </h3>
                                 <div id="collapse3" class="panel-collapse collapse">
                                     <div class="demo-box">
@@ -594,20 +576,20 @@
                                             <li id="none3-tag-3" class=""></li>
                                             <li id="none4-tag-3" class=""></li>
                                             <li id="add-tag-3" class="dynamic-demo-add-tag" style="align-self: flex-end;">
-                                                <img src="images/add_tag_b.png" width="22" height="22" title="Add Tag" alt="Add Tag" class="tooltip_"/>
+                                                <img src="images/create_comment.png" width="30" height="30" title="Add Comment" alt="Add Comment" class="tooltip_"/>
                                             </li>
 
                                         </ul>
                                     </div>
                                     <div class="demo-box" role="group" aria-label="...">
-                                        <!--label for="top_text_tag_3">Text Tag:&nbsp;*</label>
+                                        <!--label for="top_text_tag_3">Short Comment:&nbsp;*</label>
                                         <input type="text" id="top_text_tag_3" name="top_text_tag_3" value="" size="50" maxlength="50" required placeholder="Title for Tags in Video"/><br/-->
                                         <input type="hidden" id="ct_3" name="ct_3" />
-                                        <label for="bottom_text_tag_3">Text Tag:&nbsp;*</label>
-                                        <input type="text" id="bottom_text_tag_3" name="bottom_text_tag_3" disabled="disabled" value="" size="50" maxlength="50" required placeholder="Text Tags visible in Video"/><br/>
-                                        <label for="text_tag_3">Comments Tag:&nbsp;</label>
-                                        <textarea id="text_tag_3" name="text_tag_3" rows="3" cols="70" disabled="disabled" style="resize: none;" placeholder="Comment of your tags, not visible in video"></textarea><br/>
-                                        <label for="textOver_3">Options Text Tag:&nbsp;</label>
+                                        <label for="bottom_text_tag_3">Short Comment:&nbsp;*</label>
+                                        <input type="text" id="bottom_text_tag_3" name="bottom_text_tag_3" disabled="disabled" value="" size="50" maxlength="50" required placeholder="Short Comment visible in Video"/><br/>
+                                        <label for="text_tag_3">Long Comment:&nbsp;</label>
+                                        <textarea id="text_tag_3" name="text_tag_3" rows="3" cols="70" disabled="disabled" style="resize: none;" placeholder="Long Comment of video, not visible in video"></textarea><br/>
+                                        <label for="textOver_3">Options Short Comment:&nbsp;</label>
                                         <div class="checkbox" id="buttom_3">
                                             <label>
                                                 <input id="dynamic-demo-bold-3" name="dynamic-demo-bold-3" type="checkbox">
@@ -663,7 +645,7 @@
                         <div class="area-grids-heading">
                             <div id="demo-tools-4" style="display: none;">
                                 <h3 class="demo-box-title active panel-title">
-                                    <a data-toggle="collapse" href="#collapse4"><span class="expand-tools">[+]</span> Tools Tags Video - Camera 4</a>
+                                    <a data-toggle="collapse" href="#collapse4"><span class="expand-tools">[+]</span> Tools Comments Video - Camera 4</a>
                                 </h3>
                                 <div id="collapse4" class="panel-collapse collapse">
                                     <div class="demo-box">
@@ -696,19 +678,19 @@
                                             <li id="none3-tag-4" class=""></li>
                                             <li id="none4-tag-4" class=""></li>
                                             <li id="add-tag-4" class="dynamic-demo-add-tag" style="align-self: flex-end;">
-                                                <img src="images/add_tag_b.png" width="22" height="22" title="Add Tag" alt="Add Tag" class="tooltip_"/>
+                                                <img src="images/create_comment.png" width="30" height="30" title="Add Comment" alt="Add Comment" class="tooltip_"/>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="demo-box" role="group" aria-label="...">
-                                        <!--label for="top_text_tag_4">Text Tag:&nbsp;*</label>
+                                        <!--label for="top_text_tag_4">Short Comment:&nbsp;*</label>
                                         <input type="text" id="top_text_tag_4" name="top_text_tag_4" value="" size="50" maxlength="50" required placeholder="Title for Tags in Video"/><br/-->
                                         <input type="hidden" id="ct_4" name="ct_4" />
-                                        <label for="bottom_text_tag_4">Text Tag:&nbsp;*</label>
-                                        <input type="text" id="bottom_text_tag_4" name="bottom_text_tag_4" disabled="disabled" value="" size="50" maxlength="50" required placeholder="Text Tags visible in Video"/><br/>
-                                        <label for="text_tag_4">Comments Tag:&nbsp;</label>
-                                        <textarea id="text_tag_4" name="text_tag_4" rows="3" cols="70" style="resize: none;" disabled="disabled" placeholder="Comment of your tags, nt visible in video"></textarea><br/>
-                                        <label for="textOver_4">Options Top and Bottom Text:&nbsp;</label>
+                                        <label for="bottom_text_tag_4">Short Comment:&nbsp;*</label>
+                                        <input type="text" id="bottom_text_tag_4" name="bottom_text_tag_4" disabled="disabled" value="" size="50" maxlength="50" required placeholder="Short Comment visible in Video"/><br/>
+                                        <label for="text_tag_4">Long Comment:&nbsp;</label>
+                                        <textarea id="text_tag_4" name="text_tag_4" rows="3" cols="70" style="resize: none;" disabled="disabled" placeholder="Long Comment of video, not visible in video"></textarea><br/>
+                                        <label for="textOver_4">Options Short Comment:&nbsp;</label>
                                         <div class="checkbox" id="buttom_4">
                                             <label>
                                                 <input id="dynamic-demo-bold-4" name="dynamic-demo-bold-4" type="checkbox">
@@ -732,7 +714,7 @@
                                             </label>&nbsp;&nbsp;
                                             <img src="images/save.png" class="dynamic-demo-add button-edit tooltip_" width="22" height="22" title="Save" alt="Save"/>
                                             &nbsp;&nbsp;
-                                            <img src="images/cancel.png" class="dynamic-demo-cancel button-edit tooltip_" width="22" height="22" title="Cancel Edition Tag" alt="Cancel"/>
+                                            <img src="images/cancel.png" class="dynamic-demo-cancel button-edit tooltip_" width="22" height="22" title="Cancel Edition Comment" alt="Cancel"/>
                                         </div>
                                         <input type="hidden" id="textOver_4" name="textOver_4" />
                                         <input type="hidden" id="id_4" name="id_4" />
@@ -771,7 +753,7 @@
 </body>
 <script>
 
-    var caption_data = caption_data = JSOTRAGE.get_caption();;
+    var caption_data = JSOTRAGE.get_caption();
     var video1 = document.getElementById("Video1");
     var video2 = document.getElementById("Video2");
     var video3 = document.getElementById("Video3");
@@ -914,34 +896,6 @@
 
         } else {
             errMessage("HTML5 Video is required for this example");
-        }
-
-        function setFileTags(sw) {
-            if (sw) {
-                caption_data = JSOTRAGE.get_caption();
-                getVideo();
-            } else {
-                var request;
-                if (window.XMLHttpRequest){
-                    request = new XMLHttpRequest();
-                } else {
-                    request = ActiveXObject("Microsoft.XMLHTTP");
-                }
-                request.overrideMimeType("application/json");
-                request.open('GET', 'comment-video.json', true);
-                request.onreadystatechange = function() {
-                    if (request.readyState == 4 && request.status == "200") {
-                        caption_data = JSON.parse(request.responseText);
-                        JSOTRAGE.insert_caption(caption_data);
-                        if (Object.keys(caption_data).length == 4)
-                            getVideo();
-                        else
-                            errMessage("Enter a valid video URL for video and file for comments tags");
-                    }
-                }
-                request.send(null);
-            }
-
         }
 
         /**
@@ -1486,11 +1440,11 @@
                             "<input type='hidden' id='current_time_" + cam + i +  "' name='current_time_" + cam + i + "' value='" + caption[i].time + "' />" +
                             "<input type='hidden' id='ed_" + cam + i + "' name='ed_" + cam + i + "' value='S' />" +
                             "<input type='hidden' id='id_" + cam + i + "' name='id_" + cam + i + "' value='" + caption[i].id + "' />" +
-                            "<input type='text' disabled='disabled' size='70' maxlength='70' name='tag_text_save_" + cam + i + "' id='tag_text_save_" + cam + i + "' value='Time: " + caption[i].time  + " seg. - Tag: " + caption[i].data + "' class='tooltip_' title='" + caption[i].comment + "'/> "  +
+                            "<input type='text' disabled='disabled' size='70' maxlength='70' name='tag_text_save_" + cam + i + "' id='tag_text_save_" + cam + i + "' value='Time: " + caption[i].time  + " seg. - Comment: " + caption[i].data + "' class='tooltip_' title='" + caption[i].comment + "'/> "  +
                             "</b>" +
-                            "&nbsp;<img src='images/preview.png' class='li-prev tooltip_' width='18' height='18' alt='Preview' title='Preview Tag on Video' id='goto_tag_" + i +
+                            "&nbsp;<img src='images/preview.png' class='li-prev tooltip_' width='18' height='18' alt='Preview' title='Preview Comment on Video' id='goto_tag_" + i +
                             cam + "' onclick='javascript: goTag(" + cam + ", " + i + ");'/> " +
-                            "&nbsp;<img src='images/rename.png' class='li-rename tooltip_' width='18' height='18' alt='Edit' title='Edit Tag Text' id='edit_tag_" + i +
+                            "&nbsp;<img src='images/rename.png' class='li-rename tooltip_' width='18' height='18' alt='Edit' title='Edit Comment Text' id='edit_tag_" + i +
                             cam + "' onclick='javascript: editTag(" + cam + ", " + i + ");'/> " +
                             "</li>");
                     // $("#marker-list-" + cam).append(item);
@@ -1499,7 +1453,7 @@
                 }
                 $("#marker-list-" + cam).append(item);
             }
-            $("#marker-list-" + cam).append("<script>$(function(){ Tipped.create('.tooltip_', {skin: 'red'} ); });<\/script>");
+            $("#marker-list-" + cam).append("<script>$(function(){ Tipped.create('.tooltip_', {skin: 'gray', position: 'rightmiddle'} ); });<\/script>");
         }
 
         // paintListAll();
