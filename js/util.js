@@ -76,6 +76,7 @@ $(function () {
 function getDefaultComments(){
     var def_comment = {
         "cam-1": {
+            "_id": "VI000101_201610_IDENT",
             "records": "1",
             "total": "1",
             "rows": [
@@ -99,6 +100,7 @@ function getDefaultComments(){
             ]
         },
         "cam-2": {
+            "_id": "VI000102_201610_IDENT",
             "records": "1",
             "total": "1",
             "rows": [
@@ -122,6 +124,7 @@ function getDefaultComments(){
             ]
         },
         "cam-3": {
+            "_id": "VI000103_201610_IDENT",
             "records": "1",
             "total": "1",
             "rows": [
@@ -145,6 +148,7 @@ function getDefaultComments(){
             ]
         },
         "cam-4": {
+            "_id": "VI000104_201610_IDENT",
             "records": "1",
             "total": "1",
             "rows": [
