@@ -19,22 +19,22 @@ You can export the captions in a json files. By default captions can be loaded e
 ### Characteristics
 
 ##### Main control panel to simultaneously play all videos
-![Panel Control](https://github.com/mfcardenas/annotation-video/blob/master/images/panel-control-video.png)
+![Panel Control](https://github.com/mfcardenas/comments-video/blob/master/images/panel-control-video.png)
 
 ##### Section four cameras default.
-![Section Camera](https://github.com/mfcardenas/annotation-video/blob/master/images/panel-cameras-all.png)
+![Section Camera](https://github.com/mfcardenas/comments-video/blob/master/images/panel-cameras-all.png)
 
 ##### Control subtitle sync for each camera content on the four videos.
-![Control Subtitle](https://github.com/mfcardenas/annotation-video/blob/master/images/panel-comment-camera.png)
+![Control Subtitle](https://github.com/mfcardenas/comments-video/blob/master/images/panel-comment-camera.png)
 
 ##### Rich Text format for subtitles.
-![Rich Text](https://github.com/mfcardenas/annotation-video/blob/master/images/panel-comment-text.png)
+![Rich Text](https://github.com/mfcardenas/comments-video/blob/master/images/panel-comment-text.png)
 
 ##### Description command of Application.
-![Rich Text](https://github.com/mfcardenas/annotation-video/blob/master/images/panel-help-option.png)
+![Rich Text](https://github.com/mfcardenas/comments-video/blob/master/images/panel-help-option.png)
 
 ### Template for a video camera
 
 ##### Main control panel to play video
-![Panel Control](https://github.com/mfcardenas/annotation-video/blob/master/images/panel-control-video-camera-1.png)
+![Panel Control](https://github.com/mfcardenas/comments-video/blob/master/images/panel-control-video-camera-1.png)
 
