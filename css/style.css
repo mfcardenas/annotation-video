@@ -3756,7 +3756,8 @@ div#graph1,div#graph4,div#graph5,div#graph6,div#graph7,div#graph8,div#graph9 {
 .agile-Updating-grids,.agile-bottom-grid,.agile-last-grid{
     border: 10px solid #d8d8d8;
     background: #FFF;
-    padding: 1em;	
+    padding: 1em;
+	text-align: center;
 }
 .agile-bottom-grids {
     margin: 2em 0;
@@ -4718,8 +4719,8 @@ div#vmap {
 
 /* css for responsive frame videos */
 .responsive-video {
-    width: 100%;  
-    height: auto;  
+    width: 100%; !important;
+    height: auto; !important;
 }
 
 /* css for element tags and editing section */
@@ -4811,4 +4812,25 @@ ul#marker-list li a:hover {
 
 .text-video {
 	color: red;
+}
+
+#graph-1 {
+	margin: 0 auto;
+	width: 970px;
+}
+
+#collapse1 {
+	text-align: left;
+}
+
+#collapse2 {
+	text-align: left;
+}
+
+#collapse3 {
+	text-align: left;
+}
+
+#collapse4 {
+	text-align: left;
 }
