@@ -32,3 +32,9 @@ You can export the captions in a json files. By default captions can be loaded e
 
 ##### Description command of Application.
 ![Rich Text](https://github.com/mfcardenas/annotation-video/blob/master/images/panel-help-option.png)
+
+### Template for a video camera
+
+##### Main control panel to play video
+![Panel Control](https://github.com/mfcardenas/annotation-video/blob/master/images/panel-control-video-camera-1.png)
+
