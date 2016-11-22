@@ -20,9 +20,11 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link href="css/style.css" rel='stylesheet' type='text/css'/>
     <link href="css/font.css" rel="stylesheet" type="text/css"/>
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <link href="css/videojs.markers.min.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="css/video-js.css" rel="stylesheet">
+    <link href="css/jquery-ui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="css/font-awesome.css" rel="stylesheet"/>
+    <link href="css/videojs.markers.min.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="css/video-js.css" rel="stylesheet"/>
 
     <link rel="stylesheet" href="css/bar-controls.css">
     <link rel="stylesheet" href="css/video-js.css">
@@ -30,10 +32,10 @@
     <link rel="stylesheet" href="css/tipped.css">
 
     <script src="js/jquery2.0.3.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <script src="js/tipped.js"></script>
+    <!--script src="js/tipped.js"></script-->
     <script src="js/bootstrap-slider.min.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="js/jquery-ui.js"></script>
     <script src="js/modernizr.js"></script>
     <script src="js/jquery.cookie.js"></script>
     <script src="js/screenfull.js"></script>
@@ -163,6 +165,13 @@
             }
         });
     </script>
+    <script>
+        $( function() {
+            $( document ).tooltip({
+                track: true
+            });
+        } );
+    </script>
 
     <nav class="main-menu">
         <ul>
@@ -174,23 +183,31 @@
 					</span>
                 </a>
             </li>
+            <li>
+                <a href="fast_guide.html">
+                    <i class="fa fa-book nav-icon"></i>
+                    <span class="nav-text">
+					Guía Rápida de Uso
+					</span>
+                </a>
+            </li>
             <li class="has-subnav">
                 <a href="help.html">
                     <i class="fa fa-cogs" aria-hidden="true"></i>
                     <span class="nav-text">
-					Ayuda
+					Opciones
 				</span>
                     <i class="icon-angle-right"></i><i class="icon-angle-down"></i>
                 </a>
                 <ul>
                     <li>
                         <a class="subnav-text" href="help.html#controlcommon">
-                            Controles Comunes
+                            Comunes
                         </a>
                     </li>
                     <li>
                         <a class="subnav-text" href="help.html#controlcomment">
-                            Controles de Comentarios
+                            De Comentarios
                         </a>
                     </li>
                 </ul>
@@ -234,16 +251,18 @@
                     <div class="col-md-12">
                         <div class="checkbox">
                             <input type="text" id="videoFile1" size="40" maxlength="250" class="tooltip_" style="width: 350px;" title="Video 1 file input field"
-                                   value="videos/1476373777352_Copy_GuiDefault.mp4"/>
+                                   value="videos/cancion.mp4"/>
                             <input type="text" id="videoFile2" size="40" maxlength="250" class="tooltip_" style="width: 350px;" title="Video 2 file input field"
-                                   value="videos/1476373777353_Copy_Cam0.mp4"/>
+                                   value="videos/londres.mp4"/>
                             <input type="text" id="videoFile3" size="40" maxlength="250" class="tooltip_" style="width: 350px;" title="Video 3 file input field"
-                                   value="videos/1476373777353_Copy_Cam1.mp4"/>
+                                   value="videos/monterrey.mp4"/>
                             <input type="text" id="videoFile4" size="40" maxlength="250" class="tooltip_" style="width: 350px;" title="Video 4 file input field"
-                                   value="videos/1476373777353_Copy_Cam2.mp4"/>
+                                   value="videos/paris.mp4"/>
                             <button type="button" id="buttom_load_video" class="btn btn-md btn-primary" style="width: 120px">Load Videos</button>
                         </div>
-                        <div title="Error message area" id="errorMsg" style="color:Red;"></div>
+                        <div title="Error message area" id="errorMsg" style="color:Red;">
+                            <input type="hidden" id="id_cp" name="id_cp" value="CAMASSISTANT-CP000001" />
+                        </div>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -304,12 +323,12 @@
                                 <label for="file-comment">Load Comments&nbsp;<img src="images/subtitle_load_4.png" title="Load Comment of File" height="22" width="22" alt="of File"/></label>
                                 <input id="file-comment" name="file-comment" type="file"/>
 
-                                <label for="bottom-export-json">&nbsp;&nbsp;&nbsp;Save Comments</label>
+                                <label for="bottom-export-json">&nbsp;&nbsp;&nbsp;Export Comment&nbsp;<img id="bottom-export-json" alt="Export Comment JSON" src="images/img-json-alt.png" title="Export Comment to JSON" height="22" width="22" class="tooltip_"/></label>
                                 <input id="filename" disabled="disabled" size="20" maxlength="20" type="hidden" placeholder="Please enter filename for Comments" value="comment-video.json"/>
-                                <button for="filename" type="button" id="bottom-export-json" title="Export JSON" class="btn btn-md btn-primary"
-                                        style="width: 60px">
-                                    <img alt="Export JSON" src="images/save.png" title="Export Comment to JSON" height="22" width="22" class="tooltip_"/>
-                                </button><a id="download" download="" href=""></a>
+                                <a id="download" download="" href=""></a>
+                                <label for="bottom-save-comment">&nbsp;&nbsp;&nbsp;Save Comment&nbsp;<img id="bottom-save-comment" alt="Save Comment" src="images/img-save-alt.png" title="Save Comment" height="22" width="22" class="tooltip_"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    Your identifier:&nbsp;
+                                    <input size="20" type="text" id="identifiy_comment" name="identifiy_comment" value="" readonly="readonly" class="input-identify" /></label>&nbsp;<img src="images/img-question-gif.png" width="22" height="22" title="This is your identifier. Copy it and send it by e-mail to the case study team you are analyzing to take their comments into account."/>
                             </div>
                         </div>
                     </div>
@@ -321,10 +340,11 @@
                     <div class="agile-bottom-grid">
                         <div class="area-grids-heading heading-video">
                             <h3 class="active"><a data-toggle="collapse" href="#graph-1">Camera 1</a></h3>
+                            <input type="hidden" id="id_cam" name="id_cam" value="CP000001-CAM1-VI01-20161015" />
                         </div>
                         <div id="graph-1" class="video-mc">
                             <video id="Video1" preload="none" class="video-js responsive-video vjs-default-skin" style="border: 1px solid green;" title="video element" width="775" height="436"
-                                   poster="images/fondo_viedeos.png"  >
+                                   poster="images/fondo_viedeos.png">
                                 HTML5 Video is required for this example
                             </video>
                         </div>
@@ -671,6 +691,34 @@
 </body>
 <script>
 
+    function insertComment(data_comment){
+        $.ajax({
+            url: "https://api.myjson.com/bins",
+            type: "POST",
+            data: data_comment,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, textStatus, jqXHR) {
+                $("#identifiy_comment").val(data.uri.split("/")[4]);
+            }
+        });
+    }
+
+    function updateComment(data_comment, id){
+        if (id != ""){
+            $.ajax({
+                url:"https://api.myjson.com/bins/" + id,
+                type:"PUT",
+                data:data_comment,
+                contentType:"application/json; charset=utf-8",
+                dataType:"json",
+                success: function(data, textStatus, jqXHR){
+
+                }
+            });
+        }
+    }
+
     var caption_data = JSOTRAGE.get_caption();
     var video1 = document.getElementById("Video1");
     var video2 = document.getElementById("Video2");
@@ -696,6 +744,16 @@
             downlink.setAttribute("href", dataJson);
             downlink.setAttribute("download", filename);
             downlink.click();
+        });
+
+        $("#bottom-save-comment").click(function () {
+            var ident_ = $("#identifiy_comment").val();
+            var data_comment = JSON.stringify(caption_data);
+            if (ident_ == ""){
+                insertComment(data_comment);
+            }else{
+                updateComment(data_comment, ident_.split("/")[5])
+            }
         });
 
         if (video1.canPlayType) {
@@ -1198,7 +1256,9 @@
                 }
                 $("#marker-list-" + cam).append(item);
             }
-            $("#marker-list-" + cam).append("<script>$(function(){ Tipped.create('.tooltip_', {skin: 'gray', position: 'rightmiddle'} ); });<\/script>");
+
+            $("#marker-list-" + cam).append("<script>$( document ).tooltip({ track: true });<\/script>");
+            //$("#marker-list-" + cam).append("<script>$(function(){ Tipped.create('.tooltip_', {skin: 'gray', position: 'rightmiddle'} ); });<\/script>");
         }
 
         // paintListAll();

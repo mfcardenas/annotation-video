@@ -3,7 +3,7 @@
  */
 
 $(function () {
-    Tipped.create('.tooltip_', {skin: 'gray', position: 'rightmiddle'});
+    //Tipped.create('.tooltip_', {skin: 'gray', position: 'rightmiddle'});
 
     $('.agile-bottom-grid').draggable({
         opacity: 0.35,
@@ -75,8 +75,9 @@ $(function () {
 
 function getDefaultComments(){
     var def_comment = {
+        "_id": "CAMASSISTANT-CP000001",
         "cam-1": {
-            "_id": "VI000101_201610_IDENT",
+            "_id": "CP000001-CAM1-VI01_20161015",
             "records": "1",
             "total": "1",
             "rows": [
@@ -100,7 +101,7 @@ function getDefaultComments(){
             ]
         },
         "cam-2": {
-            "_id": "VI000102_201610_IDENT",
+            "_id": "CP000001-CAM1-VI02_20161015",
             "records": "1",
             "total": "1",
             "rows": [
@@ -124,7 +125,7 @@ function getDefaultComments(){
             ]
         },
         "cam-3": {
-            "_id": "VI000103_201610_IDENT",
+            "_id": "CP000001-CAM1-VI03_20161015",
             "records": "1",
             "total": "1",
             "rows": [
@@ -148,7 +149,7 @@ function getDefaultComments(){
             ]
         },
         "cam-4": {
-            "_id": "VI000104_201610_IDENT",
+            "_id": "CP000001-CAM1-VI04_20161015",
             "records": "1",
             "total": "1",
             "rows": [
