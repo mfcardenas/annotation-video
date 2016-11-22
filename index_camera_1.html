@@ -207,7 +207,7 @@
                     </li>
                     <li>
                         <a class="subnav-text" href="help_camera_1.html#controlcomment">
-                            Comentarios
+                            De Comentarios
                         </a>
                     </li>
                 </ul>
@@ -251,7 +251,7 @@
                     <div class="col-md-12">
                         <div class="center_element">
                             <input type="text" id="videoFile1" size="40" maxlength="250" class="tooltip_" style="width: 350px;" title="Video 1 file input field"
-                                   value="videos/1476373777352_Copy_GuiDefault.mp4"/>
+                                   value="videos/1476373777352_Copy_GuiDefault.mp4" readonly="readonly"/>
                             <button type="button" id="buttom_load_video" class="btn btn-md btn-primary" style="width: 120px">Load Videos</button>
                         </div>
                         <div title="Error message area" id="errorMsg" style="color:Red;">
@@ -335,6 +335,7 @@
                     <div class="agile-bottom-grid">
                         <div class="area-grids-heading heading-video">
                             <h3 class="active"><a data-toggle="collapse" href="#graph-1">Camera 1</a></h3>
+                            <input type="hidden" id="id_cam" name="id_cam" value="CP000001-CAM1-VI01-20161015" />
                         </div>
                         <div id="graph-1" class="video-mc">
                             <video id="Video1" preload="auto" class="responsive-video video-js vjs-default-skin" style="border: 1px solid green;" title="video element" width="975" height="636"
