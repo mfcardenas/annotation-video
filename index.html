@@ -1123,7 +1123,8 @@
             pauseVideos();
             var id_ = $(this).parent().attr('id');
             var cam = id_.slice(-1);
-            var currentTime = parseFloat($("#ct_" + cam).val());
+            var ct_el = $("#ct_" + cam);
+            var currentTime = parseFloat(ct_el.val());
             currentTime = currentTime.toFixed(2)
             var tag_input = $("#bottom_text_tag_" + cam);
             var text_input = $("#text_tag_" + cam);
@@ -1176,7 +1177,7 @@
             tag_input.attr('disabled', 'disabled');
             text_input.attr('disabled', 'disabled');
             ed_sn.val('N');
-            $("#ct_" + cam).val('');
+            ct_el.val('');
             JSOTRAGE.insert_caption(caption_data);
             //playVideos();
         });
