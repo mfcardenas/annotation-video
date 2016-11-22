@@ -250,7 +250,7 @@
                 <div class="grid-info">
                     <div class="col-md-12">
                         <div class="center_element">
-                            <input type="text" id="videoFile1" size="40" maxlength="250" class="tooltip_" style="width: 350px;" title="Video 1 file input field"
+                            <input type="text" id="videoFile1" size="60" maxlength="250" class="tooltip_" style="width: 450px;" title="Video 1 file input field"
                                    value="videos/1476373777352_Copy_GuiDefault.mp4" readonly="readonly"/>
                             <button type="button" id="buttom_load_video" class="btn btn-md btn-primary" style="width: 120px">Load Videos</button>
                         </div>
@@ -322,7 +322,10 @@
                                 <a id="download" download="" href=""></a>
                                 <label for="bottom-save-comment">&nbsp;&nbsp;&nbsp;Save Comment&nbsp;<img id="bottom-save-comment" alt="Save Comment" src="images/img-save-alt.png" title="Save Comment" height="22" width="22" class="tooltip_"/>&nbsp;&nbsp;&nbsp;&nbsp;
                                     Your identifier:&nbsp;
-                                    <input size="20" type="text" id="identifiy_comment" name="identifiy_comment" value="" readonly="readonly" class="input-identify" /></label>&nbsp;<img src="images/img-question-gif.png" width="22" height="22" title="This is your identifier. Copy it and send it by e-mail to the case study team you are analyzing to take their comments into account."/>
+                                    <input size="20" type="text" id="identifiy_comment" name="identifiy_comment" value="" readonly="readonly" class="input-identify" /></label>&nbsp;
+                                <img src="images/img-question-gif.png" width="22" height="22" title="This is your identifier. Copy it and send it by e-mail to the case study team you are analyzing to take their comments into account."/>
+                                <img src="images/img-check-ok.png" id="save-comment-img-ok" width="32" height="32" style="display: none;" title="Comment Save"/>
+                                <img src="images/img-check-err.png" id="save-comment-img-err" width="32" height="32" style="display: none;" title="Comment NOT Save. Please send your comment as JSON file for email."/>
                             </div>
                         </div>
                     </div>
@@ -433,6 +436,26 @@
 </body>
 <script>
 
+    /**
+     *  Function set message.
+     */
+    function messageSave(mess) {
+        if (mess == "ok"){
+            $("#save-comment-img-ok").show("swing");
+            $("#save-comment-img-err").hide("linear");
+            setTimeout("document.getElementById('save-comment-img-ok').style.display = 'none';", 5000);
+        }else {
+            if (mess == "err"){
+                $("#save-comment-img-err").show("swing");
+                $("#save-comment-img-ok").hide("linear");
+                setTimeout("document.getElementById('save-comment-img-err').style.display = 'none';", 5000);
+            }else{
+                $("#save-comment-img-ok").hide("linear");
+                $("#save-comment-img-err").hide("linear");
+            }
+        }
+    }
+
     function insertComment(data_comment){
         $.ajax({
             url: "https://api.myjson.com/bins",
@@ -442,6 +465,7 @@
             dataType: "json",
             success: function (data, textStatus, jqXHR) {
                 $("#identifiy_comment").val(data.uri.split("/")[4]);
+                messageSave("ok")
             }
         });
     }
@@ -455,7 +479,7 @@
                 contentType:"application/json; charset=utf-8",
                 dataType:"json",
                 success: function(data, textStatus, jqXHR){
-
+                    messageSave("ok");
                 }
             });
         }
