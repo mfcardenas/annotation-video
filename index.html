@@ -261,7 +261,7 @@
                             <button type="button" id="buttom_load_video" class="btn btn-md btn-primary" style="width: 120px">Load Videos</button>
                         </div>
                         <div title="Error message area" id="errorMsg" style="color:Red;">
-                            <input type="hidden" id="id_cp" name="id_cp" value="CAMASSISTANT-CP000001" />
+                            <input type="hidden" id="id_cp" name="id_cp" value="CAMASSISTANT-CP000005" />
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -354,7 +354,7 @@
                     <div class="agile-bottom-grid">
                         <div class="area-grids-heading heading-video">
                             <h3 class="active"><a data-toggle="collapse" href="#graph-1">Camera 1</a></h3>
-                            <input type="hidden" id="id_cam" name="id_cam" value="CP000001-CAM1-VI01-20161015" />
+                            <input type="hidden" id="id_cam_1" name="id_cam_1" value="CP000005-CAM1-VI01-20161015" />
                         </div>
                         <div id="graph-1" class="video-mc">
                             <video id="Video1" preload="none" class="video-js responsive-video vjs-default-skin" style="border: 1px solid green;" title="video element" width="775" height="436"
@@ -443,6 +443,7 @@
                     <div class="agile-bottom-grid">
                         <div class="area-grids-heading heading-video">
                             <h3 class="active"><a data-toggle="collapse" href="#graph-2">Camera 2</a></h3>
+                            <input type="hidden" id="id_cam_2" name="id_cam_2" value="CP000005-CAM2-VI02-20161015" />
                         </div>
                         <div id="graph-2">
                             <video id="Video2" preload="none" class="video-js responsive-video vjs-default-skin" style="border: 1px solid yellow;" title="video element" width="775" height="436" poster="images/fondo_viedeos.png">
@@ -529,6 +530,7 @@
                     <div class="area-grids">
                         <div class="area-grids-heading heading-video">
                             <h3 class="active"><a data-toggle="collapse" href="#graph-3">Camera 3</a></h3>
+                            <input type="hidden" id="id_cam_3" name="id_cam_3" value="CP000005-CAM3-VI03-20161015" />
                         </div>
                         <div id="graph-3">
                             <video id="Video3" preload="none" class="video-js vjs-default-skin responsive-video" style="border: 1px solid red;" title="video element"
@@ -613,6 +615,7 @@
                     <div class="agile-Updating-grids">
                         <div class="area-grids-heading heading-video">
                             <h3 class="active"><a data-toggle="collapse" href="#graph-4">Camera 4</a></h3>
+                            <input type="hidden" id="id_cam_4" name="id_cam_4" value="CP000005-CAM4-VI04-20161015" />
                         </div>
                         <div id="graph-4">
                             <video id="Video4" preload="none" class="video-js vjs-default-skin responsive-video" style="border: 1px solid blue;" title="video element" width="775" height="436" poster="images/fondo_viedeos.png">
@@ -1026,24 +1029,6 @@
         function errMessage(msg) {
             document.getElementById("errorMsg").textContent = msg;
             setTimeout("document.getElementById('errorMsg').textContent=''", 10000);
-        }
-
-        /**
-         *  Function set message.
-         */
-        function messageSave(mess) {
-            if (mess == "ok"){
-                $("#save-comment-img-ok").show("swing");
-                $("#save-comment-img-err").hide("linear");
-            }else {
-                if (mess == "err"){
-                    $("#save-comment-img-err").show("swing");
-                    $("#save-comment-img-ok").hide("linear");
-                }else{
-                    $("#save-comment-img-ok").hide("linear");
-                    $("#save-comment-img-err").hide("linear");
-                }
-            }
         }
 
         /**
