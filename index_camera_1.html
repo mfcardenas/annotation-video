@@ -314,23 +314,34 @@
                             <br/>
 
                             <div class="image-upload">
-                                <label for="file-comment">Load Comments&nbsp;<img src="images/subtitle_load_4.png" title="Load Comment of File" height="22" width="22" alt="of File"/></label>
+                                <label for="file-comment">Load Comments&nbsp;<img src="images/subtitle_load_4.png" title="Load Comment your local drive" height="22" width="22" alt="Load Comment JSON"/></label>
                                 <input id="file-comment" name="file-comment" type="file"/>
 
-                                <label for="bottom-export-json">&nbsp;&nbsp;&nbsp;Export Comment&nbsp;<img id="bottom-export-json" alt="Export Comment JSON" src="images/img-json-alt.png" title="Export Comment to JSON" height="22" width="22" class="tooltip_"/></label>
+                                <label for="bottom-export-json">&nbsp;&nbsp;&nbsp;Export Comment&nbsp;<img id="bottom-export-json" alt="Export Comment JSON" src="images/img-json-alt.png" title="Export Comment to local drive" height="22" width="22" class="tooltip_"/></label>
                                 <input id="filename" disabled="disabled" size="20" maxlength="20" type="hidden" placeholder="Please enter filename for Comments" value="comment-video.json"/>
                                 <a id="download" download="" href=""></a>
-                                <label for="bottom-save-comment">&nbsp;&nbsp;&nbsp;Save Comment&nbsp;<img id="bottom-save-comment" alt="Save Comment" src="images/img-save-alt.png" title="Save Comment" height="22" width="22" class="tooltip_"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    Your identifier:&nbsp;
+                                <label for="bottom-save-comment">&nbsp;&nbsp;&nbsp;Cloud Comment&nbsp;<img id="bottom-save-comment" alt="Cloud Comment" src="images/img-save-alt.png" title="Cloud Comment" height="22" width="22" class="tooltip_"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    Cloud identifier:&nbsp;
                                     <input size="20" type="text" id="identifiy_comment" name="identifiy_comment" value="" readonly="readonly" class="input-identify" /></label>&nbsp;
-                                <img src="images/img-question-gif.png" width="22" height="22" title="This is your identifier. Copy it and send it by e-mail to the case study team you are analyzing to take their comments into account."/>
+                                <img src="images/img-question-gif.png" width="22" height="22" title="This is your cloud identifier. Copy and Paste this identifier in the data submission form that can be displayed with the 'Send' button."/>
                                 <img src="images/img-check-ok.png" id="save-comment-img-ok" width="32" height="32" style="display: none;" title="Comment Save"/>
-                                <img src="images/img-check-err.png" id="save-comment-img-err" width="32" height="32" style="display: none;" title="Comment NOT Save. Please send your comment as JSON file for email."/>
+                                <img src="images/img-check-err.png" id="save-comment-img-err" width="32" height="32" style="display: none;" title="Comment NOT Save. Please send your comment as JSON file for email."/> &nbsp;&nbsp;
+                                <img src="images/img-send-data-2.png" id="send-comment" name="save-comment" alt="Send" title="Send Comment to GRASIA" style="display: none;" width="32" height="32"/>
                             </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
                 </div>
+            </div>
+            <div id="form-cam" class="agile-bottom-grids" style="display: none;">
+                <div class="col-md-2"></div>
+                <div class="col-md-8 agile-bottom-right">
+                    <div class="agile-bottom-grid">
+                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSddoLJC9G9UjdraNHntwuykFiR0Ln5mkp8leRiBYB6MGikSBw/viewform?embedded=true" width="550" height="800" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="clearfix"></div>
             </div>
             <div class="agile-bottom-grids">
                 <div class="col-md-2"></div>
@@ -444,14 +455,17 @@
             $("#save-comment-img-ok").show("swing");
             $("#save-comment-img-err").hide("linear");
             setTimeout("document.getElementById('save-comment-img-ok').style.display = 'none';", 5000);
+            $("#send-comment").show("swing");
         }else {
             if (mess == "err"){
                 $("#save-comment-img-err").show("swing");
                 $("#save-comment-img-ok").hide("linear");
+                $("#send-comment").hide("linear");
                 setTimeout("document.getElementById('save-comment-img-err').style.display = 'none';", 5000);
             }else{
                 $("#save-comment-img-ok").hide("linear");
                 $("#save-comment-img-err").hide("linear");
+                $("#send-comment").hide("linear");
             }
         }
     }
@@ -465,7 +479,7 @@
             dataType: "json",
             success: function (data, textStatus, jqXHR) {
                 $("#identifiy_comment").val(data.uri.split("/")[4]);
-                messageSave("ok")
+                messageSave("ok");
             }
         });
     }
@@ -515,6 +529,10 @@
                 updateComment(data_comment, ident_)
             }
         });
+
+        $("#send-comment").click(function () {
+            $("#form-cam").toggle();
+        })
 
         if (video1.canPlayType) {
 
