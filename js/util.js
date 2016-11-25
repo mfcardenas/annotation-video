@@ -101,7 +101,7 @@ function getDefaultComments(){
             ]
         },
         "cam-2": {
-            "_id": "CP000001-CAM1-VI02_20161015",
+            "_id": "CP000001-CAM2-VI02_20161015",
             "records": "1",
             "total": "1",
             "rows": [
@@ -125,7 +125,7 @@ function getDefaultComments(){
             ]
         },
         "cam-3": {
-            "_id": "CP000001-CAM1-VI03_20161015",
+            "_id": "CP000001-CAM3-VI03_20161015",
             "records": "1",
             "total": "1",
             "rows": [
@@ -149,7 +149,7 @@ function getDefaultComments(){
             ]
         },
         "cam-4": {
-            "_id": "CP000001-CAM1-VI04_20161015",
+            "_id": "CP000001-CAM4-VI04_20161015",
             "records": "1",
             "total": "1",
             "rows": [
