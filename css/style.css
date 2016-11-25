@@ -4882,3 +4882,7 @@ ul#marker-list li a:hover {
 .tooltip:hover .tooltiptext {
 	visibility: visible;
 }
+
+#success {
+	color: red;
+}

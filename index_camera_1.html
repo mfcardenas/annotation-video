@@ -249,12 +249,11 @@
                 <div class="grid-info">
                     <div class="col-md-12">
                         <div class="center_element">
-                            <input type="text" id="videoFile1" size="60" maxlength="250" class="tooltip_" style="width: 450px;" title="Video 1 file input field"
+                            <input type="text" id="videoFile1" size="60" maxlength="250" class="tooltip_ video_cam" style="width: 450px;" title="Video 1 file input field"
                                    value="videos/1476373777352_Copy_GuiDefault.mp4" readonly="readonly"/>
                             <button type="button" id="buttom_load_video" class="btn btn-md btn-primary" style="width: 120px">Load Videos</button>
                         </div>
                         <div title="Error message area" id="errorMsg" style="color:Red;">
-                            <input type="hidden" id="id_cp" name="id_cp" value="CAMASSISTANT-CP000001" />
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -313,7 +312,8 @@
                             <br/>
 
                             <div class="image-upload">
-                                <label for="file-comment">Load Comments&nbsp;<img src="images/subtitle_load_4.png" title="Load Comment your local drive"
+                                <label for="file-comment">Load Comments&nbsp;
+                                    <img src="images/subtitle_load_4.png" title="Load Comment your local drive"
                                                                                   height="32" width="32" alt="Load Comment JSON"/></label>
                                 <input id="file-comment" name="file-comment" type="file"/>
 
@@ -342,29 +342,36 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-8 agile-bottom-right">
                     <div class="agile-bottom-grid">
+                        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
                         <form data-toggle="validator" action="https://docs.google.com/macros/exec?service=AKfycbwlJPs3FdUvsT73pzavO08CF-98rTLK0NA2GRQboU6AHBD6NjXD"  method="POST" role="form" name="theForm" id="theForm" target="hidden_iframe">
                             <input type="hidden" name="form-type" value="contact">
                             <fieldset class="row">
                                 <label>
-                                    <input required type="text" id="name" name="name" placeholder="Nombre:*" data-constraints="@LettersOnly @NotEmpty">
+                                    <input required type="text" id="name" name="name" placeholder="Nombre:*" data-constraints="@LettersOnly @NotEmpty"
+                                    title="Indique su Nombre"/>
                                     <div class="help-block with-errors"></div>
                                 </label>
                                 <label>
-                                    <input type="text" id="email" name="email" placeholder="Email:" data-constraints="@Email @NotEmpty">
+                                    <input type="text" id="email" name="email" placeholder="Email:" data-constraints="@Email @NotEmpty" title="Indique su Email"/>
                                     <div class="help-block with-errors"></div>
                                 </label>
                                 <label>
-                                    <input required type="text" id="identifier_view" name="identifier_view" placeholder="Identificador:*" data-constraints="@NotEmpty">
-                                    <div class="help-block with-errors"></div>
+                                    <input type="hidden" id="identifier_view" name="identifier_view" />
                                 </label>
                                 <label>
                                     <input required type="text" id="control" name="control" placeholder="4 dígitos:*" data-constraints="@Number"
-                                    title="Para prevenir spam, por favor indique cualquier número de 4 dígitos" size="8" maxlength="20">
+                                    title="Para prevenir spam, por favor indique cualquier número de 4 dígitos" size="8" maxlength="20"/>
                                     <img src="images/img-question-gif.png" width="22" height="22" title="Para prevenir spam, por favor indique cualquier número de 4 dígitos"/>
                                     <div class="help-block with-errors"></div>
                                 </label>
                                 <label>
                                     <button type="button" id="send-send" name="send-send" class="btn btn-md btn-primary">Enviar</button>
+                                    <input type="hidden" id="identifier_data" name="identifier_data" />
+                                    <input type="hidden" id="url_identifier_data" name="url_identifier_data" />
+                                    <input type="hidden" id="json-str" name="json-str" />
+                                    <input type="hidden" id="form_id_cp" name="form_id_cp" />
+                                    <input type="hidden" id="form_id_cam" name="form_id_cam" />
+                                    <input type="hidden" id="name_videos" name="name_videos" />
                                 </label>
                                 <label>
                                     <button type="button" id="send-cancel" name="send-cancel"  class="btn btn-md btn-primary">Cancelar</button>
@@ -383,7 +390,8 @@
                     <div class="agile-bottom-grid">
                         <div class="area-grids-heading heading-video">
                             <h3 class="active"><a data-toggle="collapse" href="#graph-1">Camera 1</a></h3>
-                            <input type="hidden" id="id_cam" name="id_cam" value="CP000001-CAM1-VI01-20161015" />
+                            <input type="hidden" id="id_cp" name="id_cp" value="CAMASSISTANT-CP000001" />
+                            <input type="hidden" id="id_cam" name="id_cam" value="CP000001-CAM1-VI01-20161015" class="id_cams"/>
                         </div>
                         <div id="graph-1" class="video-mc">
                             <video id="Video1" preload="auto" class="responsive-video video-js vjs-default-skin" style="border: 1px solid green;" title="video element" width="975" height="636"
@@ -549,16 +557,25 @@
 
         if (isNumeric(document.getElementById("control"), "¡Indique un valor númerico!")){
             if (name != "" && identifier != "" && url != "") {
-                var data_comment = "name=" + name + "&email=" + email + "&identifier=" + identifier + "&control=" + control + "&url=" + url;
-                $.ajax({
-                    url:"https://docs.google.com/macros/exec?service=AKfycbwlJPs3FdUvsT73pzavO08CF-98rTLK0NA2GRQboU6AHBD6NjXD",
-                    type:"POST",
-                    data:data_comment,
-                    success: function(data, textStatus, jqXHR){
-                        document.getElementById('success').innerHTML='Enviado';
-                        setTimeout("document.getElementById('form-cam').style.display = 'none';", 5000);
-                    }
+                $("#url_identifier_data").val(url);
+                $("#identifier_data").val(identifier);
+                $("#json-str").val(JSON.stringify(caption_data));
+                $("#form_id_cp").val($("#id_cp").val());
+
+                var name_videos = "";
+                var id_cams = "";
+                $('.video_cam').each(function(){
+                    name_videos += $(this).val() + ";";
                 });
+                $('.id_cams').each(function(){
+                    id_cams += $(this).val() + ";";
+                });
+                $("#name_videos").val(name_videos);
+                $("#form_id_cam").val(id_cams);
+
+                document.getElementById('theForm').submit();
+                document.getElementById('success').innerHTML='Enviado.';
+                setTimeout("document.getElementById('form-cam').style.display = 'none';", 5000);
             }else{
                 alert("¡Indique todos los campos obligatorios!");
             }
@@ -587,8 +604,8 @@
         });
 
         $("#bottom-save-comment").click(function () {
+            document.getElementById('success').innerHTML='';
             if (confirm("¿Esta seguro que desea enviar todos sus comentarios al equipo de desarrollo?")){
-                //var ident_ = $("#identifiy_comment").val();
                 var ident_ = $("#identifier").val();
                 var data_comment = JSON.stringify(caption_data);
                 if (ident_ == ""){
@@ -597,7 +614,6 @@
                     updateComment(data_comment, ident_)
                 }
             }
-
         });
 
         $("#send-cancel").click(function () {
