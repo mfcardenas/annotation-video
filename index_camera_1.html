@@ -24,7 +24,8 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="css/font-awesome.css" rel="stylesheet"/>
     <link href="css/videojs.markers.min.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link href="css/video-js.css" rel="stylesheet"/>
+    <!--<link href="css/video-js.css" rel="stylesheet"/>-->
+    <link href="vjs.zencdn.net/5.4.6/video-js.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="css/bar-controls.css">
     <link rel="stylesheet" href="css/video-js.css">
@@ -53,7 +54,7 @@
     </script>
     <!-- If you'd like to support IE8 -->
     <!--script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js" type="text/javascript"></script-->
-
+    <!--<script src="//vjs.zencdn.net/5.4.6/video.min.js"></script>-->
     <script src="js/video.js" type="text/javascript"></script>
     <script src="js/videojs.caption.js" type="text/javascript"></script>
     <!-- script src='js/videojs.markers.js'></script -->
@@ -249,8 +250,9 @@
                 <div class="grid-info">
                     <div class="col-md-12">
                         <div class="center_element">
-                            <input type="text" id="videoFile1" size="60" maxlength="250" class="tooltip_ video_cam" style="width: 450px;" title="Video 1 file input field"
-                                   value="videos/1476373777352_Copy_GuiDefault.mp4" readonly="readonly"/>
+                            <input type="text" id="videoFile1" size="60" maxlength="250"
+                                   class="tooltip_ video_cam" style="width: 450px;" title="Video 1 file input field"
+                                   value="videos/cancion.mp4" readonly="readonly"/>
                             <button type="button" id="buttom_load_video" class="btn btn-md btn-primary" style="width: 120px">Load Videos</button>
                         </div>
                         <div title="Error message area" id="errorMsg" style="color:Red;">
@@ -386,19 +388,25 @@
             </div>
             <div class="agile-bottom-grids">
                 <div class="col-md-2"></div>
-                <div class="col-md-8 agile-bottom-right">
+                <div class="col-md-8 agile-bottom-right wrapper">
                     <div class="agile-bottom-grid">
                         <div class="area-grids-heading heading-video">
                             <h3 class="active"><a data-toggle="collapse" href="#graph-1">Camera 1</a></h3>
                             <input type="hidden" id="id_cp" name="id_cp" value="CAMASSISTANT-CP000001" />
                             <input type="hidden" id="id_cam" name="id_cam" value="CP000001-CAM1-VI01-20161015" class="id_cams"/>
                         </div>
-                        <div id="graph-1" class="video-mc">
-                            <video id="Video1" preload="auto" class="responsive-video video-js vjs-default-skin" style="border: 1px solid green;" title="video element" width="975" height="636"
-                                   poster="images/fondo_viedeos.png" >
+                        <div id="graph-1" class="video-js-responsive-container vjs-hd">
+                            <!-- width="975" height="636" data-setup='{"fluid": true}' -->
+                            <video id="Video1" preload="auto" class="video-js vjs-default-skin"  width="auto" height="auto"
+                                   style="border: 1px solid green;"
+                                   data-setup="{{'fluid': true}}"
+                                   title="Case Practical Comment Video"
+                                   poster="images/fondo_viedeos.png"
+                                   >
                                 HTML5 Video is required for this example
                             </video>
                         </div>
+
                         <div class="area-grids-heading">
                             <div id="demo-tools-1" style="display: none;">
                                 <h3 class="demo-box-title active panel-title">
@@ -585,7 +593,8 @@
     var caption_data = JSOTRAGE.get_caption();
     var video1 = document.getElementById("Video1");
 
-    var video_1 = videojs('Video1');
+//    var video_1 = videojs('Video1');
+    var video_1 = videojs('Video1', { responsive: true });
 
     var json;
 
@@ -618,11 +627,11 @@
 
         $("#send-cancel").click(function () {
             $("#form-cam").toggle();
-        })
+        });
 
         $("#send-send").click(function () {
             getDataFormComment();
-        })
+        });
 
         if (video1.canPlayType) {
 

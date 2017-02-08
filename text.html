@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Oscar Estrada">
+    <meta name="viewport" content="width=device-width" />
+    <title>Video.js Example Embed</title>
+    <script src="http://vjs.zencdn.net/5-unsafe/video.js"></script>
+    <link rel="stylesheet" href="https://vjs.zencdn.net/5-unsafe/video-js.css" type="text/css">
+    <script>
+        function lightsOff() {
+            restoreColor = document.body.style.backgroundColor;
+            var e = document.body;
+            e.style.backgroundColor = "black";
+            var t = document.getElementById("restofpage");
+            t.style.opacity = .25
+        }
+        function lightsOn() {
+            var e = document.body;
+            e.style.backgroundColor = restoreColor;
+            var t = document.getElementById("restofpage");
+            t.style.opacity = 1
+        }
+        function vjsdimmer() {
+            var e = document.getElementsByTagName("video")[0];
+            e.addEventListener("playing", lightsOff, !1), e.addEventListener("pause", lightsOn, !1), e.addEventListener("ended", lightsOn, !1)
+        }
+        var restoreColor;
+    </script>
+</head>
+
+<body onload="vjsdimmer()">
+    <div id="restofpage"></div>
+    <h1>Video.js Example Embed</h1>
+    <div class="video-container">
+        <video id="player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload width="640" height="264" 
+        poster="http://video-js.zencoder.com/oceans-clip.png"  data-setup='{"fluid": true, "playbackRates": [0.5, 1, 2], "html5": {"nativeTextTracks": false}}'>
+            <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+            <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm">
+            <track kind="captions" src="http://www.videojs.com/vtt/captions.vtt" srclang="en" label="captions on" default>
+        </video>
+    </div>
+</body>
+</html>
