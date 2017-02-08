@@ -4816,6 +4816,7 @@ ul#marker-list li a:hover {
 
 #graph-1 {
 	margin: 0 auto;
+	/* affect all code */
 	/* width: 970px; */
 }
 
