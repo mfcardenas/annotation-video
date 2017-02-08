@@ -4887,29 +4887,6 @@ ul#marker-list li a:hover {
 	color: red;
 }
 
-
-/*.video-js {*/
-	/*width: 100% !important;*/
-	/*height: auto !important;*/
-/*}*/
-/*.video-js:after {*/
-	/*content: '.';*/
-	/*display: block;*/
-	/*position: relative;*/
-	/*padding: 0;*/
-	/*padding-top: 40.1%; !* set this to (height/width)*100% (eg. 56%=16:9, 75%=4:3) *!*/
-	/*margin: 0 0 0 -100%;*/
-	/*visibility: hidden;*/
-	/*height: 0;*/
-/*}*/
-/*.vjs-poster {*/
-	/*position: absolute;*/
-	/*top: 0;*/
-	/*bottom: 0;*/
-	/*right: 0;*/
-	/*left: 0;*/
-/*}*/
-
 .video-js-responsive-container.vjs-hd {
 	padding-top: 56.25%;
 }
