@@ -52,6 +52,7 @@
     </script>
     <!-- If you'd like to support IE8 -->
     <!--script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js" type="text/javascript"></script-->
+
     <script src="js/video.js" type="text/javascript"></script>
     <script src="js/videojs.caption.js" type="text/javascript"></script>
 
@@ -246,7 +247,7 @@
                 <div class="grid-info">
                     <div class="col-md-12">
                         <div class="center_element">
-                            <input type="text" id="videoFile1" size="60" maxlength="250"
+                            <input type="hidden" id="videoFile1" size="60" maxlength="250"
                                    class="tooltip_ video_cam" style="width: 450px;" title="Video 1 file input field"
                                    value="videos/cancion.mp4" readonly="readonly"/>
                             <button type="button" id="buttom_load_video" class="btn btn-md btn-primary" style="width: 120px">Load Videos</button>
@@ -258,78 +259,115 @@
                 </div>
                 <div class="grid-info">
                     <div class="col-md-12">
-                        <div id="buttonbar" style="display: none; font-size:larger;">
-                            <button type="button" id="restart" class="btn btn-md btn-primary" style="width: 60px">
-                                <img src="images/refresh.png" height="22" width="22" alt="[]" title="Reload Video" class="tooltip_"/>
-                            </button>
-                            <button type="button" id="rew" class="btn btn-md btn-primary" style="width: 60px">
-                                <img src="images/previous.png" height="22" width="22" alt="&lt;&lt;" title="Rewind Video" class="tooltip_"/>
-                            </button>
-                            <button type="button" id="play" class="btn btn-md btn-primary" style="width: 60px">
-                                <img src="images/play-button.png" height="22" width="22" alt="&gt;" title="Play Video" class="tooltip_"/>
-                            </button>
-                            <button type="button" id="fwd" class="btn btn-md btn-primary" style="width: 60px">
-                                <img src="images/next.png" height="22" width="22" alt="&gt;&gt;" title="Forward Video" class="tooltip_"/>
-                            </button>
-                            <label for="slower">&nbsp;&nbsp;&nbsp;Rate Video: </label>
-                            <button type="button" id="slower" title="Slower playback button" class="btn btn-md btn-primary"
-                                    style="width: 60px">
-                                <img alt="-" src="images/minus.png" height="22" width="22" title="Slower playback" class="tooltip_"/>
-                            </button>
-                            <button type="button" id="faster"  class="btn btn-md btn-primary" style="width: 60px">
-                                <img alt="+" src="images/plus.png" height="22" width="22" title="Faster playback" class="tooltip_"/>
-                            </button>
-                            <button type="button" id="normal" class="btn btn-md btn-primary" style="width: 60px">
-                                <img alt="-" src="images/refresh.png" height="22" width="22" title="Reset playback rate" class="tooltip_"/>
-                            </button>
-
-                            <label for="volDn">&nbsp;&nbsp;&nbsp;Volume: </label>
-                            <button type="button" id="volDn" class="btn btn-md btn-primary" style="width: 60px">
-                                <img alt="-" src="images/minus.png" height="22" width="22" title="Volume Down"/>
-                            </button>
-                            <button type="button" id="volUp" class="btn btn-md btn-primary" style="width: 60px">
-                                <img alt="+" src="images/plus.png" height="22" width="22" title="Volume Up"/>
-                            </button>
-
-                            <label for="mute">&nbsp;&nbsp;&nbsp;Sound: </label>
-                            <button type="button" id="mute" title="Mute button" class="btn btn-md btn-primary"
-                                    style="width: 60px">
-                                <img alt="On/Off" src="images/volume-off.png" title="On/Off Audio Videos" height="22" width="22"/>
-                            </button>
-                            <br/>
-                            <br/>
-                            <div style="position:relative; margin:auto; width:90%">
-                                <span style="position:absolute; color:gray; min-width:100px;">
-                                    <span id="value_range"></span>
-                                </span>
-                                <input id="current_time_video_bar" name="current_time_video_bar" type="range" min="0" max="100" step="0.01" value="0" title="Current Time 0.00"/>
+                        <div id="buttonbar" class="container-fluid" style="display: none; font-size:larger;" role="group">
+                            <div class="row">
+                                <form class="form-inline" role="form">
+                                    <div class = "form-group col-xs-4 col-sm-1">
+                                        <button type="button" id="restart" class="btn btn-md btn-primary" style="width: 60px" title="Reload Video">
+                                            <img src="images/refresh.png" height="22" width="22" alt="[]" title="Reload Video" class="tooltip_"/>
+                                        </button>
+                                    </div>
+                                    <div class = "form-group col-xs-4 col-sm-1">
+                                        <button type="button" id="rew" class="btn btn-md btn-primary" style="width: 60px" title="Rewind Video">
+                                            <img src="images/rewing.png" height="22" width="22" alt="&lt;&lt;" title="Rewind Video" class="tooltip_"/>
+                                        </button>
+                                    </div>
+                                    <div class = "form-group col-xs-4 col-sm-1">
+                                        <button type="button" id="play" class="btn btn-md btn-primary" style="width: 60px" title="Play Video">
+                                            <img src="images/play-button.png" height="22" width="22" alt="&gt;" title="Play Video" class="tooltip_"/>
+                                        </button>
+                                    </div>
+                                    <div class = "form-group col-xs-4 col-sm-1">
+                                        <button type="button" id="fwd" class="btn btn-md btn-primary" style="width: 60px" title="Forward Video">
+                                            <img src="images/forward.png" height="22" width="22" alt="&gt;&gt;" title="Forward Video" class="tooltip_"/>
+                                        </button>
+                                    </div>
+                                    <div class = "form-group col-xs-4 col-sm-1">
+                                        <label for="slower">Rate Video: </label>
+                                    </div>
+                                    <div class = "form-group col-xs-4 col-sm-1">
+                                        <button type="button" id="slower" title="Slower playback" class="btn btn-md btn-primary"
+                                                style="width: 60px">
+                                            <img alt="-" src="images/minus.png" height="22" width="22" title="Slower playback" class="tooltip_"/>
+                                        </button>
+                                    </div>
+                                    <div class = "form-group col-xs-4 col-sm-1">
+                                        <button type="button" id="faster"  class="btn btn-md btn-primary" style="width: 60px" title="Faster playback">
+                                            <img alt="+" src="images/plus.png" height="22" width="22" title="Faster playback" class="tooltip_"/>
+                                        </button>
+                                    </div>
+                                    <div class = "form-group col-xs-4 col-sm-1">
+                                        <button type="button" id="normal" class="btn btn-md btn-primary" style="width: 60px" title="Reset playback rate">
+                                            <img alt="-" src="images/refresh.png" height="22" width="22" title="Reset playback rate" class="tooltip_"/>
+                                        </button>
+                                    </div>
+                                    <div class = "form-group col-xs-4 col-sm-1">
+                                        <label for="volDn">Volume: </label>
+                                    </div>
+                                    <div class = "form-group col-xs-4 col-sm-1">
+                                        <button type="button" id="volDn" class="btn btn-md btn-primary" style="width: 60px" title="Volume Down">
+                                            <img alt="-" src="images/minus.png" height="22" width="22" title="Volume Down"/>
+                                        </button>
+                                    </div>
+                                    <div class = "form-group col-xs-4 col-sm-1">
+                                        <button type="button" id="volUp" class="btn btn-md btn-primary" style="width: 60px" title="Volume Up">
+                                            <img alt="+" src="images/plus.png" height="22" width="22" title="Volume Up"/>
+                                        </button>
+                                    </div>
+                                    <div class = "form-group col-xs-4 col-sm-1">
+                                        <button type="button" id="mute" title="On/Off Audio Video" class="btn btn-md btn-primary"
+                                                style="width: 60px">
+                                            <img alt="On/Off" src="images/volume-off.png" title="On/Off Audio Video" height="22" width="22"/>
+                                        </button>
+                                    </div>
+                                    <div class="clearfix visible-xs"></div>
+                                </form>
                             </div>
-                            <br/>
-                            <div id="status">Length(seconds): <span class="text-video" id="vLen"></span>&nbsp;&nbsp;&nbsp;Current time: <span class="text-video" id="curTime" title="Current time"></span>&nbsp;&nbsp;&nbsp;Remaining time: <span class="text-video" id="vRemaining" title="Remaining time"></span>
+                            <div class="row">
+                                <div style="position:relative; margin:auto; width:90%">
+                                    <span style="position:absolute; color:gray; min-width:100px;">
+                                        <span id="value_range"></span>
+                                    </span>
+                                    <input id="current_time_video_bar" name="current_time_video_bar" type="range" min="0" max="100" step="0.01" value="0" title="Current Time 0.00"/>
+                                </div>
                             </div>
-                            <br/>
-
-                            <div class="image-upload">
-                                <label for="file-comment">Load Comments&nbsp;
-                                    <img src="images/subtitle_load_4.png" title="Load Comment your local drive"
-                                                                                  height="32" width="32" alt="Load Comment JSON"/></label>
-                                <input id="file-comment" name="file-comment" type="file"/>
-
-                                <label for="bottom-export-json">&nbsp;&nbsp;&nbsp;Export Comment&nbsp;<img id="bottom-export-json" alt="Export Comment JSON" src="images/img-json-alt.png" title="Export Comment to local drive" height="32" width="32" class="tooltip_"/></label>
-                                <input id="filename" disabled="disabled" size="20" maxlength="20" type="hidden" placeholder="Please enter filename for Comments" value="comment-video.json"/>
-                                <a id="download" download="" href=""></a>
-                                <label for="bottom-save-comment">&nbsp;&nbsp;&nbsp;Send Comment&nbsp;<img id="bottom-save-comment" alt="Send Comment" src="images/img-send-data-2.png" title="Send Comment" height="32" width="32" class="tooltip_"/>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <!--    Cloud identifier:&nbsp;
-                                        <input size="20" type="text" id="identifiy_comment" name="identifiy_comment" value="" readonly="readonly" class="input-identify" /></label>&nbsp;
-                                    <img src="images/img-question-gif.png" width="22" height="22" title="This is your cloud identifier. Copy and Paste this identifier in the data submission form that can be displayed with the 'Send' button."/>
-                                    <img src="images/img-check-ok.png" id="save-comment-img-ok" width="32" height="32" style="display: none;" title="Comment Save"/>
-                                    <img src="images/img-check-err.png" id="save-comment-img-err" width="32" height="32" style="display: none;" title="Comment NOT Save. Please send your comment as JSON file for email."/> &nbsp;&nbsp;
-                                    <img src="images/img-send-data-2.png" id="send-comment" name="save-comment" alt="Send" title="Send Comment to GRASIA" style="display: none;" width="32" height="32"/-->
-                                    <img src="images/img-check-ok.png" id="save-comment-img-ok" width="32" height="32" style="display: none;" title="Comment Save"/>
-                                    <img src="images/img-check-err.png" id="save-comment-img-err" width="32" height="32" style="display: none;" title="Comment NOT Save. Please send your comment as JSON file for email."/>
-                                    <input type="hidden" id="identifier" name="identifier" />
-                                    <input type="hidden" id="url_identifier" name="url_identifier" />
+                            <div class="row">
+                                <form class="form-inline" role="form">
+                                    <div class = "form-group col-xs-6 col-sm-4">
+                                        Length (seconds): <span class="text-video" id="vLen"></span>
+                                    </div>
+                                    <div class = "form-group col-xs-6 col-sm-4">
+                                        Current time: <span class="text-video" id="curTime" title="Current time"></span>
+                                    </div>
+                                    <div class = "form-group col-xs-6 col-sm-4">
+                                        Remaining time: <span class="text-video" id="vRemaining" title="Remaining time"></span>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="row">
+                                <form class="form-inline" role="form">
+                                    <div class = "form-group col-xs-6 col-sm-4">
+                                        <div class="image-upload">
+                                            <label for="file-comment">Load Comments
+                                                <img src="images/subtitle_load_4.png" title="Load Comment your local drive"height="32" width="32" alt="Load Comment JSON"/></label>
+                                            <input id="file-comment" name="file-comment" type="file"/>
+                                        </div>
+                                    </div>
+                                    <div class = "form-group col-xs-6 col-sm-4">
+                                        <label for="bottom-export-json">Export Comment <img id="bottom-export-json" alt="Export Comment JSON" src="images/img-json-alt.png" title="Export Comment to local drive" height="32" width="32" class="tooltip_"/></label>
+                                        <input id="filename" disabled="disabled" size="20" maxlength="20" type="hidden" placeholder="Please enter filename for Comments" value="comment-video.json"/>
+                                        <a id="download" download="" href=""></a>
+                                    </div>
+                                    <div class = "form-group col-xs-6 col-sm-4">
+                                        <label for="bottom-save-comment">Send Comment <img id="bottom-save-comment" alt="Send Comment" src="images/img-send-data-2.png" title="Send Comment" height="32" width="32" class="tooltip_"/></label>
+                                    </div>
+                                    <div class = "form-group col-xs-6 col-sm-4">
+                                        <img src="images/img-check-ok.png" id="save-comment-img-ok" width="32" height="32" style="display: none;" title="Comment Save"/>
+                                        <img src="images/img-check-err.png" id="save-comment-img-err" width="32" height="32" style="display: none;" title="Comment NOT Save. Please send your comment as JSON file for email."/>
+                                        <input type="hidden" id="identifier" name="identifier" />
+                                        <input type="hidden" id="url_identifier" name="url_identifier" />
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -384,7 +422,7 @@
             </div>
             <div class="agile-bottom-grids">
                 <div class="col-md-2"></div>
-                <div class="col-md-8 agile-bottom-right wrapper">
+                <div class="col-md-8 agile-bottom-right">
                     <div class="agile-bottom-grid">
                         <div class="area-grids-heading heading-video">
                             <h3 class="active"><a data-toggle="collapse" href="#graph-1">Camera 1</a></h3>
@@ -392,12 +430,11 @@
                             <input type="hidden" id="id_cam" name="id_cam" value="CP000001-CAM1-VI01-20161015" class="id_cams"/>
                         </div>
                         <div id="graph-1" class="video-js-responsive-container vjs-hd">
-                            <video id="Video1" preload="auto" class="video-js vjs-default-skin"  width="auto" height="auto"
-                                   style="border: 1px solid green;"
+                            <video id="Video1" preload="auto" class="video-js vjs-default-skin" style="border: 1px solid green;"
+				   width="auto" height="auto"
                                    data-setup="{{'fluid': true}}"
                                    title="Case Practical Comment Video"
-                                   poster="images/fondo_viedeos.png"
-                                   >
+                                   poster="images/fondo_viedeos.png" >
                                 HTML5 Video is required for this example
                             </video>
                         </div>
@@ -410,12 +447,15 @@
                                 <div id="collapse1" class="panel-collapse collapse">
                                     <div class="demo-box">
                                         <ul class="demo-tool-buttons" id="tools_1">
-                                            <li>
-                                                Current time: <span class="text-video" id="curTime-tools" title="Current time"></span>
+                                            <li id="none1-tag-01" class="">
+                                                <img id="restart-min" src="images/refresh.png" height="22" width="22" alt="[]" title="Reload Video" class="tooltip_"/>
                                             </li>
-                                            <li id="none1-tag-01" class=""></li>
-                                            <li id="none2-tag-01" class=""></li>
-                                            <li id="none3-tag-01" class=""></li>
+                                            <li id="none2-tag-01" class="">
+                                                <img id="play-min" name="play-min" src="images/play-button.png" height="22" width="22" alt="&gt;" title="Play Video" class="tooltip_"/>
+                                            </li>
+                                            <li id="none3-tag-01" class="">
+
+                                            </li>
                                             <li id="increase-font-1" class="increase-font">
                                                 <img src="images/font_inc.png" width="22" height="22" alt="Zoom in Comments" title="Zoom in Comments" class="tooltip_"/>
                                             </li>
@@ -426,18 +466,22 @@
                                             <li id="none2-tag-1" class=""></li>
                                             <li id="none3-tag-1" class=""></li>
                                             <li id="none4-tag-1" class=""></li>
+                                            <li>
+                                                Current: <span class="text-video" id="curTime-tools" title="Current time"></span>
+                                            </li>
                                             <li id="add-tag-1" class="dynamic-demo-add-tag" style="align-self: flex-end;">
                                                 <img src="images/create_comment.png" width="30" height="30" title="Add Comment" alt="Add Comment" class="tooltip_"/>
                                             </li>
-
                                         </ul>
                                     </div>
                                     <div class="demo-box" role="group" aria-label="...">
                                         <input type="hidden" id="ct_1" name="ct_1" />
-                                        <label for="bottom_text_tag_1">Short Comment:&nbsp;*</label>
-                                        <input type="text" id="bottom_text_tag_1" name="bottom_text_tag_1" disabled="disabled" value="" size="50" maxlength="50" required placeholder="Short Comment visible in Video"/><br/>
+                                        <label for="bottom_text_tag_1">Short Comment:*</label>
+                                        <input type="text" id="bottom_text_tag_1" name="bottom_text_tag_1" class="form-control" disabled="disabled" value="" maxlength="50" required placeholder="Short Comment visible in Video"/><br/>
                                         <label for="text_tag_1">Long Comment:&nbsp;</label>
-                                            <textarea id="text_tag_1" name="text_tag_1" rows="3" cols="70" disabled="disabled" style="resize: none;" placeholder="Long Comment of camera, not visible in video"></textarea><br/>
+                                        <textarea id="text_tag_1" name="text_tag_1" rows="3" class="form-control" disabled="disabled" style="resize: none;" placeholder="Long Comment of camera, not visible in video"></textarea><br/>
+                                    </div>
+                                    <div class="demo-box" role="group" aria-label="...">
                                         <label for="textOver_1">Options Short Comment:&nbsp;</label>
                                         <div class="checkbox" id="buttom_1">
                                             <label>
@@ -634,7 +678,15 @@
                 loadVideos();
             });
 
+            $("#play-min").click(function(){
+                loadVideos();
+            });
+
             $("#restart").click(function(){
+                setTime(0);
+            });
+
+            $("#restart-min").click(function(){
                 setTime(0);
             });
 
@@ -696,10 +748,12 @@
 
             video1.addEventListener("pause", function () {
                 document.getElementById("play").innerHTML = "<img alt='&gl;' title='Play' src='images/play-button.png' height='22' width='22'/>";
+                document.getElementById("play-min").src = "images/play-button.png";
             }, false);
 
             video1.addEventListener("playing", function () {
                 document.getElementById("play").innerHTML = "<img alt='||' title='Pause' src='images/pause.png' height='22' width='22'/>";
+                document.getElementById("play-min").src = "images/pause.png";
             }, false);
 
             video1.addEventListener("volumechange", function () {
@@ -739,9 +793,11 @@
             if (video1.paused) {
                 playVideos();
                 document.getElementById("play").innerHTML = "<img alt='||' title='Pause' src='images/pause.png' height='22' width='22'/>";
+                document.getElementById("play-min").src = "images/pause.png";
             } else {
                 pauseVideos();
                 document.getElementById("play").innerHTML = "<img alt='&gl;' title='Play' src='images/play-button.png' height='22' width='22'/>";
+                document.getElementById("play-min").src = "images/play-button.png";
             }
         }
 
@@ -756,6 +812,7 @@
                 video1.load();
                 document.getElementById("buttonbar").style.display = "block";
                 document.getElementById("play").innerHTML = "<img alt='&gl;' title='Play' src='images/play-button.png' height='22' width='22'/>";
+                document.getElementById("play-min").src = "images/play-button.png";
                 loadSubtitle();
                 paintListAll();
             } else {
@@ -1011,11 +1068,10 @@
                             "<input type='hidden' id='current_time_" + cam + i +  "' name='current_time_" + cam + i + "' value='" + caption[i].time + "' />" +
                             "<input type='hidden' id='ed_" + cam + i + "' name='ed_" + cam + i + "' value='S' />" +
                             "<input type='hidden' id='id_" + cam + i + "' name='id_" + cam + i + "' value='" + caption[i].id + "' />" +
-                            "<input type='text' disabled='disabled' size='70' maxlength='70' name='tag_text_save_" + cam + i + "' id='tag_text_save_" + cam + i + "' value='Time: " + caption[i].time  + " seg. - Comment: " + caption[i].data + "' class='tooltip_' title='" + caption[i].comment + "'/> "  +
-                            "</b>" +
-                            "&nbsp;<img src='images/preview.png' class='li-prev tooltip_' width='18' height='18' alt='Preview' title='Preview Comment on Video' id='goto_tag_" + i +
+                            "<input type='text' disabled='disabled' maxlength='70' style='width: 85%;' name='tag_text_save_" + cam + i + "' id='tag_text_save_" + cam + i + "' value='Time: " + caption[i].time  + " seg. - Comment: " + caption[i].data + "' class='tooltip_ ' title='" + caption[i].comment + "'/></b> "  +
+                            "<img src='images/preview.png' class='li-prev tooltip_' width='18' height='18' alt='Preview' title='Preview Comment on Video' id='goto_tag_" + i +
                             cam + "' onclick='javascript: goTag(" + cam + ", " + i + ");'/> " +
-                            "&nbsp;<img src='images/rename.png' class='li-rename tooltip_' width='18' height='18' alt='Edit' title='Edit Comment Text' id='edit_tag_" + i +
+                            "<img src='images/rename.png' class='li-rename tooltip_' width='18' height='18' alt='Edit' title='Edit Comment Text' id='edit_tag_" + i +
                             cam + "' onclick='javascript: editTag(" + cam + ", " + i + ");'/> " +
                             "</li>");
                     // $("#marker-list-" + cam).append(item);
