@@ -447,14 +447,17 @@
                                 <div id="collapse1" class="panel-collapse collapse">
                                     <div class="demo-box">
                                         <ul class="demo-tool-buttons" id="tools_1">
-                                            <li id="none1-tag-01" class="">
-                                                <img id="restart-min" src="images/refresh.png" height="22" width="22" alt="[]" title="Reload Video" class="tooltip_"/>
-                                            </li>
                                             <li id="none2-tag-01" class="">
                                                 <img id="play-min" name="play-min" src="images/play-button.png" height="22" width="22" alt="&gt;" title="Play Video" class="tooltip_"/>
                                             </li>
+                                            <li id="none1-tag-01" class="">
+                                                <img id="restart-min" src="images/previous.png" height="22" width="22" alt="[]" title="Reload Video" class="tooltip_"/>
+                                            </li>
+                                            <li id="none1-tag-1" class="">
+                                                <img id="rew-min" src="images/rewing.png" height="22" width="22" alt="&gt;&gt;" title="Rewing Video" class="tooltip_"/>
+                                            </li>
                                             <li id="none3-tag-01" class="">
-
+                                                <img id="fwd-min" src="images/forward.png" height="22" width="22" alt="&gt;&gt;" title="Forward Video" class="tooltip_"/>
                                             </li>
                                             <li id="increase-font-1" class="increase-font">
                                                 <img src="images/font_inc.png" width="22" height="22" alt="Zoom in Comments" title="Zoom in Comments" class="tooltip_"/>
@@ -462,7 +465,6 @@
                                             <li id="decrease-font-1" class="decrease-font">
                                                 <img src="images/font_dec.png" width="22" height="22" alt="Zoom out Comments" title="Zoom out Comments" class="tooltip_"/>
                                             </li>
-                                            <li id="none1-tag-1" class=""></li>
                                             <li id="none2-tag-1" class=""></li>
                                             <li id="none3-tag-1" class=""></li>
                                             <li id="none4-tag-1" class=""></li>
@@ -690,12 +692,20 @@
                 setTime(0);
             });
 
+            $("#rew-min").click(function(){
+                setTime(-5);
+            });
+
             $("#rew").click(function(){
-                setTime(-10);
+                setTime(-5);
+            });
+
+            $("#fwd-min").click(function(){
+                setTime(5);
             });
 
             $("#fwd").click(function(){
-                setTime(10);
+                setTime(5);
             });
 
             $("#current_time_video_bar").change(function () {
