@@ -222,7 +222,7 @@ body a:hover{
 	.scrollable{
 		overflow-y: auto;
 		overflow-x: hidden;
-		padding-left: 3.8em;
+		/*padding-left: 3.8em;*/
 		-webkit-overflow-scrolling: touch;
 	}
 	.no-touch .scrollable.hover{overflow-y:hidden}
