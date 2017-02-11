@@ -1,0 +1,401 @@
+<!doctype html>
+<html>
+<head>
+    <title>CAM Assistant for Massis Simulations - UCM</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Videos, Tags, PHAT-SIM, Massis, UCM, Complutense"/>
+    <script type="application/x-javascript">
+        if (navigator.userAgent.indexOf('Firefox') == -1) {
+            window.location.href = "error.html"
+        }
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link href="css/style.css" rel='stylesheet' type='text/css'/>
+    <link href="css/font.css" rel="stylesheet" type="text/css"/>
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/videojs.markers.min.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="css/video-js.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/bar-controls.css">
+    <link rel="stylesheet" href="css/video-js.css">
+    <link rel="stylesheet" href="css/videojs.caption.css">
+    <link rel="stylesheet" href="css/tipped.css">
+
+    <script src="js/jquery2.0.3.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/tipped.js"></script>
+    <script src="js/bootstrap-slider.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/screenfull.js"></script>
+
+    <script>
+        $(function () {
+            // $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+            if (!screenfull.enabled) {
+                return false;
+            }
+            $('#toggle').click(function () {
+                screenfull.toggle($('#container')[0]);
+            });
+        });
+    </script>
+</head>
+<body class="dashboard-page">
+    <script>
+        var theme = 'default';
+        $('body').removeClass(function (index, css) {
+            return (css.match(/\btheme-\S+/g) || []).join(' ');
+        });
+        if (theme !== 'default')
+            $('body').addClass(theme);
+    </script>
+
+    <nav class="main-menu">
+        <ul>
+            <li>
+                <a href="index_camera_1.html">
+                    <i class="fa fa-home nav_icon"></i>
+                    <span class="nav-text">
+					CAM Assistant
+					</span>
+                </a>
+            </li>
+            <li class="has-subnav">
+                <a href="help_camera_1.html">
+                    <i class="fa fa-cogs" aria-hidden="true"></i>
+                    <span class="nav-text">
+					Ayuda
+				</span>
+                    <i class="icon-angle-right"></i><i class="icon-angle-down"></i>
+                </a>
+                <ul>
+                    <li>
+                        <a class="subnav-text" href="help_camera_1.html#controlcommon">
+                            Controles Comunes
+                        </a>
+                    </li>
+                    <li>
+                        <a class="subnav-text" href="help_camera_1.html#controlcomment">
+                            Controles de Comentarios
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="wrapper scrollable">
+        <nav class="user-menu">
+            <a href="javascript:;" class="main-menu-access">
+                <i class="icon-proton-logo"></i>
+                <i class="icon-reorder"></i>
+            </a>
+        </nav>
+        <section class="title-bar">
+            <div class="logo">
+                <h1>
+                    <a href="index.html"><img src="images/ucm-ws.png" alt=""/>HELP OPTIONS</a>
+                </h1>
+            </div>
+            <div class="full-screen">
+                <section class="full-top">
+                    <button id="toggle"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
+                </section>
+            </div>
+            <div class="w3l_search">
+
+            </div>
+            <div class="header-right">
+                <div class="profile_details_left">
+                    <div class="header-right-left">
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </section>
+        <div class="main-grid">
+            <div class="social grid">
+                <div class="grid-info">
+                    <div class="col-md-12">
+                        <a name="controlcommon" id="controlcommon"><h3>Controles Comunes</h3></a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                         <img src="images/refresh.png" alt="Refresh" title="Refresh Bottom" width="22" height="22"/>
+                    </div>
+                    <div class="col-md-11">
+                        Reiniciar los v&iacute;deos de todas las c&aacute;maras.
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/previous.png" height="22" width="22" alt="&lt;&lt;" title="Rewind Video" />
+                    </div>
+                    <div class="col-md-11">
+                        Retroceder 10 segundo la reproducción de cada cámaras.
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/play-button.png" height="22" width="22" alt="&gt;" title="Play Video" />
+                    </div>
+                    <div class="col-md-11">
+                        Reproducir el video de todas las cámaras.
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/next.png" height="22" width="22" alt="&gt;&gt;" title="Forward Video" />
+                    </div>
+                    <div class="col-md-11">
+                        Avanzar 10 segundo la reproducción de todas los cámaras.
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img alt="-" src="images/minus.png" height="22" width="22" title="Slower playback" />
+                    </div>
+                    <div class="col-md-11">
+                         Disminuir la velocidad de repducción de las cámaras (0.25 milisegundos).
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img alt="+" src="images/plus.png" height="22" width="22" title="Faster playback" />
+                    </div>
+                    <div class="col-md-11">
+                        Aumentar la velocidad de repducción de las cámaras (0.25 milisegundos).
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img alt="-" src="images/refresh.png" height="22" width="22" title="Reset playback rate" />
+                    </div>
+                    <div class="col-md-11">
+                        Restaurar la velocidad de repducción de las cámaras.
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img alt="On/Off" src="images/volume-off.png" title="On/Off Audio Videos" height="22" width="22"/>
+                    </div>
+                    <div class="col-md-11">
+                         Activar/Desactivar el sonido de las cámaras.
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/subtitle_load_4.png" height="22" width="22"  title="Load Comments of File" alt="Load Comments"/>
+                    </div>
+                    <div class="col-md-11">
+                        Cargar desde un fichero los comentarios sobre cada cámara. <b>El formato del fichero debe ser JSON (.json)</b>.<br/>
+                        <b>Si no utiliza esta opción</b>, se cargaran los comentarios que esten guardados en la sesión local de su navegador.<br/> <b>Siempre que no realice ninguna limpieza en las sesiones de su navegador</b>, estos comentarios se mantendrán alojados en su ordenador.
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img alt="Export JSON" src="images/save.png" title="Export Comment to JSON" height="22" width="22"/>
+                    </div>
+                    <div class="col-md-11">
+                         Exportar los comentarios a un fichero en formato JSON. <br/><b>Cuando se quiera guardar de forma segura todos los comentarios existentes en cada cámara</b>, estos se deben exportar a un fichero JSON para que luego pueda ser utilizado en la carga de videos <img src="images/load_videos.bmp" height="22" title="Load Video of File" alt="Load Video of File"/> con la opción
+                          <img src="images/subtitle_load_4.png" width="22" height="22" title="Load Comments of File" alt="Load Comments"/> Cargar Comentarios.
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-12">
+                        <a name="controlcomment" id="controlcomment"><h3>Controles de Comentarios</h3></a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/font_inc.png" width="22" height="22" alt="Zoom in Tags" title="Zoom in Tags" />
+                    </div>
+                    <div class="col-md-11">
+                         Aumentar el tamaño del texto o comentario mientras se visualiza sobre el Vídeo.
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/font_dec.png" width="22" height="22" alt="Zoom out Tags" title="Zoom out Tags" />
+                    </div>
+                    <div class="col-md-11">
+                        Disminuir el tamaño del texto o comentario mientras se visualiza sobre el Vídeo.
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!--div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/previous.png" width="22" height="22" title="Previus Tags" alt="Previus Tags" />
+                    </div>
+                    <div class="col-md-11">
+                         Visualizar sobre el Vídeo el comentario anterior.
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/next.png" width="22" height="22" title="Next Tags" alt="Next Tags" />
+                    </div>
+                    <div class="col-md-11">
+                        Visualizar sobre el Vídeo el comentario siguiente.
+                    </div>
+                    <div class="clearfix"></div>
+                </div-->
+                <!--div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/trash.png" width="22" height="22" title="Delete All Tags" alt="Delete All Tags" />
+                    </div>
+                    <div class="col-md-11">
+                        Borrar todos los comentarios creados sobre el Vídeo <b>(Opción no habilitada)</b>
+                    </div>
+                    <div class="clearfix"></div>
+                </div-->
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/create_comment.png" width="22" height="22" title="Add Tag" alt="Add Tag" />
+                    </div>
+                    <div class="col-md-11">
+                         Añadir un comentario sobre el Vídeo en curso. Se habilita la entrada de texto en los campos "Short Comment" y "Long Comments". <br/>El comentario se visualizará en el instante de tiempo de reproducción actual del vídeo.<br/>
+                        <b>Para garantizar que los comentarios se visualicen correctamente</b>, procure dejar entre comentario y comentario como mínimo <b>3 segundos</b> de tiempo.
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        Short Comment:
+                    </div>
+                    <div class="col-md-11">
+                         Texto del comentario que se visualizará sobre el video. <b>Procure ser breve y consizo.</b>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        Long Comment:
+                    </div>
+                    <div class="col-md-11">
+                         Observaciones del comentario realizado. Estas observaciones <b>No se visualizan sobre el video </b> por lo que podrá indicar el texto que considere necesario para ampliar su comentario.
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/bold.png"  width="22" height="22" title="Bold Text" alt="Bold"/>
+                    </div>
+                    <div class="col-md-11">
+                         Mostrar en Negrilla el texto del comentario sobre el Vídeo. <b>(Opción no habilitada)</b>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/italic.png"  width="22" height="22" title="Italy Text" alt="Italy"/>
+                    </div>
+                    <div class="col-md-11">
+                        Mostrar en Cursiva el texto del comentario sobre el Vídeo.  <b>(Opción no habilitada)</b>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/underline.png"  width="22" height="22" title="Underline Text" alt="Underline"/>
+                    </div>
+                    <div class="col-md-11">
+                        Mostrar Subrayado el texto del comentario sobre el Vídeo.  <b>(Opción no habilitada)</b>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/left.png"  width="22" height="22" title="Left Text" alt="Left"/>
+                    </div>
+                    <div class="col-md-11">
+                        Alinear a la izquierda el texto del comentario sobre el Vídeo.  <b>(Opción no habilitada)</b>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/center.png"  width="22" height="22" title="Center Text" alt="Center"/>
+                    </div>
+                    <div class="col-md-11">
+                        Centrar el texto del comentario sobre el Vídeo. <b>(Opción no habilitada)</b>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/save.png"  width="22" height="22" title="Save" alt="Save"/>
+                    </div>
+                    <div class="col-md-11">
+                        Guardar el comentario creado sobre el Vídeo. <br/><b>Recuerde que el comentario se guarda en la sesión de su nevegador</b>.<br/>
+                        Si quiere guardar de forma segura los comentarios  que ha creado, utilice el botón <img alt="Export JSON" src="images/save.png" title="Export Comment to JSON" height="22" width="22"/> de los Controles Comunes.
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+                        <img src="images/cancel.png"  width="22" height="22" title="Cancel Edition Tag" alt="Cancel"/>
+                    </div>
+                    <div class="col-md-11">
+                        Cancelar la Creación o Edición del comentario.
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+
+                    </div>
+                    <div class="col-md-11">
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-1">
+
+                    </div>
+                    <div class="col-md-11">
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <!-- footer -->
+        <div class="footer">
+            <p>© 2016 <a href="http://grasia.fdi.ucm.es/colosaal/" target="_blank">ColosAAL</a> - <a href="http://ucm.es" target="_blank">Universidad Complutense de Madrid</a></p>
+        </div>
+        <!-- //footer -->
+    </section>
+</body>
+</html>

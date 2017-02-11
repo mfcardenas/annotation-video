@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+<head>
+    <title>CAM Assistant for Massis Simulations - UCM</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Videos, Tags, PHAT-SIM, Massis, UCM, Complutense"/>
+    <script type="application/x-javascript">
+        if (navigator.userAgent.indexOf('Firefox') == -1) {
+            window.location.href = "error.html"
+        }
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link href="css/style.css" rel='stylesheet' type='text/css'/>
+    <link href="css/font.css" rel="stylesheet" type="text/css"/>
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/videojs.markers.min.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="css/video-js.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/bar-controls.css">
+    <link rel="stylesheet" href="css/video-js.css">
+    <link rel="stylesheet" href="css/videojs.caption.css">
+    <link rel="stylesheet" href="css/tipped.css">
+
+    <script src="js/jquery2.0.3.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/tipped.js"></script>
+    <script src="js/bootstrap-slider.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/screenfull.js"></script>
+
+    <script>
+        $(function () {
+            // $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+            if (!screenfull.enabled) {
+                return false;
+            }
+            $('#toggle').click(function () {
+                screenfull.toggle($('#container')[0]);
+            });
+        });
+    </script>
+</head>
+<body class="dashboard-page">
+    <script>
+        var theme = 'default';
+        $('body').removeClass(function (index, css) {
+            return (css.match(/\btheme-\S+/g) || []).join(' ');
+        });
+        if (theme !== 'default')
+            $('body').addClass(theme);
+    </script>
+
+    <nav class="main-menu">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <i class="fa fa-home nav_icon"></i>
+                    <span class="nav-text">
+					CAM Assistant
+					</span>
+                </a>
+            </li>
+            <li>
+                <a href="fast_guide.html">
+                    <i class="fa fa-book nav-icon"></i>
+                    <span class="nav-text">
+					Guía Rápida de Uso
+					</span>
+                </a>
+            </li>
+            <li class="has-subnav">
+                <a href="help.html">
+                    <i class="fa fa-cogs" aria-hidden="true"></i>
+                    <span class="nav-text">
+					Opciones
+				</span>
+                    <i class="icon-angle-right"></i><i class="icon-angle-down"></i>
+                </a>
+                <ul>
+                    <li>
+                        <a class="subnav-text" href="help.html#controlcommon">
+                            Comunes
+                        </a>
+                    </li>
+                    <li>
+                        <a class="subnav-text" href="help.html#controlcomment">
+                            De Comentarios
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="wrapper scrollable">
+        <nav class="user-menu">
+            <a href="javascript:;" class="main-menu-access">
+                <i class="icon-proton-logo"></i>
+                <i class="icon-reorder"></i>
+            </a>
+        </nav>
+        <section class="title-bar">
+            <div class="logo">
+                <h1>
+                    <a href="index.html"><img src="images/ucm-ws.png" alt=""/>Guía Rápida</a>
+                </h1>
+            </div>
+            <div class="full-screen">
+                <section class="full-top">
+                    <button id="toggle"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
+                </section>
+            </div>
+            <div class="w3l_search">
+
+            </div>
+            <div class="header-right">
+                <div class="profile_details_left">
+                    <div class="header-right-left">
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </section>
+        <div class="main-grid">
+            <div class="social grid">
+                <div class="grid-info">
+                    <div class="col-md-12">
+                        <a name="controlcommon" id="controlcommon"><h3>CAM Assistant</h3></a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="grid-info">
+                    <div class="col-md-12">
+                        <p>
+                            CAM Assistant es la aplicación web colaborativa que te permitirá participar en la cocreación de los casos de estudios prácticos. A trav&eacute;s de comentarios podrás contribuir en la construcción de simulaciones realistas de los casos de estudios definidos. Cuanto mayor sea tu aporte podremos entre todos garantizar que la simulación generada puede ser &uacute;til para estudiar aquellos casos en los que los pacientes pueden verse afectados por la enfermedad o limitación que se estudia.
+                        </p>
+                        <p>&nbsp;</p>
+                        <p>
+                            Durante este ciclo de trabajo, se podr&aacute;n generar varias iteraciones hasta que sea posible usar la simulación como un caso práctico de estudio. Definido el caso práctico se pasará a la fase de diseñar y construir soluciones que mejoren las condiciones de los pacientes.
+                        </p>
+                        <p>&nbsp;</p>
+                        <p>
+                            Mediante CAM Assistant se visualizar&aacute;n las simulaciones en formato de vídeo, bien desde una o varias perspectivas (cámaras). Sobre cada cámara de la simulación podrás ir añadiendo comentarios que iran apareciendo sobre el vídeo en forma de subtítulos. Lo que se pretende es recoger tu <i>feedback</i> de la simulación construida bien para mejorarla o para incluir características que no se hayan tenido en cuenta en su construcción.
+                        </p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <h3 class="off1 primary"><a name="preamble"></a>Usa la aplicación web de comentarios</h3>
+                        <p>La aplicación tiene la siguiente apariencia:</p>
+                        <br/>
+                        <p><img src="images/img-cam-assitant-01.png" alt="CAM Assistant" title="CAM Assistant" class="img_responsive"/></p>
+                        <br/>
+                        <p>Si la simulación cuenta con varios videos se mostrará de esta forma (una cámara por cada vídeo): </p>
+                        <br/>
+                        <p><img src="images/img-cam-assitant-01-01.bmp" alt="CAM Assistant" title="CAM Assistant" class="img_responsive"/></p>
+                        <br/>
+                        <br/>
+                        <h3>Paso 1:</h3>
+                        <br/>
+                        <p>Carga los vídeos y las diferentes opciones de trabajo con el botón <i>"LOAD VIDEOS"</i>.</p>
+                        <br/>
+                        <p><img src="images/img-cam-next-2.bmp" alt="CAM Assistant" title="CAM Assistant" class="img_responsive"/></p>
+                        <br/>
+                        <p>Una vez activado podrás ver todas las opciones de reproducción.</p>
+                        <br/>
+                        <p><img src="images/img-cam-next-2-2.bmp" alt="CAM Assistant" title="CAM Assistant" class="img_responsive"/></p>
+                        <br/>
+                        <br/>
+                        <h3>Paso 2:</h3>
+                        <br/>
+                        <p>Reproduce el/los vídeo(s).</p>
+                        <br/>
+                        <p><img src="images/img-cam-next-3.bmp" alt="CAM Assistant" title="CAM Assistant" class="img_responsive"/></p>
+                        <br/>
+                        <br/>
+                        <h3>Paso 3:</h3>
+                        <br/>
+                        <p>Visualiza las opciones para añadir comentarios.</p>
+                        <br/>
+                        <p><img src="images/img-cam-next-4.bmp" alt="CAM Assistant" title="CAM Assistant" class="img_responsive"/></p>
+                        <br/>
+                        <br/>
+                        <h3>Paso 4:</h3>
+                        <br/>
+                        <p>Agrega los comentarios en los instantes de tiempos que consideres oportunos.</p>
+                        <br/>
+                        <p><img src="images/img-cam-next-5.bmp" alt="CAM Assistant" title="CAM Assistant" class="img_responsive"/></p>
+                        <br/>
+                        <p>Debes agregar una breve descripción para tu comentario.</p>
+                        <br/>
+                        <p><img src="images/img-cam-next-6.bmp" alt="CAM Assistant" title="CAM Assistant" class="img_responsive"/></p>
+                        <br/>
+                        <p>Y una descripción más larga que explique de forma amplia tu observación.</p>
+                        <br/>
+                        <p><img src="images/img-cam-next-7.bmp" alt="CAM Assistant" title="CAM Assistant" class="img_responsive"/></p>
+                        <br/>
+                        <p>Finalmente guarda tu comentario para que quede registrado sobre el vídeo.</p>
+                        <br/>
+                        <p><img src="images/img-cam-next-8.bmp" alt="CAM Assistant" title="CAM Assistant" class="img_responsive"/></p>
+                        <br/>
+                        <p>Aparecerá el nuevo comentario en la lista inferior. Podrás Visualizar y/o Editar tu comentario usando las opciones que se muestran a su derecha.</p>
+                        <br/>
+                        <p><img src="images/img-cam-next-9.bmp" alt="CAM Assistant" title="CAM Assistant" class="img_responsive"/></p>
+                        <br/>
+                        <br/>
+                        <h3>Paso 5:</h3>
+                        <br/>
+                        <p>Cuando hayas terminado de <b>añadir TODOS los comentarios</b>, sube tu trabajo a la nube utilizando el botón <i>"Cloud Comment"</i>.</p>
+                        <br/>
+                        <p><img src="images/img-cam-next-10.bmp" alt="CAM Assistant" title="CAM Assistant" class="img_responsive"/></p>
+                        <br/>
+                        <br/>
+                        <h3>Paso 6:</h3>
+                        <br/>
+                        <p>Se visualizará un identificador único y exclusivo para ti, el cual tendrás que facilitar al equipo de desarrollo.</p>
+                        <br/>
+                        <p><img src="images/img-cam-next-11.bmp" alt="CAM Assistant" title="CAM Assistant" class="img_responsive"/></p>
+                        <br/>
+                        <p>Para enviar dicho identificador al equipo de desarrollo, debes rellenar el formulario que se visualiza con la opción <img src="images/img-send-data-2.png" alt="Form" title="Open Form">. Indicar los datos que se piden y no olvides poner el identificador de tu colaboración. </p>
+                        <br/>
+                        <p><img src="images/img-cam-next-12.bmp" alt="CAM Assistant" title="CAM Assistant" class="img_responsive"/></p>
+                        <br/>
+                        <p>Los comentarios que subes a la nube son totalmente anónimos y no podrán ser analizados sino rellenas y envías el formulario correctamente.</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <!-- footer -->
+        <div class="footer">
+            <p>© 2016 <a href="http://grasia.fdi.ucm.es/colosaal/" target="_blank">ColosAAL</a> - <a href="http://ucm.es" target="_blank">Universidad Complutense de Madrid</a></p>
+        </div>
+        <!-- //footer -->
+    </section>
+</body>
+</html>
